@@ -61,7 +61,7 @@ std::string addint(std::string &x, std::string &x2) {
           };
         };
       } else {
-        cur_str[i] = char(cur_val + 48);
+        cur_str[i] = char(int(cur_val) + 48);
       };
     };
   } else {
