@@ -1,3 +1,5 @@
+#include <iostream>
+
 //@L Addition
 //@L2 Int
 
@@ -154,3 +156,37 @@ std::string subsint(std::string &x, std::string &x2) {
   return cur_str;
 };
 
+//@L Comparisons
+
+//@T is_greater
+//@U bool is_greater(std::string &x, std::string &x2)
+//@X
+//@D Returns 1 if the first number (as a std string) is greater than the second (as a std string) .
+//@A x : is a number as a string
+//@A x2 : is a number as a string
+//@X
+//@E
+//@X
+
+bool is_greater(std::string &x, std::string &x2) {
+  const unsigned int n = x.size();
+  const unsigned int n2 = x.size();
+  unsigned int val1;
+  unsigned int val2;
+  if (n == n2) {
+    for (unsigned int i = 0; i < n; ++i) {
+      val1 = int(x[i]);
+      val2 = int(x2[i]);
+      if (val1 != val2) {
+        if (val1 > val2) {
+          return 1;
+        } else {
+          return 0;
+        };
+      };
+    };
+  } else if (n > n2) {
+    return 1;
+  };
+  return 0;
+};
