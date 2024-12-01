@@ -5,8 +5,8 @@
 //@U std::string addint(std::string &x, std::string &x2)
 //@X
 //@D Returns the result as a std string.
-//@A x : is the first int
-//@A x2 is the second int
+//@A x : is the first positive int as a string
+//@A x2 is the second positive int as a string
 //@X
 //@E
 //@X
@@ -32,10 +32,13 @@ std::string addint(std::string &x, std::string &x2) {
   int cur_val;
   int bf_cnt;
   bool agn;
+  if (bf_str[0] == '-') {
+    return "";
+  };
   if (cur_str[0] != '-') {
     for (int i = cnt; i < sizen; ++i) {
       cur_val = (int(bf_str[i - cnt]) - 48) + (int(cur_str[i]) - 48);
-      if (cur_val >= 10) {
+      if (cur_val > 9) {
         cur_val -= 10;
         cur_str[i] = char(cur_val + 48);
         bf_cnt = 0;
@@ -45,7 +48,6 @@ std::string addint(std::string &x, std::string &x2) {
           if (i - bf_cnt > -1) {
             if (int(cur_str[i - bf_cnt]) - 48 > 8) {
               cur_str[i - bf_cnt] = '0';
-              agn = 1;
             } else {
               cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
               agn = 0;
@@ -62,7 +64,10 @@ std::string addint(std::string &x, std::string &x2) {
         cur_str[i] = char(cur_val + 48);
       };
     };
+  } else {
+    return "";
   };
   return cur_str;
 };
+
 
