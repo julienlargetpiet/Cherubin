@@ -92,16 +92,13 @@ std::string subsint(std::string &x, std::string &x2) {
   const unsigned int n2 = x2.length();
   unsigned int sizen;
   int i;
-  if (n > n2) {
+  if (n >= n2) {
     sizen = n;
     for (i = n2; i < n; ++i) {
       bf_str = "0" + bf_str;
     };
   } else {
-    sizen = n2;
-    for (i = n; i < n2; ++i) {
-      cur_str = "0" + cur_str;
-    };
+    return "";
   };
   int cur_val;
   int bf_cnt;
