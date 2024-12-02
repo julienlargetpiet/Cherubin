@@ -233,12 +233,11 @@ std::string subsint(std::string &x, std::string &x2) {
   const unsigned int n = x.length();
   const unsigned int n2 = x2.length();
   unsigned int sizen;
+  unsigned int cnt;
   int i;
   if (n >= n2) {
     sizen = n;
-    for (i = n2; i < n; ++i) {
-      bf_str = "0" + bf_str;
-    };
+    cnt = n - n2;
   } else {
     return "";
   };
@@ -250,8 +249,8 @@ std::string subsint(std::string &x, std::string &x2) {
     return "";
   };
   if (cur_str[0] != '-') { 
-    for (i = 0; i < sizen; ++i) {
-      cur_val = (int(cur_str[i]) - 48) - (int(bf_str[i]) - 48);
+    for (i = cnt; i < sizen; ++i) {
+      cur_val = (int(cur_str[i]) - 48) - (int(bf_str[i - cnt]) - 48);
       if (cur_val < 0) {
         cur_val = 10 + cur_val;
         cur_str[i] = char(int(cur_val) + 48);
