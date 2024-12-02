@@ -244,7 +244,6 @@ std::string subsint(std::string &x, std::string &x2) {
   int cur_val;
   int bf_cnt;
   bool agn;
-  int cnt2;
   if (bf_str[0] == '-') {
     return "";
   };
@@ -268,15 +267,11 @@ std::string subsint(std::string &x, std::string &x2) {
       } else {
         cur_str[i] = char(cur_val + 48);
       };
-      cnt2 = 0;
-      while (cur_str[cnt2] == '0' & cnt2 <= i & cnt2 + 1 < sizen) {
+      if (cur_str[0] == '0') {
+        cur_str = cur_str.substr(1, cur_str.length());
+        bf_str = bf_str.substr(1, cur_str.length());
         sizen -= 1;
         i -= 1;
-        cnt2 += 1;
-      };
-      if (cnt2 > 0) {
-        cur_str = cur_str.substr(cnt2, cur_str.length());
-        bf_str = bf_str.substr(cnt2, cur_str.length());
       };
     };
   } else {
