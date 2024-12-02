@@ -180,10 +180,14 @@ std::string addflt(std::string &x, std::string &x2) {
         if (cur_val > 9) {
           cur_val -= 10;
           cur_str[i] = char(cur_val + 48);
-          if (cur_str[i - 1] != '.') {
-            bf_cnt = 0;
+          if (i - 1 > 0) {
+            if (cur_str[i - 1] != '.') {
+              bf_cnt = 0;
+            } else {
+              bf_cnt = 1;
+            };
           } else {
-            bf_cnt = 1;
+            bf_cnt = 0;
           };
           agn = 1;
           while (agn) {
@@ -257,10 +261,14 @@ std::string subsint(std::string &x, std::string &x2) {
         agn = 1;
         while (agn) {
           bf_cnt += 1;
-          if (int(cur_str[i - bf_cnt]) - 48 < 1) {
-            cur_str[i - bf_cnt] = '9';
+          if (i - bf_cnt > -1) {
+            if (int(cur_str[i - bf_cnt]) - 48 < 1) {
+              cur_str[i - bf_cnt] = '9';
+            } else {
+              cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) - 1);
+              agn = 0;
+            };
           } else {
-            cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) - 1);
             agn = 0;
           };
         };
@@ -379,7 +387,6 @@ std::string subsflt(std::string &x, std::string &x2) {
   };
   int cur_val;
   int bf_cnt;
-  std::cout << "here\n";
   if (bf_str[0] == '-') {
     return "";
   };
@@ -406,11 +413,6 @@ std::string subsflt(std::string &x, std::string &x2) {
                 agn = 0;
               };
             } else {
-              cur_str[i] = char(int(10 - cur_val) + 48);
-              i += 1;
-              sizen += 1;
-              cur_str = "-" + cur_str;
-              bf_str = "-" + bf_str;
               agn = 0;
             };
           };
@@ -501,7 +503,6 @@ std::string roundstr(std::string &x, int &digits) {
     };
   } else if (digits > 0) {
     cnt += digits;
-    std::cout << cnt << "\n";
     if (cnt + 1 < x.length()) {
       if (58 - int(x[cnt + 1]) < 6) {
         x[cnt] = char(int(x[cnt]) + 1);
