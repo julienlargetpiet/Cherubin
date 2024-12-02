@@ -187,3 +187,61 @@ bool is_greater(std::string &x, std::string &x2) {
   };
   return 0;
 };
+
+//@L Round
+
+//@T roundstr
+//@U std::string roundstr(std::string &x, int &digits)
+//@X
+//@D Round the input number entered as a std string. 
+//@A x : is a std string representing a number
+//@A digits : is the number of digits to round from, can be negative
+//@X
+//@E
+//@X
+
+std::string roundstr(std::string &x, int &digits) {
+  unsigned int cnt = 0;
+  std::string rtn_str;
+  unsigned int i;
+  while (x[cnt] != '.') {
+    cnt += 1;
+  };
+  if (digits < 0) {
+    unsigned int cnt2 = cnt;
+    cnt += digits;
+    if (cnt > 0) {
+      if (58 - int(x[cnt]) < 6) {
+        x[cnt - 1] = char(int(x[cnt - 1]) + 1);
+      };
+    };
+    for (i = 0; i < cnt; ++i) {
+        rtn_str += x[i];
+    };
+    for (i = cnt; i < cnt2; ++i) {
+        rtn_str += '0';
+    };
+  } else if (digits > 0) {
+    cnt += digits;
+    std::cout << cnt << "\n";
+    if (cnt + 1 < x.length()) {
+      if (58 - int(x[cnt + 1]) < 6) {
+        x[cnt] = char(int(x[cnt]) + 1);
+      };
+    };
+    for (i = 0; i < cnt + 1; ++i) {
+        rtn_str += x[i];
+    };
+  } else {
+    if (cnt + 1 < x.length()) {
+      if (58 - int(x[cnt + 1]) < 6) {
+        x[cnt - 1] = char(int(x[cnt - 1]) + 1);
+      };
+    };
+    for (i = 0; i < cnt; ++i) {
+        rtn_str += x[i];
+    };
+  };
+  return rtn_str;
+};
+
