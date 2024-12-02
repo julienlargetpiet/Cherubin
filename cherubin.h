@@ -93,7 +93,7 @@ std::string addflt(std::string &x, std::string &x2) {
   bool is_dec1 = 0;
   bool is_dec2 = 0;
   int i;
-  unsigned int cur_delta = 0;
+  int cur_delta = 0;
   while (agn) {
     cnt += 1;
     if (cnt == bf_cn) {
@@ -122,8 +122,9 @@ std::string addflt(std::string &x, std::string &x2) {
     bf_str = x;
     cnt = n2 - n;
     cur_delta = (bf_cn - n) - (bf_cn2 - n2);
+    sizen = bf_cn2;
     if (cur_delta > 0) {
-      sizen = bf_cn2 + cur_delta;
+      sizen += cur_delta;
       if (!is_dec2) {
         cur_delta -= 1;
         cur_str += ".";
@@ -131,20 +132,39 @@ std::string addflt(std::string &x, std::string &x2) {
       for (i = 0; i < cur_delta; ++i) {
         cur_str += "0";
       };
+    } else if (cur_delta < 0) {
+      cur_delta *= -1;
+      if (!is_dec1) {
+        cur_delta -= 1;
+        bf_str += ".";
+      };
+      for (i = 0; i < cur_delta; ++i) {
+        bf_str += "0";
+      };
     };
   } else {
     cur_str = x;
     bf_str = x2;
     cnt = n - n2; 
     cur_delta = (bf_cn2 - n2) - (bf_cn - n);
+    sizen = bf_cn;
     if (cur_delta > 0) {
-      sizen = bf_cn + cur_delta;
+      sizen += cur_delta;
       if (!is_dec1) {
         cur_delta -= 1;
         cur_str += ".";
       };
       for (i = 0; i < cur_delta; ++i) {
         cur_str += "0";
+      };
+    } else if (cur_delta < 0) {
+      cur_delta *= -1;
+      if (!is_dec2) {
+        cur_delta -= 1;
+        bf_str += ".";
+      };
+      for (i = 0; i < cur_delta; ++i) {
+        bf_str += "0";
       };
     };
   };
@@ -160,7 +180,11 @@ std::string addflt(std::string &x, std::string &x2) {
         if (cur_val > 9) {
           cur_val -= 10;
           cur_str[i] = char(cur_val + 48);
-          bf_cnt = 0;
+          if (cur_str[i - 1] != '.') {
+            bf_cnt = 0;
+          } else {
+            bf_cnt = 1;
+          };
           agn = 1;
           while (agn) {
             bf_cnt += 1;
