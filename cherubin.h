@@ -266,13 +266,6 @@ std::string subsint(std::string &x, std::string &x2) {
               cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) - 1);
               agn = 0;
             };
-          } else {
-            cur_str[i] = char(int(10 - cur_val) + 48);
-            i += 1;
-            sizen += 1;
-            cur_str = "-" + cur_str;
-            bf_str = "-" + bf_str;
-            agn = 0;
           };
         };
       } else {
