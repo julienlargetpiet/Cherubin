@@ -425,6 +425,95 @@ std::string subsflt(std::string &x, std::string &x2) {
   return cur_str;
 };
 
+//@L Multiplication
+//@L2 Integers
+
+//@T multint2
+//@U std::string multint2(std::string &x, std::string &x2)
+//@X
+//@D Returns the multiplication of two integers as std string.
+//@A x : is an integer as a std string
+//@A x2 : is an integer as a std string
+//@X
+//@E
+//@X
+
+std::string multint2(std::string &x, std::string &x2) {
+  std::string cur_str = x;
+  std::string cur_str2 = x;
+  std::string bf_str = x2;
+  int cnt = 0;
+  std::string eval_str = "1";
+  unsigned int n = x.length();
+  unsigned int n2 = x2.length();
+  int cur_val;
+  unsigned int delta = 0;
+  int cur_eval;
+  int bf_cnt;
+  bool agn;
+  if (bf_str[0] == '-') {
+    return "";
+  };
+  if (cur_str[0] != '-') {
+    while (eval_str != bf_str) {
+      for (int i = delta; i < n; ++i) {
+        cur_val = (int(cur_str[i]) - 48) + (int(cur_str2[i - delta]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          cur_str[i] = char(cur_val + 48);
+          bf_cnt = 0;
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+                cur_str[i - bf_cnt] = '0';
+              } else {
+                cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
+                agn = 0;
+              };
+            } else {
+              cur_str = "1" + cur_str;
+              i += 1;
+              delta += 1;
+              n += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          cur_str[i] = char(cur_val + 48);
+        };
+      };
+      cur_eval = int(eval_str[cnt]) - 48;
+      if (cur_eval > 8) {
+        eval_str[cnt] = '0';
+        agn = 1;
+        bf_cnt = 0;
+        while (agn) {
+          bf_cnt += 1;
+          if (cnt - bf_cnt > -1) {
+            if (int(eval_str[cnt - bf_cnt]) - 48 > 8) {
+              eval_str[cnt - bf_cnt] = '0';
+            } else {
+              eval_str[cnt - bf_cnt] = char(int(eval_str[cnt - bf_cnt]) + 1);
+              agn = 0;
+            };
+          } else {
+            eval_str = "1" + eval_str;
+            cnt += 1;
+            agn = 0;
+          };
+        };
+      }else {
+        eval_str[cnt] = char(cur_eval + 49);
+      };
+    };
+  } else {
+    return "";
+  };
+  return cur_str;
+};
+
 //@L Comparisons
 
 //@T is_greater
