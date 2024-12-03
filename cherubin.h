@@ -428,6 +428,63 @@ std::string subsflt(std::string &x, std::string &x2) {
 //@L Multiplication
 //@L2 Integers
 
+//@T multint
+//@U std::string multint(std::string &x, unsigned int &x2)
+//@X
+//@D Returns the multiplication of two integers as std string.
+//@A x : is an integer as a std string
+//@A x2 : is an integer (unsigned int)
+//@X
+//@E
+//@X
+
+std::string multint(std::string &x, unsigned int &x2) {
+  std::string cur_str = x;
+  std::string cur_str2 = x;
+  unsigned int cnt = 1;
+  unsigned int n = x.length();
+  int cur_val;
+  unsigned int delta = 0;
+  int bf_cnt;
+  bool agn;
+  if (cur_str[0] != '-') {
+    while (cnt != x2) {
+      for (int i = delta; i < n; ++i) {
+        cur_val = (int(cur_str[i]) - 48) + (int(cur_str2[i - delta]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          cur_str[i] = char(cur_val + 48);
+          bf_cnt = 0;
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+                cur_str[i - bf_cnt] = '0';
+              } else {
+                cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
+                agn = 0;
+              };
+            } else {
+              cur_str = "1" + cur_str;
+              i += 1;
+              delta += 1;
+              n += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          cur_str[i] = char(cur_val + 48);
+        };
+      };
+      cnt += 1;
+    };
+  } else {
+    return "";
+  };
+  return cur_str;
+};
+
 //@T multint2
 //@U std::string multint2(std::string &x, std::string &x2)
 //@X
