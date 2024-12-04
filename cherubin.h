@@ -403,11 +403,13 @@ std::string subsflt(std::string &x, std::string &x2) {
           agn = 1;
           while (agn) {
             bf_cnt += 1;
-            if (int(cur_str[i - bf_cnt]) - 48 < 1) {
-              cur_str[i - bf_cnt] = '9';
-            } else {
-              cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) - 1);
-              agn = 0;
+            if (cur_str[i - bf_cnt] != '.') {
+              if (int(cur_str[i - bf_cnt]) - 48 < 1) {
+                cur_str[i - bf_cnt] = '9';
+              } else {
+                cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) - 1);
+                agn = 0;
+              };
             };
           };
         } else {
