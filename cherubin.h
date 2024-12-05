@@ -451,9 +451,10 @@ std::string multint(std::string &x, unsigned int &x2) {
   unsigned int delta = 0;
   int bf_cnt;
   bool agn;
+  int i;
   if (cur_str[0] != '-') {
     while (cnt != x2) {
-      for (int i = delta; i < n; ++i) {
+      for (i = delta; i < n; ++i) {
         cur_val = (int(cur_str[i]) - 48) + (int(cur_str2[i - delta]) - 48);
         if (cur_val > 9) {
           cur_val -= 10;
@@ -512,12 +513,13 @@ std::string multint2(std::string &x, std::string &x2) {
   int cur_eval;
   int bf_cnt;
   bool agn;
+  int i;
   if (bf_str[0] == '-') {
     return "";
   };
   if (cur_str[0] != '-') {
     while (eval_str != bf_str) {
-      for (int i = delta; i < n; ++i) {
+      for (i = delta; i < n; ++i) {
         cur_val = (int(cur_str[i]) - 48) + (int(cur_str2[i - delta]) - 48);
         if (cur_val > 9) {
           cur_val -= 10;
@@ -571,6 +573,212 @@ std::string multint2(std::string &x, std::string &x2) {
     };
   } else {
     return "";
+  };
+  return cur_str;
+};
+
+//@L2 Floating points
+
+//@T multflt
+//@U std::string multflt(std::string &x, std::string &x2)
+//@X
+//@D Returns the result of a multpilication as a std string from floating points or integers as std string.
+//@A x : is a floating points or integer as a std string
+//@A x2 : is a floating points or integer as a std string
+//@X
+//@E
+//@X
+
+std::string multflt(std::string &x, std::string &x2) {
+  std::string cur_str = "";
+  int cnt = 0;
+  if (x[0] == '-' || x2[0] == '-') {
+    return "";
+  };
+  unsigned int n = x.length();
+  for (cnt = 0; cnt < n; ++cnt) {
+    if (x[cnt] != '.') {
+      cur_str += "0";
+    } else {
+      cur_str += ".";
+    };
+  };
+  std::string cur_str2 = x;
+  std::string cur_str2b;
+  std::string bf_str = x2;
+  std::string cur_part;
+  std::string inter_str2;
+  const unsigned int n2 = x2.length();
+  bool is_dec = 0;
+  int pos_dec;
+  int pos_dec2;
+  for (cnt = 0; cnt < n; ++cnt) {
+    if (cur_str[cnt] == '.') {
+      is_dec = 1;
+      break;
+    };
+  };
+  pos_dec = cnt;
+  cnt = 0;
+  std::string eval_str = "0";
+  unsigned int decnb2 = 0;
+  bool agn = 1;
+  while (agn) {
+    cur_part += bf_str[cnt];
+    cnt += 1;
+    if (cnt < n2) {
+      if (bf_str[cnt] == '.') {
+        agn = 0;
+        decnb2 = (n2 - cnt - 1);
+      };
+    } else {
+      agn = 0;
+    };
+  };
+  int agn_cnt = cnt;
+  if (decnb2 > 0) {
+    if (!is_dec) {
+      cur_str += ".";
+      cur_str2 += ".";
+      n += 1;
+    };
+    for (cnt = 0; cnt < decnb2; ++cnt) {
+      cur_str += "0";
+      cur_str2 += "0";
+      n += 1;
+    };
+  };
+  cnt = 0;
+  int cur_val;
+  unsigned int delta = 0;
+  unsigned int delta2 = 0;
+  int cur_eval;
+  int bf_cnt;
+  bool agn2 = 1;
+  bool underzero = 0;
+  int i;
+  while (agn2) {
+    if (eval_str == cur_part) {
+      cnt = 0;
+      if (agn_cnt + 1 > n2) {
+        return cur_str; 
+      } else {
+        agn = 1;
+        pos_dec2 = 0;
+        while (agn) {
+          agn_cnt += 1;
+          delta2 += 1;
+          pos_dec2 += 1;
+          if (agn_cnt < n2) {
+            if (bf_str[agn_cnt] != '0') {
+              agn = 0;
+            };
+          } else {
+            return cur_str;
+          };
+        };
+        if (pos_dec - pos_dec2 > 0) {
+          cur_str2b = cur_str2.substr(pos_dec + 1, n);
+          inter_str2 = "";
+          for (i = pos_dec2; i > 0; --i){
+            inter_str2 += cur_str2[pos_dec - i];
+          };
+          pos_dec -= pos_dec2;
+          cur_str2 = cur_str2.substr(0, pos_dec);
+          cur_str2 += "." + inter_str2 + cur_str2b;
+        } else {
+          cur_str2b = cur_str2;
+          cur_str2 = "";
+          if (!underzero) {
+            for (i = 0; i < pos_dec2 - pos_dec; ++i) {
+              cur_str2 += "0";
+              cur_str += "0";
+              n += 1;
+            };
+            underzero = 1;
+            pos_dec -= pos_dec2;
+            i = 0;
+            while (cur_str2b[i] != '.') {
+              cur_str2 += cur_str2b[i];
+              i += 1;
+            };
+            i += 1;
+          } else {
+            i = 0;
+          };
+          while (i < n) {
+            cur_str2 += cur_str2b[i];
+            i += 1;
+          };
+        };
+        cur_part = bf_str[agn_cnt];
+        eval_str = "0";      
+      };
+    };
+    for (i = delta + delta2; i < n; ++i) {
+      if (cur_str[i] != '.') {
+        cur_val = (int(cur_str[i]) - 48) + (int(cur_str2[i - delta - delta2]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          cur_str[i] = char(cur_val + 48);
+          if (i > 0) {
+            if (cur_str[i - 1] != '.') {
+              bf_cnt = 0;
+            } else {
+              bf_cnt = 1;
+            };
+          } else {
+            bf_cnt = 0;
+          };
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (cur_str[i - bf_cnt] != '.') {
+                if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+                  cur_str[i - bf_cnt] = '0';
+                } else {
+                  cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
+                  agn = 0;
+                };
+              };
+            } else {
+              cur_str = "1" + cur_str;
+              cur_str2 += "0";
+              i += 1;
+              delta += 1;
+              n += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          cur_str[i] = char(cur_val + 48);
+        };
+      };
+    };
+    cur_eval = int(eval_str[cnt]) - 48;
+    if (cur_eval > 8) {
+      eval_str[cnt] = '0';
+      agn = 1;
+      bf_cnt = 0;
+      while (agn) {
+        bf_cnt += 1;
+        if (cnt - bf_cnt > -1) {
+          if (int(eval_str[cnt - bf_cnt]) - 48 > 8) {
+            eval_str[cnt - bf_cnt] = '0';
+          } else {
+            eval_str[cnt - bf_cnt] = char(int(eval_str[cnt - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          eval_str = "1" + eval_str;
+          cnt += 1;
+          agn = 0;
+        };
+      };
+    }else {
+      eval_str[cnt] = char(cur_eval + 49);
+    };
   };
   return cur_str;
 };
