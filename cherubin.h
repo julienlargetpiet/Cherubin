@@ -700,21 +700,17 @@ std::string multflt(std::string &x, std::string &x2) {
           pos_dec -= pos_dec2;
           cur_str2 = cur_str2.substr(0, pos_dec);
           cur_str2 += "." + inter_str2 + cur_str2b;
-        } else {
+        } else if (!underzero) {
           cur_str2b = cur_str2;
           cur_str2 = "0";
-          if (!underzero) {
-            underzero = 1;
-            pos_dec -= pos_dec2;
-            i = 0;
-            while (cur_str2b[i] != '.') {
-              cur_str2 += cur_str2b[i];
-              i += 1;
-            };
+          underzero = 1;
+          pos_dec -= pos_dec2;
+          i = 0;
+          while (cur_str2b[i] != '.') {
+            cur_str2 += cur_str2b[i];
             i += 1;
-          } else {
-            i = 0;
           };
+          i += 1;
           while (i < n) {
             cur_str2 += cur_str2b[i];
             i += 1;
