@@ -715,7 +715,7 @@ std::string multflt(std::string &x, std::string &x2) {
           } else {
             i = 0;
           };
-          while (i < n2) {
+          while (i < n) {
             cur_str2 += cur_str2b[i];
             i += 1;
           };
