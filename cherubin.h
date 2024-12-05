@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <algorithm>
 
 //@L Addition
 //@L2 Integers
@@ -56,7 +58,9 @@ std::string addint(std::string &x, std::string &x2) {
             };
           } else {
             cur_str = "1" + cur_str;
-            bf_str = "1" + bf_str;
+            std::reverse(bf_str.begin(), bf_str.end());
+            bf_str += "1";
+            std::reverse(bf_str.begin(), bf_str.end());
             i += 1;
             sizen += 1;
             agn = 0;
@@ -202,8 +206,12 @@ std::string addflt(std::string &x, std::string &x2) {
                 };
               };
             } else {
-              cur_str = "1" + cur_str;
-              bf_str = "1" + bf_str;
+              std::reverse(cur_str.begin(), cur_str.end());
+              cur_str += "1";
+              std::reverse(cur_str.begin(), cur_str.end());
+              std::reverse(bf_str.begin(), bf_str.end());
+              bf_str += "1";
+              std::reverse(bf_str.begin(), bf_str.end());
               i += 1;
               sizen += 1;
               agn = 0;
@@ -471,7 +479,9 @@ std::string multint(std::string &x, unsigned int &x2) {
                 agn = 0;
               };
             } else {
-              cur_str = "1" + cur_str;
+              std::reverse(cur_str.begin(), cur_str.end());
+              cur_str += "1";
+              std::reverse(cur_str.begin(), cur_str.end());
               i += 1;
               delta += 1;
               n += 1;
@@ -536,7 +546,9 @@ std::string multint2(std::string &x, std::string &x2) {
                 agn = 0;
               };
             } else {
-              cur_str = "1" + cur_str;
+              std::reverse(cur_str.begin(), cur_str.end());
+              cur_str += "1";
+              std::reverse(cur_str.begin(), cur_str.end());
               i += 1;
               delta += 1;
               n += 1;
@@ -562,7 +574,9 @@ std::string multint2(std::string &x, std::string &x2) {
               agn = 0;
             };
           } else {
-            eval_str = "1" + eval_str;
+            std::reverse(eval_str.begin(), eval_str.end());
+            eval_str += "1";
+            std::reverse(eval_str.begin(), eval_str.end());
             cnt += 1;
             agn = 0;
           };
@@ -743,7 +757,9 @@ std::string multflt(std::string &x, std::string &x2) {
                 };
               };
             } else {
-              cur_str = "1" + cur_str;
+              std::reverse(cur_str.begin(), cur_str.end());
+              cur_str += "1";
+              std::reverse(cur_str.begin(), cur_str.end());
               cur_str2 += "0";
               i += 1;
               delta += 1;
@@ -771,7 +787,9 @@ std::string multflt(std::string &x, std::string &x2) {
             agn = 0;
           };
         } else {
-          eval_str = "1" + eval_str;
+          std::reverse(eval_str.begin(), eval_str.end());
+          eval_str += "1";
+          std::reverse(eval_str.begin(), eval_str.end());
           cnt += 1;
           agn = 0;
         };
