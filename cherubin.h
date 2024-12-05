@@ -702,13 +702,8 @@ std::string multflt(std::string &x, std::string &x2) {
           cur_str2 += "." + inter_str2 + cur_str2b;
         } else {
           cur_str2b = cur_str2;
-          cur_str2 = "";
+          cur_str2 = "0";
           if (!underzero) {
-            for (i = 0; i < pos_dec2 - pos_dec; ++i) {
-              cur_str2 += "0";
-              cur_str += "0";
-              n += 1;
-            };
             underzero = 1;
             pos_dec -= pos_dec2;
             i = 0;
@@ -720,13 +715,13 @@ std::string multflt(std::string &x, std::string &x2) {
           } else {
             i = 0;
           };
-          while (i < n) {
+          while (i < n2) {
             cur_str2 += cur_str2b[i];
             i += 1;
           };
         };
         cur_part = bf_str[agn_cnt];
-        eval_str = "0";      
+        eval_str = "0";
       };
     };
     for (i = delta + delta2; i < n; ++i) {
