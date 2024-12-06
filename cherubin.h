@@ -777,8 +777,8 @@ std::string multflt(std::string &x, std::string &x2) {
 //@L Division
 //@L2 Quotient
 
-//@T quotient
-//@U std::string quotient(std::string &x, std::string &x2)
+//@T quotientflt
+//@U std::string quotientflt(std::string &x, std::string &x2)
 //@X
 //@A x : is the int or floating point that will be divided, represented as a string.
 //@A x2 : is the int or floating point that will divide x, represented as a string.
@@ -786,7 +786,7 @@ std::string multflt(std::string &x, std::string &x2) {
 //@E
 //@X
 
-std::string quotient(std::string &x, std::string &x2) {
+std::string quotientflt(std::string &x, std::string &x2) {
   if (x[0] == '-' || x2[0] == '-') {
     return "";
   };
@@ -798,8 +798,55 @@ std::string quotient(std::string &x, std::string &x2) {
   unsigned int n = divider.length();
   int n2 = 0;
   unsigned int n_divided = x.length();
+  unsigned int dec1;
+  unsigned int dec2;
   bool agn;
   bool agn2 = 1;
+  bool is_dec1 = 0;
+  bool is_dec2 = 0;
+  while (agn2) {
+    cnt += 1;
+    if (cnt + 1 == n) {
+      agn2 = 0;
+    } else if (divider[cnt] == '.') {
+      is_dec1 = 1;
+      agn2 = 0;
+    };
+  };
+  dec1 = n - cnt - 1;
+  agn2 = 1;
+  cnt = 0;
+  while (agn2) {
+    cnt += 1;
+    if (cnt + 1 == n_divided) {
+      agn2 = 0;
+    } else if (divided[cnt] == '.') {
+      is_dec2 = 1;
+      agn2 = 0;
+    };
+  };
+  dec2 = n_divided - cnt - 1;
+  if (dec2 > dec1) {
+    if (!is_dec1) {
+      divider += ".";
+      n += 1;
+    };
+    for (cnt = 0; cnt < dec2 - dec1; ++cnt) {
+      n += 1;
+      divider += "0";
+    };
+  } else if (dec2 < dec1) {
+    if (!is_dec2) {
+      divided += ".";
+      n_divided += 1;
+    };
+    for (cnt = 0; cnt < dec1 - dec2; ++cnt) {
+      divided += "0";
+      n_divided += 1;
+    };
+  };
+  agn2 = 1;
+  cnt = 0;
   int bf_cnt = 0;
   int i;
   unsigned int cur_val;
