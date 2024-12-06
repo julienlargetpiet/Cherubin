@@ -776,6 +776,145 @@ std::string multflt(std::string &x, std::string &x2) {
   return cur_str;
 };
 
+//@L Factorial
+
+//@T factorial
+//@U std::string factorial(std::string &x)
+//@X
+//@A x : is an integer as a std string
+//@X
+//@E
+//@X
+
+std::string factorial(std::string &x) {
+  if (x[0] == '-') {
+    return "";
+  };
+  if (x == "1") {
+    return "1";
+  } else if (x == "2") {
+    return "2";
+  };
+  std::string cur_str = x;
+  std::string eval_str = x;
+  std::string cur_str2;
+  std::string eval_str2;
+  unsigned int cnt = 0;
+  unsigned int n = x.length();
+  unsigned int n2 = n - 1;
+  int id_n3 = 0;
+  int cur_val;
+  int bf_cnt;
+  bool agn;
+  int i;
+  cur_val = int(eval_str[n2] - 48) - 1;
+  if (cur_val < 0) {
+    eval_str[n2] = '9';
+    bf_cnt = 0;
+    agn = 1;
+    while (agn) {
+      bf_cnt += 1;
+      if (int(eval_str[n2 - bf_cnt] - 48) < 1) {
+        eval_str[n2 - bf_cnt] = '9';
+      } else {
+        eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) - 1);
+        if (eval_str[0] == '0') {
+          std::reverse(eval_str.begin(), eval_str.end());
+          eval_str.erase(eval_str.length() - 1);
+          std::reverse(eval_str.begin(), eval_str.end());
+          n2 -= 1;
+        };
+        agn = 0;
+      };
+    };
+  } else {
+    eval_str[n2] = char(int(eval_str[n2]) - 1);
+  };
+  while (eval_str != "1") {
+    cur_str2 = cur_str;
+    cur_val = int(eval_str[n2] - 48) - 1;
+    if (cur_val < 0) {
+      eval_str[n2] = '9';
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (int(eval_str[n2 - bf_cnt] - 48) < 1) {
+          eval_str[n2 - bf_cnt] = '9';
+        } else {
+          eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) - 1);
+          if (eval_str[0] == '0') {
+            std::reverse(eval_str.begin(), eval_str.end());
+            eval_str.erase(eval_str.length() - 1);
+            std::reverse(eval_str.begin(), eval_str.end());
+            n2 -= 1;
+          };
+          agn = 0;
+        };
+      };
+    } else {
+      eval_str[n2] = char(int(eval_str[n2]) - 1);
+    };
+    eval_str2 = "0";
+    id_n3 = 0;
+    cnt = 0;
+    while (eval_str2 != eval_str) { 
+      for (i = cnt; i < n; ++i) {
+        cur_val = (int(cur_str[i]) - 48) + (int(cur_str2[i - cnt]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          cur_str[i] = char(cur_val + 48);
+          bf_cnt = 0;
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+                cur_str[i - bf_cnt] = '0';
+              } else {
+                cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
+                agn = 0;
+              };
+            } else {
+              cur_str.insert(0, "1");
+              i += 1;
+              n += 1;
+              cnt += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          cur_str[i] = char(cur_val + 48);
+        };
+      };
+      cur_val = int(eval_str2[id_n3] - 48) + 1;
+      if (cur_val > 9) {
+        eval_str2[id_n3] = '0';
+        bf_cnt = 0;
+        agn = 1;
+        while (agn) {
+          bf_cnt += 1;
+          if (id_n3 - bf_cnt > -1) {
+            if (int(eval_str2[id_n3 - bf_cnt]) - 48 > 8) {
+              eval_str2[id_n3 - bf_cnt] = '0';
+            } else {
+              eval_str2[id_n3 - bf_cnt] = char(int(eval_str2[id_n3 - bf_cnt]) + 1);
+              agn = 0;
+            };
+          } else {
+            eval_str2.insert(0, "1");
+            id_n3 += 1;
+            agn = 0;
+          };
+        };
+      } else {
+        eval_str2[id_n3] = char(cur_val + 48);
+      };
+    };
+  };
+  return cur_str;
+};
+
 //@L Comparisons
 
 //@T is_greater
