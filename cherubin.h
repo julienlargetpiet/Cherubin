@@ -776,6 +776,120 @@ std::string multflt(std::string &x, std::string &x2) {
   return cur_str;
 };
 
+//@L Division
+//@L2 Quotient
+
+//@T quotient
+//@U std::string quotient(std::string &x, std::string &x2)
+//@X
+//@A x : is the int or floating point that will be divided, represented as a string.
+//@A x2 : is the int or floating point that will divide x, represented as a string.
+//@X
+//@E
+//@X
+
+std::string quotient(std::string &x, std::string &x2) {
+  if (x[0] == '-' || x2[0] == '-') {
+    return "";
+  };
+  std::string divided = x;
+  std::string divider = x2;
+  std::string divider_base = x2;
+  std::string eval_str = "0";
+  unsigned int cnt = 0;
+  unsigned int n = divider.length();
+  int n2 = 0;
+  unsigned int n_divided = x.length();
+  bool agn;
+  bool agn2 = 1;
+  int bf_cnt = 0;
+  int i;
+  unsigned int cur_val;
+  while (agn2) {
+    if (n > n_divided) {
+      agn2 = 0;
+      break;
+    } else if (n == n_divided) {
+      i = 0;
+      for (i = 0; i < n; ++i) {
+        if (int(divider[i] + 48) > int(divided[i] + 48)) {
+          agn2 = 0;
+          break;
+        } else if (int(divider[i] + 48) < int(divided[i] + 48)) {
+          break;
+        };
+      };
+      if (agn2 == 0) {
+        break;
+      };
+    };
+    for (i = cnt; i < n; ++i) {
+      if (divider[i] != '.') {
+        cur_val = (int(divider_base[i - cnt]) - 48) + (int(divider[i]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          divider[i] = char(cur_val + 48);
+          if (i - 1 > 0) {
+            if (divider[i - 1] != '.') {
+              bf_cnt = 0;
+            } else {
+              bf_cnt = 1;
+            };
+          } else {
+            bf_cnt = 0;
+          };
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (divider[i - bf_cnt] != '.') {
+                if (int(divider[i - bf_cnt]) - 48 > 8) {
+                  divider[i - bf_cnt] = '0';
+                } else {
+                  divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                  agn = 0;
+                };
+              };
+            } else {
+              divider.insert(0, "1");
+              i += 1;
+              n += 1;
+              cnt += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          divider[i] = char(cur_val + 48);
+        };
+      };
+    };
+    cur_val = int(eval_str[n2] - 48) + 1;
+    if (cur_val > 9) {
+      eval_str[n2] = '0';
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (n2 - bf_cnt > -1) {
+          if (int(eval_str[n2 - bf_cnt]) - 48 > 8) {
+            eval_str[n2 - bf_cnt] = '0';
+          } else {
+            eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          eval_str.insert(0, "1");
+          n2 += 1;
+          agn = 0;
+        };
+      };
+    } else {
+      eval_str[n2] = char(cur_val + 48);
+    };
+  };
+  return eval_str;
+};
+
 //@L Factorial
 
 //@T factorial
