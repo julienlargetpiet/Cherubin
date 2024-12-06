@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
 
 //@L Addition
 //@L2 Integers
