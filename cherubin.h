@@ -933,9 +933,7 @@ std::string factorial(std::string &x) {
       } else {
         eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) - 1);
         if (eval_str[0] == '0') {
-          std::reverse(eval_str.begin(), eval_str.end());
-          eval_str.erase(eval_str.length() - 1);
-          std::reverse(eval_str.begin(), eval_str.end());
+          eval_str = eval_str.substr(1, eval_str.length());
           n2 -= 1;
         };
         agn = 0;
@@ -958,9 +956,7 @@ std::string factorial(std::string &x) {
         } else {
           eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) - 1);
           if (eval_str[0] == '0') {
-            std::reverse(eval_str.begin(), eval_str.end());
-            eval_str.erase(eval_str.length() - 1);
-            std::reverse(eval_str.begin(), eval_str.end());
+            eval_str = eval_str.substr(1, eval_str.length());
             n2 -= 1;
           };
           agn = 0;
