@@ -263,7 +263,7 @@ std::string subsint(std::string &x, std::string &x2) {
         agn = 1;
         while (agn) {
           bf_cnt += 1;
-          if (int(cur_str[i - bf_cnt]) - 48 < 1) {
+          if (cur_str[i - bf_cnt] == '0') {
             cur_str[i - bf_cnt] = '9';
           } else {
             cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) - 1);
@@ -404,7 +404,7 @@ std::string subsflt(std::string &x, std::string &x2) {
           while (agn) {
             bf_cnt += 1;
             if (cur_str[i - bf_cnt] != '.') {
-              if (int(cur_str[i - bf_cnt]) - 48 < 1) {
+              if (cur_str[i - bf_cnt] == '0') {
                 cur_str[i - bf_cnt] = '9';
               } else {
                 cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) - 1);
@@ -1078,7 +1078,7 @@ std::string factorial(std::string &x) {
     agn = 1;
     while (agn) {
       bf_cnt += 1;
-      if (int(eval_str[n2 - bf_cnt] - 48) < 1) {
+      if (eval_str[n2 - bf_cnt] == '0') {
         eval_str[n2 - bf_cnt] = '9';
       } else {
         eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) - 1);
@@ -1101,7 +1101,7 @@ std::string factorial(std::string &x) {
       agn = 1;
       while (agn) {
         bf_cnt += 1;
-        if (int(eval_str[n2 - bf_cnt] - 48) < 1) {
+        if (eval_str[n2 - bf_cnt] == '0') {
           eval_str[n2 - bf_cnt] = '9';
         } else {
           eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) - 1);
