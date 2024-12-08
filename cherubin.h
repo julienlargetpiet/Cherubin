@@ -775,9 +775,124 @@ std::string multflt(std::string &x, std::string &x2) {
 };
 
 //@L Division
+//@L2 Remainder
+
+//@T remainderint
+//@U std::string remainderint(std::string &x, std::string &x2)
+//@X
+//@D Returns the remainder of a division between two int represented as a std string
+//@A x : is the int that will be divided, represented as a string
+//@A x2 : is the divider which is a int represented as a string
+//@E
+//@X
+
+std::string remainderint(std::string &x, std::string &x2) {
+  if (x[0] == '-' || x2[0] == '-') {
+    return "";
+  };
+  std::string divided = x;
+  std::string divider = x2;
+  std::string divider_base = x2;
+  std::string lst_divider = divider;
+  unsigned int cnt = 0;
+  unsigned int n = divider.length();
+  int n2 = 0;
+  unsigned int n_divided = x.length();
+  bool agn;
+  bool agn2 = 1;
+  int bf_cnt = 0;
+  int i;
+  int cur_val;
+  while (agn2) {
+    if (n > n_divided) {
+      agn2 = 0;
+      break;
+    } else if (n == n_divided) {
+      i = 0;
+      for (i = 0; i < n; ++i) {
+        if (int(divider[i] + 48) > int(divided[i] + 48)) {
+          agn2 = 0;
+          break;
+        } else if (int(divider[i] + 48) < int(divided[i] + 48)) {
+          break;
+        };
+      };
+      if (i == n) {
+        break;
+      };
+      if (agn2 == 0) {
+        break;
+      };
+    };
+    lst_divider = divider;
+    for (i = cnt; i < n; ++i) {
+      cur_val = (int(divider_base[i - cnt]) - 48) + (int(divider[i]) - 48);
+      if (cur_val > 9) {
+        cur_val -= 10;
+        divider[i] = char(cur_val + 48);
+        bf_cnt = 0;
+        agn = 1;
+        while (agn) {
+          bf_cnt += 1;
+          if (i - bf_cnt > -1) {
+            if (divider[i - bf_cnt] != '.') {
+              if (int(divider[i - bf_cnt]) - 48 > 8) {
+                divider[i - bf_cnt] = '0';
+              } else {
+                divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                agn = 0;
+              };
+            };
+          } else {
+            divider.insert(0, "1");
+            i += 1;
+            n += 1;
+            cnt += 1;
+            agn = 0;
+          };
+        };
+      } else {
+        divider[i] = char(cur_val + 48);
+      };
+    };
+  };
+  cnt = divided.length() - lst_divider.length();
+  for (i = cnt; i < n_divided; ++i) {
+    cur_val = int(divided[i] - 48) - int(lst_divider[i - cnt] - 48);
+    if (cur_val < 0) {
+      cur_val += 10; 
+      divided[i] = char(cur_val + 48);
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (i - bf_cnt > 0) {
+          if (divided[i - bf_cnt] == '0') {
+            divided[i - bf_cnt] = '9';
+          } else {
+            divided[i - bf_cnt] = char(int(divided[i - bf_cnt]) - 1);
+            agn = 0;
+          };
+        } else {
+          agn = 0;
+        };
+      };
+    } else {
+      divided[i] = char(cur_val + 48); 
+    };
+    if (divided[0] == '0' & n_divided > 1) {
+      lst_divider = lst_divider.substr(1, n);
+      divided = divided.substr(1, n);
+      n_divided -= 1;
+      i -= 1;
+    };
+  };
+  return divided;
+};
+
 //@L2 Quotient
 
-//@L Integers
+//@L3 Integers
 
 //@T quotientint
 //@U std::string quotientint(std::string &x, std::string &x2)
@@ -880,7 +995,7 @@ std::string quotientint(std::string &x, std::string &x2) {
   return eval_str;
 };
 
-//@L Floating points
+//@L3 Floating points
 
 //@T quotientflt
 //@U std::string quotientflt(std::string &x, std::string &x2)
