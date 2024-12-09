@@ -48,7 +48,7 @@ std::string addint(std::string &x, std::string &x2) {
         while (agn) {
           bf_cnt += 1;
           if (i - bf_cnt > -1) {
-            if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+            if (cur_str[i - bf_cnt] == '9') {
               cur_str[i - bf_cnt] = '0';
             } else {
               cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
@@ -194,7 +194,7 @@ std::string addflt(std::string &x, std::string &x2) {
             bf_cnt += 1;
             if (i - bf_cnt > -1) {
               if (cur_str[i - bf_cnt] != '.') {
-                if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+                if (cur_str[i - bf_cnt] == '9') {
                   cur_str[i - bf_cnt] = '0';
                 } else {
                   cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
@@ -464,7 +464,7 @@ std::string multint(std::string &x, unsigned int &x2) {
           while (agn) {
             bf_cnt += 1;
             if (i - bf_cnt > -1) {
-              if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+              if (cur_str[i - bf_cnt] == '9') {
                 cur_str[i - bf_cnt] = '0';
               } else {
                 cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
@@ -529,7 +529,7 @@ std::string multint2(std::string &x, std::string &x2) {
           while (agn) {
             bf_cnt += 1;
             if (i - bf_cnt > -1) {
-              if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+              if (cur_str[i - bf_cnt] == '9') {
                 cur_str[i - bf_cnt] = '0';
               } else {
                 cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
@@ -555,7 +555,7 @@ std::string multint2(std::string &x, std::string &x2) {
         while (agn) {
           bf_cnt += 1;
           if (cnt - bf_cnt > -1) {
-            if (int(eval_str[cnt - bf_cnt]) - 48 > 8) {
+            if (eval_str[cnt - bf_cnt] == '9') {
               eval_str[cnt - bf_cnt] = '0';
             } else {
               eval_str[cnt - bf_cnt] = char(int(eval_str[cnt - bf_cnt]) + 1);
@@ -726,7 +726,7 @@ std::string multflt(std::string &x, std::string &x2) {
             bf_cnt += 1;
             if (i - bf_cnt > -1) {
               if (cur_str[i - bf_cnt] != '.') {
-                if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+                if (cur_str[i - bf_cnt] == '9') {
                   cur_str[i - bf_cnt] = '0';
                 } else {
                   cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
@@ -755,7 +755,7 @@ std::string multflt(std::string &x, std::string &x2) {
       while (agn) {
         bf_cnt += 1;
         if (cnt - bf_cnt > -1) {
-          if (int(eval_str[cnt - bf_cnt]) - 48 > 8) {
+          if (eval_str[cnt - bf_cnt] == '9') {
             eval_str[cnt - bf_cnt] = '0';
           } else {
             eval_str[cnt - bf_cnt] = char(int(eval_str[cnt - bf_cnt]) + 1);
@@ -776,6 +776,7 @@ std::string multflt(std::string &x, std::string &x2) {
 
 //@L Division
 //@L2 Remainder
+//@L3 Integers
 
 //@T remainderint
 //@U std::string remainderint(std::string &x, std::string &x2)
@@ -834,13 +835,11 @@ std::string remainderint(std::string &x, std::string &x2) {
         while (agn) {
           bf_cnt += 1;
           if (i - bf_cnt > -1) {
-            if (divider[i - bf_cnt] != '.') {
-              if (int(divider[i - bf_cnt]) - 48 > 8) {
-                divider[i - bf_cnt] = '0';
-              } else {
-                divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
-                agn = 0;
-              };
+            if (divider[i - bf_cnt] == '9') {
+              divider[i - bf_cnt] = '0';
+            } else {
+              divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+              agn = 0;
             };
           } else {
             divider.insert(0, "1");
@@ -889,8 +888,194 @@ std::string remainderint(std::string &x, std::string &x2) {
   return divided;
 };
 
-//@L2 Quotient
+//@L3 Floting Points
 
+//@T remainderflt
+//@U std::string remainderflt(std::string &x, std::string &x2)
+//@X
+//@D Returns the remainder of a division between two int or floating point represented as a std string
+//@A x : is the int or floating point that will be divided, represented as a string
+//@A x2 : is the divider which is a int or floating point represented as a string
+//@E
+//@X
+
+std::string remainderflt(std::string &x, std::string &x2) {
+  if (x[0] == '-' || x2[0] == '-') {
+    return "";
+  };
+  std::string divided = x;
+  std::string divider = x2;
+  std::string divider_base = x2;
+  std::string lst_divider = divider;
+  unsigned int n = divider.length();
+  unsigned int n_divided = x.length();
+  bool is_dec1 = 0;
+  bool is_dec2 = 0;
+  unsigned int dec1;
+  unsigned int dec2;
+  unsigned int cnt = 0;
+  bool agn2 = 1;
+  while (agn2) {
+    cnt += 1;
+    if (cnt + 1 == n) {
+      agn2 = 0;
+    } else if (divider[cnt] == '.') {
+      is_dec1 = 1;
+      agn2 = 0;
+    };
+  };
+  dec1 = n - cnt - 1;
+  agn2 = 1;
+  cnt = 0;
+  while (agn2) {
+    cnt += 1;
+    if (cnt + 1 == n_divided) {
+      agn2 = 0;
+    } else if (divided[cnt] == '.') {
+      is_dec2 = 1;
+      agn2 = 0;
+    };
+  };
+  dec2 = n_divided - cnt - 1;
+  if (dec1 > dec2) {
+    if (!is_dec2) {
+      divided += ".";
+      n_divided += 1;
+    };
+    for (cnt = 0; cnt < dec1 - dec2; ++cnt) {
+      divided += "0";
+      n_divided += 1;
+    };
+  } else if (dec1 < dec2) {
+    if (!is_dec1) {
+      divider += ".";
+      lst_divider += ".";
+      divider_base += ".";
+      n += 1;
+    };
+    for (cnt = 0; cnt < dec2 - dec1; ++cnt) {
+      divider += "0";
+      lst_divider += "0";
+      divider_base += "0";
+      n += 1;
+    };
+  };
+  agn2 = 1;
+  int bf_cnt = 0;
+  bool agn;
+  int i;
+  int cur_val;
+  cnt = 0;
+  while (agn2) {
+    if (n > n_divided) {
+      agn2 = 0;
+      break;
+    } else if (n == n_divided) {
+      i = 0;
+      for (i = 0; i < n; ++i) {
+        if (int(divider[i] + 48) > int(divided[i] + 48)) {
+          agn2 = 0;
+          break;
+        } else if (int(divider[i] + 48) < int(divided[i] + 48)) {
+          break;
+        };
+      };
+      if (i == n) {
+        break;
+      };
+      if (agn2 == 0) {
+        break;
+      };
+    };
+    lst_divider = divider;
+    for (i = cnt; i < n; ++i) {
+      if (divider[i] != '.') {
+        cur_val = (int(divider_base[i - cnt]) - 48) + (int(divider[i]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          divider[i] = char(cur_val + 48);
+          if (i > 0) {
+            if (divider[i - 1] == '.') {
+              bf_cnt = 1;
+            } else {
+              bf_cnt = 0;
+            };
+          } else {
+            bf_cnt = 0;
+          };
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (divider[i - bf_cnt] != '.') {
+                if (divider[i - bf_cnt] == '9') {
+                  divider[i - bf_cnt] = '0';
+                } else {
+                  divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                  agn = 0;
+                };
+              };
+            } else {
+              divider.insert(0, "1");
+              i += 1;
+              n += 1;
+              cnt += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          divider[i] = char(cur_val + 48);
+        };
+      };
+    };
+  };
+  cnt = divided.length() - lst_divider.length();
+  for (i = cnt; i < n_divided; ++i) {
+    if (divided[i] != '.') {
+      cur_val = int(divided[i] - 48) - int(lst_divider[i - cnt] - 48);
+      if (cur_val < 0) {
+        cur_val += 10; 
+        divided[i] = char(cur_val + 48);
+        if (i > 0) {
+          if (divided[i - 1] == '.') {
+            bf_cnt = 1;
+          } else {
+            bf_cnt = 0;
+          };
+        } else {
+          bf_cnt = 0;
+        };
+        agn = 1;
+        while (agn) {
+          bf_cnt += 1;
+          if (i - bf_cnt > -1) {
+            if (divided[i - bf_cnt] != '.') {
+              if (divided[i - bf_cnt] == '0') {
+                divided[i - bf_cnt] = '9';
+              } else {
+                divided[i - bf_cnt] = char(int(divided[i - bf_cnt]) - 1);
+                agn = 0;
+              };
+            };
+          } else {
+            agn = 0;
+          };
+        };
+      } else {
+        divided[i] = char(cur_val + 48); 
+      };
+      if (divided[0] == '0' & n_divided > 1) {
+        lst_divider = lst_divider.substr(1, n);
+        divided = divided.substr(1, n);
+        n_divided -= 1;
+        i -= 1;
+      };
+    };
+  };
+  return divided;
+};
+
+//@L2 Quotient
 //@L3 Integers
 
 //@T quotientint
@@ -948,7 +1133,7 @@ std::string quotientint(std::string &x, std::string &x2) {
           bf_cnt += 1;
           if (i - bf_cnt > -1) {
             if (divider[i - bf_cnt] != '.') {
-              if (int(divider[i - bf_cnt]) - 48 > 8) {
+              if (divider[i - bf_cnt] == '9') {
                 divider[i - bf_cnt] = '0';
               } else {
                 divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
@@ -975,7 +1160,7 @@ std::string quotientint(std::string &x, std::string &x2) {
       while (agn) {
         bf_cnt += 1;
         if (n2 - bf_cnt > -1) {
-          if (int(eval_str[n2 - bf_cnt]) - 48 > 8) {
+          if (eval_str[n2 - bf_cnt] == '9') {
             eval_str[n2 - bf_cnt] = '0';
           } else {
             eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) + 1);
@@ -1107,7 +1292,7 @@ std::string quotientflt(std::string &x, std::string &x2) {
             bf_cnt += 1;
             if (i - bf_cnt > -1) {
               if (divider[i - bf_cnt] != '.') {
-                if (int(divider[i - bf_cnt]) - 48 > 8) {
+                if (divider[i - bf_cnt] == '9') {
                   divider[i - bf_cnt] = '0';
                 } else {
                   divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
@@ -1135,7 +1320,7 @@ std::string quotientflt(std::string &x, std::string &x2) {
       while (agn) {
         bf_cnt += 1;
         if (n2 - bf_cnt > -1) {
-          if (int(eval_str[n2 - bf_cnt]) - 48 > 8) {
+          if (eval_str[n2 - bf_cnt] == '9') {
             eval_str[n2 - bf_cnt] = '0';
           } else {
             eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) + 1);
@@ -1243,7 +1428,7 @@ std::string factorial(std::string &x) {
           while (agn) {
             bf_cnt += 1;
             if (i - bf_cnt > -1) {
-              if (int(cur_str[i - bf_cnt]) - 48 > 8) {
+              if (cur_str[i - bf_cnt] == '9') {
                 cur_str[i - bf_cnt] = '0';
               } else {
                 cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
@@ -1269,7 +1454,7 @@ std::string factorial(std::string &x) {
         while (agn) {
           bf_cnt += 1;
           if (id_n3 - bf_cnt > -1) {
-            if (int(eval_str2[id_n3 - bf_cnt]) - 48 > 8) {
+            if (eval_str2[id_n3 - bf_cnt] == '9') {
               eval_str2[id_n3 - bf_cnt] = '0';
             } else {
               eval_str2[id_n3 - bf_cnt] = char(int(eval_str2[id_n3 - bf_cnt]) + 1);
