@@ -992,7 +992,7 @@ std::string remainderflt(std::string &x, std::string &x2) {
         if (cur_val > 9) {
           cur_val -= 10;
           divider[i] = char(cur_val + 48);
-          if (i > 0) {
+          if (i - 1 > 0) {
             if (divider[i - 1] == '.') {
               bf_cnt = 1;
             } else {
