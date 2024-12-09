@@ -56,7 +56,7 @@ std::string addint(std::string &x, std::string &x2) {
             };
           } else {
             cur_str.insert(0, "1");
-            bf_str.insert(0, "1");
+            cnt += 1;
             i += 1;
             sizen += 1;
             agn = 0;
@@ -203,7 +203,7 @@ std::string addflt(std::string &x, std::string &x2) {
               };
             } else {
               cur_str.insert(0, "1");
-              bf_str.insert(0, "1");
+              cnt += 1;
               i += 1;
               sizen += 1;
               agn = 0;
