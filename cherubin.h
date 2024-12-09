@@ -805,7 +805,6 @@ std::string remainderint(std::string &x, std::string &x2) {
   int cur_val;
   while (agn2) {
     if (n > n_divided) {
-      agn2 = 0;
       break;
     } else if (n == n_divided) {
       i = 0;
@@ -966,7 +965,6 @@ std::string remainderflt(std::string &x, std::string &x2) {
   cnt = 0;
   while (agn2) {
     if (n > n_divided) {
-      agn2 = 0;
       break;
     } else if (n == n_divided) {
       i = 0;
