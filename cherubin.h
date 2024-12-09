@@ -1104,7 +1104,6 @@ std::string quotientint(std::string &x, std::string &x2) {
   unsigned int cur_val;
   while (agn2) {
     if (n > n_divided) {
-      agn2 = 0;
       break;
     } else if (n == n_divided) {
       i = 0;
@@ -1254,7 +1253,6 @@ std::string quotientflt(std::string &x, std::string &x2) {
   unsigned int cur_val;
   while (agn2) {
     if (n > n_divided) {
-      agn2 = 0;
       break;
     } else if (n == n_divided) {
       i = 0;
