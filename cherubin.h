@@ -796,7 +796,6 @@ std::string remainderint(std::string &x, std::string &x2) {
   std::string lst_divider = divider;
   unsigned int cnt = 0;
   unsigned int n = divider.length();
-  int n2 = 0;
   unsigned int n_divided = x.length();
   bool agn;
   bool agn2 = 1;
@@ -1026,7 +1025,7 @@ std::string quotientflt(std::string &x, std::string &x2) {
   bool is_dec2 = 0;
   while (agn2) {
     cnt += 1;
-    if (cnt + 1 == n) {
+    if (cnt + 1 >= n) {
       agn2 = 0;
     } else if (divider[cnt] == '.') {
       is_dec1 = 1;
@@ -1038,7 +1037,7 @@ std::string quotientflt(std::string &x, std::string &x2) {
   cnt = 0;
   while (agn2) {
     cnt += 1;
-    if (cnt + 1 == n_divided) {
+    if (cnt + 1 >= n_divided) {
       agn2 = 0;
     } else if (divided[cnt] == '.') {
       is_dec2 = 1;
