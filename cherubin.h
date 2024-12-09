@@ -949,13 +949,11 @@ std::string remainderflt(std::string &x, std::string &x2) {
   } else if (dec1 < dec2) {
     if (!is_dec1) {
       divider += ".";
-      lst_divider += ".";
       divider_base += ".";
       n += 1;
     };
     for (cnt = 0; cnt < dec2 - dec1; ++cnt) {
       divider += "0";
-      lst_divider += "0";
       divider_base += "0";
       n += 1;
     };
