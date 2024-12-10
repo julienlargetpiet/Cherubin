@@ -794,7 +794,7 @@ std::string remainderint(std::string &x, std::string &x2) {
   std::string divided = x;
   std::string divider = x2;
   std::string divider_base = x2;
-  std::string lst_divider = divider;
+  std::string lst_divider = "0";
   unsigned int cnt = 0;
   unsigned int n = divider.length();
   unsigned int n_divided = x.length();
