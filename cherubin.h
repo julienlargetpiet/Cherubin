@@ -1246,11 +1246,13 @@ std::string quotientflt(std::string &x, std::string &x2) {
   if (dec2 > dec1) {
     if (!is_dec1) {
       divider += ".";
+      divider_base += ".";
       n += 1;
     };
     for (cnt = 0; cnt < dec2 - dec1; ++cnt) {
       n += 1;
       divider += "0";
+      divider_base += "0";
     };
   } else if (dec2 < dec1) {
     if (!is_dec2) {
