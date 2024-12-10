@@ -782,8 +782,8 @@ std::string multflt(std::string &x, std::string &x2) {
 //@U std::string remainderint(std::string &x, std::string &x2)
 //@X
 //@D Returns the remainder of a division between two int represented as a std string
-//@A x : is the int that will be divided, represented as a string
-//@A x2 : is the divider which is a int represented as a string
+//@A x : is the int that will be divided, represented as a string, must be greater or equal to x2
+//@A x2 : is the divider which is a int represented as a string, must be lower or equal to x
 //@E
 //@X
 
@@ -794,7 +794,7 @@ std::string remainderint(std::string &x, std::string &x2) {
   std::string divided = x;
   std::string divider = x2;
   std::string divider_base = x2;
-  std::string lst_divider = "0";
+  std::string lst_divider = divider;
   unsigned int cnt = 0;
   unsigned int n = divider.length();
   unsigned int n_divided = x.length();
@@ -808,13 +808,14 @@ std::string remainderint(std::string &x, std::string &x2) {
       break;
     } else if (n == n_divided) {
       i = 0;
-      for (i = 0; i < n; ++i) {
+      while (i < n) {
         if (int(divider[i] + 48) > int(divided[i] + 48)) {
           agn2 = 0;
           break;
         } else if (int(divider[i] + 48) < int(divided[i] + 48)) {
           break;
         };
+        i += 1;
       };
       if (i == n) {
         break;
@@ -893,8 +894,8 @@ std::string remainderint(std::string &x, std::string &x2) {
 //@U std::string remainderflt(std::string &x, std::string &x2)
 //@X
 //@D Returns the remainder of a division between two int or floating point represented as a std string
-//@A x : is the int or floating point that will be divided, represented as a string
-//@A x2 : is the divider which is a int or floating point represented as a string
+//@A x : is the int or floating point that will be divided, represented as a string, must be greater or equal to x2
+//@A x2 : is the divider which is a int or floating point represented as a string, must be lower or equal to x
 //@E
 //@X
 
@@ -914,28 +915,36 @@ std::string remainderflt(std::string &x, std::string &x2) {
   unsigned int dec2;
   unsigned int cnt = 0;
   bool agn2 = 1;
-  while (agn2) {
-    cnt += 1;
-    if (cnt + 1 == n) {
-      agn2 = 0;
-    } else if (divider[cnt] == '.') {
-      is_dec1 = 1;
-      agn2 = 0;
+  if (n > 2) {
+    while (agn2) {
+      cnt += 1;
+      if (cnt + 1 >= n) {
+        agn2 = 0;
+      } else if (divider[cnt] == '.') {
+        is_dec1 = 1;
+        agn2 = 0;
+      };
     };
+    dec1 = n - cnt - 1;
+  } else {
+    dec1 = 0;
   };
-  dec1 = n - cnt - 1;
-  agn2 = 1;
-  cnt = 0;
-  while (agn2) {
-    cnt += 1;
-    if (cnt + 1 == n_divided) {
-      agn2 = 0;
-    } else if (divided[cnt] == '.') {
-      is_dec2 = 1;
-      agn2 = 0;
+  if (n_divided > 2) {
+    agn2 = 1;
+    cnt = 0;
+    while (agn2) {
+      cnt += 1;
+      if (cnt + 1 >= n_divided) {
+        agn2 = 0;
+      } else if (divided[cnt] == '.') {
+        is_dec2 = 1;
+        agn2 = 0;
+      };
     };
+    dec2 = n_divided - cnt - 1;
+  } else {
+    dec2 = 0;
   };
-  dec2 = n_divided - cnt - 1;
   if (dec1 > dec2) {
     if (!is_dec2) {
       divided += ".";
@@ -968,13 +977,14 @@ std::string remainderflt(std::string &x, std::string &x2) {
       break;
     } else if (n == n_divided) {
       i = 0;
-      for (i = 0; i < n; ++i) {
+      while (i < n) {
         if (int(divider[i] + 48) > int(divided[i] + 48)) {
           agn2 = 0;
           break;
         } else if (int(divider[i] + 48) < int(divided[i] + 48)) {
           break;
         };
+        i += 1;
       };
       if (i == n) {
         break;
@@ -1203,28 +1213,36 @@ std::string quotientflt(std::string &x, std::string &x2) {
   bool agn2 = 1;
   bool is_dec1 = 0;
   bool is_dec2 = 0;
-  while (agn2) {
-    cnt += 1;
-    if (cnt + 1 >= n) {
-      agn2 = 0;
-    } else if (divider[cnt] == '.') {
-      is_dec1 = 1;
-      agn2 = 0;
+  if (n > 2) {
+    while (agn2) {
+      cnt += 1;
+      if (cnt + 1 >= n) {
+        agn2 = 0;
+      } else if (divider[cnt] == '.') {
+        is_dec1 = 1;
+        agn2 = 0;
+      };
     };
+    dec1 = n - cnt - 1;
+  } else {
+    dec1 = 0;
   };
-  dec1 = n - cnt - 1;
-  agn2 = 1;
-  cnt = 0;
-  while (agn2) {
-    cnt += 1;
-    if (cnt + 1 >= n_divided) {
-      agn2 = 0;
-    } else if (divided[cnt] == '.') {
-      is_dec2 = 1;
-      agn2 = 0;
+  if (n_divided > 2) {
+    agn2 = 1;
+    cnt = 0;
+    while (agn2) {
+      cnt += 1;
+      if (cnt + 1 >= n_divided) {
+        agn2 = 0;
+      } else if (divided[cnt] == '.') {
+        is_dec2 = 1;
+        agn2 = 0;
+      };
     };
+    dec2 = n_divided - cnt - 1;
+  } else {
+    dec2 = 0;
   };
-  dec2 = n_divided - cnt - 1;
   if (dec2 > dec1) {
     if (!is_dec1) {
       divider += ".";
