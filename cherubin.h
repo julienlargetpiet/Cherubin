@@ -918,7 +918,7 @@ std::string remainderflt(std::string &x, std::string &x2) {
   if (n > 2) {
     while (agn2) {
       cnt += 1;
-      if (cnt + 1 >= n) {
+      if (cnt + 1 == n) {
         agn2 = 0;
       } else if (divider[cnt] == '.') {
         is_dec1 = 1;
@@ -934,7 +934,7 @@ std::string remainderflt(std::string &x, std::string &x2) {
     cnt = 0;
     while (agn2) {
       cnt += 1;
-      if (cnt + 1 >= n_divided) {
+      if (cnt + 1 == n_divided) {
         agn2 = 0;
       } else if (divided[cnt] == '.') {
         is_dec2 = 1;
@@ -1216,7 +1216,7 @@ std::string quotientflt(std::string &x, std::string &x2) {
   if (n > 2) {
     while (agn2) {
       cnt += 1;
-      if (cnt + 1 >= n) {
+      if (cnt + 1 == n) {
         agn2 = 0;
       } else if (divider[cnt] == '.') {
         is_dec1 = 1;
@@ -1232,7 +1232,7 @@ std::string quotientflt(std::string &x, std::string &x2) {
     cnt = 0;
     while (agn2) {
       cnt += 1;
-      if (cnt + 1 >= n_divided) {
+      if (cnt + 1 == n_divided) {
         agn2 = 0;
       } else if (divided[cnt] == '.') {
         is_dec2 = 1;
