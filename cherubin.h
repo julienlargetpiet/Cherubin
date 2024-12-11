@@ -780,13 +780,13 @@ std::string multflt(std::string &x, std::string &x2) {
 //@U std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
 //@X
 //@D Returns the result of a division between ints or floats represented as std string.
-//@A x : is a int or float that will be divided represented as a std string
+//@A x : is a int or float that will be divided represented as a std string, must be superior or equal to 1
 //@A x2 : is a int or float that will divide represented as a std string
 //@X
 //@E
 //@X
 
-std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8) {
+std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5) {
   if (x[0] == '-' || x2[0] == '-') {
     return "";
   };
@@ -796,7 +796,7 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
   std::string lst_divider = x2;
   std::string eval_str = "";
   std::string eval_str2 = "0";
-  std::string lst_eval_str2;
+  std::string lst_eval_str2 = "0";
   unsigned int n = x2.length();
   unsigned int n_divided = x.length();
   unsigned int idx_dec;
@@ -903,6 +903,8 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
   int cur_val;
   int bf_cnt;
   bool agn2 = 1;
+  unsigned int post_dec;
+  unsigned int lst_n = n;
   while (agn2) { 
     if (n > n_divided) {
       divider = lst_divider;
@@ -924,12 +926,17 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
       };
       if (!agn2) {
         divider = lst_divider;
+        if (cnt != lst_n) {
+          cnt -= 1;
+        };
+        n = lst_n;
         break;
       } else if (i == n) {
         break;
       };
     };
     lst_divider = divider;
+    lst_n = n;
     for (i = cnt; i < n; ++i) {
       if (divider[i] != '.') {
         cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt]) - 48);
@@ -994,7 +1001,8 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
       eval_str2[n2] = char(cur_val + 48);
     };
   };
-  eval_str += eval_str2; 
+  eval_str += eval_str2;
+  post_dec = eval_str.length();
   if (nb_decimal > 1) {
     divided += "0";
     divider += "0";
@@ -1036,12 +1044,17 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
           if (!agn2) {
             divider = lst_divider;
             eval_str2 = lst_eval_str2;
+            if (n != lst_n) {
+              cnt -= 1;
+            };
+            n = lst_n;
             break;
           } else if (i == n) {
             break;
           };
         };
         lst_divider = divider;
+        lst_n = n;
         for (i = cnt; i < n; ++i) {
           if (divider[i] != '.') {
             cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt + delta]) - 48);
@@ -1106,11 +1119,14 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
     };
   };
   if (delta_integ > 0) {
-    eval_str[1] = eval_str[0];
-    eval_str[0] = '.';
-    eval_str.insert(0, "0");
     for (i = 1; i < delta_integ; ++i) {
-      eval_str.insert(2, "0");
+      eval_str.insert(0, "0");
+      post_dec += 1;
+    };
+    for (i = 0; i < delta_integ; ++i) {
+      eval_str[post_dec] = eval_str[post_dec - 1];
+      post_dec -= 1;
+      eval_str[post_dec] = '.';
     };
   };
   return eval_str;
