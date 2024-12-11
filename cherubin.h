@@ -775,6 +775,347 @@ std::string multflt(std::string &x, std::string &x2) {
 };
 
 //@L Division
+
+//@T divide
+//@U std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
+//@X
+//@D Returns the result of a division between ints or floats represented as std string.
+//@A x : is a int or float that will be divided represented as a std string
+//@A x2 : is a int or float that will divide represented as a std string
+//@X
+//@E
+//@X
+
+std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8) {
+  if (x[0] == '-' || x2[0] == '-') {
+    return "";
+  };
+  std::string divided = x;
+  std::string divider = x2;
+  std::string divider_base = divider;
+  std::string lst_divider = x2;
+  std::string eval_str = "";
+  std::string eval_str2 = "0";
+  std::string lst_eval_str2;
+  unsigned int n = x2.length();
+  unsigned int n_divided = x.length();
+  unsigned int idx_dec;
+  unsigned int idx_dec2;
+  unsigned int delta = 0;
+  unsigned int cnt = 0;
+  unsigned int i2;
+  int i;
+  unsigned int dec1;
+  unsigned int dec2;
+  unsigned int integ1;
+  unsigned int integ2;
+  bool is_dec1 = 0;
+  bool is_dec2 = 0;
+  bool agn = 1;
+  if (n > 2) {
+    while (agn) {
+      cnt += 1;
+      if (cnt + 1 == n) {
+        agn = 0;
+      } else if (divider[cnt] == '.') {
+        idx_dec = cnt;
+        is_dec1 = 1;
+        agn = 0;
+      };
+    };
+    dec1 = n - cnt - 1;
+    integ1 = n - dec1 - 2;
+  } else {
+    dec1 = 0;
+    integ1 = n - 1;
+  };
+  if (n_divided > 2) {
+    cnt = 0;
+    agn = 1;
+    while (agn) {
+      cnt += 1;
+      if (cnt + 1 == n_divided) {
+        agn = 0;
+      } else if (divided[cnt] == '.') {
+        is_dec2 = 1;
+        idx_dec2 = cnt;
+        agn = 0;
+      };
+    };
+    dec2 = n_divided - cnt - 1;
+    integ2 = n_divided - dec2 - 2;
+  } else {
+    dec2 = 0;
+    integ2 = n_divided - 1;
+  };
+  int delta_integ = integ1 - integ2 + 1;
+  if (delta_integ > 0) {
+    if (!is_dec2) {
+      for (i = 0; i < delta_integ; ++i) {
+        divided += "0";
+        n_divided += 1;
+      };
+    } else {
+      for (i = 0; i < delta_integ; ++i) {
+        divided[idx_dec2] = divided[idx_dec2 + 1];
+        divided[idx_dec2 + 1] = '.';
+        idx_dec2 += 1;
+        divided += "0";
+        n_divided += 1;
+      };
+    };
+  };
+  if (dec1 > dec2) {
+    if (!is_dec2) {
+      divided += ".";
+      n_divided += 1;
+    };
+    for (i = 0; i < dec1 - dec2; ++i) {
+      divided += "0";
+      n_divided += 1;
+    };
+  } else if (dec1 < dec2) {
+    if (!is_dec1) {
+      divider += ".";
+      divider_base += ".";
+      lst_divider += ".";
+      idx_dec = n;
+      n += 1;
+    };
+    for (i = 0; i < dec2 - dec1; ++i) {
+      divider += "0";
+      divider_base += "0";
+      lst_divider += "0";
+      n += 1;
+    };
+  } else if (!is_dec1 || !is_dec2) {
+    std::cout << "HEREE\n";
+    divided += ".0";
+    divider += ".0";
+    divider_base += ".0";
+    lst_divider += ".0";
+    idx_dec = n;
+    n += 2;
+    n_divided += 2;
+  };
+  cnt = 0;
+  int n2 = 0;
+  int cur_val;
+  int bf_cnt;
+  bool agn2 = 1;
+  while (agn2) { 
+    if (n > n_divided) {
+      divider = lst_divider;
+      cnt -= 1;
+      n -= 1;
+      break;
+    } else if (n == n_divided) {
+      i = 0;
+      while (i < n) {
+        if (divided[i] != divider[i]) {
+          if (int(divided[i] - 48) < int(divider[i] - 48)) {
+            agn2 = 0;
+            break;
+          } else {
+            break;
+          };
+        };
+        i += 1;
+      };
+      if (!agn2) {
+        divider = lst_divider;
+        break;
+      } else if (i == n) {
+        break;
+      };
+    };
+    lst_divider = divider;
+    for (i = cnt; i < n; ++i) {
+      if (divider[i] != '.') {
+        cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          divider[i] = char(cur_val + 48);
+          if (i - 1 > 0) {
+            if (divider[i - 1] != '.') {
+              bf_cnt = 0;
+            } else {
+              bf_cnt = 1;
+            };
+          } else {
+            bf_cnt = 0;
+          };
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (divider[i - bf_cnt] != '.') {
+                if (divider[i - bf_cnt] == '9') {
+                  divider[i - bf_cnt] = '0';
+                } else {
+                  divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                  agn = 0;
+                };
+              };
+            } else {
+              divider.insert(0, "1");
+              cnt += 1;
+              i += 1;
+              n += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          divider[i] = char(cur_val + 48);
+        };
+      };
+    };
+    cur_val = int(eval_str2[n2] - 48) + 1;
+    if (cur_val > 9) {
+      eval_str2[n2] = '0';
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (n2 - bf_cnt > -1) {
+          if (eval_str2[n2 - bf_cnt] == '9') {
+            eval_str2[n2 - bf_cnt] = '0';
+          } else {
+            eval_str2[n2 - bf_cnt] = char(int(eval_str2[n2 - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          eval_str2.insert(0, "1");
+          n2 += 1;
+          agn = 0;
+        };
+      }
+    } else {
+      eval_str2[n2] = char(cur_val + 48);
+    };
+  };
+  eval_str += eval_str2; 
+  if (nb_decimal > 1) {
+    divided += "0";
+    divider += "0";
+    n_divided += 1;
+    n += 1;
+    cnt += 1;
+    divider_base[idx_dec] = divider_base[idx_dec - 1]; 
+    idx_dec -= 1;
+    divider_base[idx_dec] = '.'; 
+    if (idx_dec == 0) {
+      cnt += 1;
+      delta = 1;
+    };
+    eval_str += ".";
+    for (unsigned int i2 = 1; i2 < nb_decimal; ++i2) {
+      eval_str2 = "0";
+      agn2 = 1;
+      n2 = 0;
+      while (agn2) { 
+        if (n > n_divided) {
+          divider = lst_divider;
+          eval_str2 = lst_eval_str2;
+          cnt -= 1;
+          n -= 1;
+          break;
+        } else if (n == n_divided) {
+          i = 0;
+          while (i < n) {
+            if (divided[i] != divider[i]) {
+              if (int(divided[i] - 48) < int(divider[i] - 48)) {
+                agn2 = 0;
+                break;
+              } else {
+                break;
+              };
+            };
+            i += 1;
+          };
+          if (!agn2) {
+            divider = lst_divider;
+            eval_str2 = lst_eval_str2;
+            break;
+          } else if (i == n) {
+            break;
+          };
+        };
+        lst_divider = divider;
+        for (i = cnt; i < n; ++i) {
+          if (divider[i] != '.') {
+            cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt + delta]) - 48);
+            if (cur_val > 9) {
+              cur_val -= 10;
+              divider[i] = char(cur_val + 48);
+              if (i - 1 > 0) {
+                if (divider[i - 1] != '.') {
+                  bf_cnt = 0;
+                } else {
+                  bf_cnt = 1;
+                };
+              } else {
+                bf_cnt = 0;
+              };
+              agn = 1;
+              while (agn) {
+                bf_cnt += 1;
+                if (i - bf_cnt > -1) {
+                  if (divider[i - bf_cnt] != '.') {
+                    if (divider[i - bf_cnt] == '9') {
+                      divider[i - bf_cnt] = '0';
+                    } else {
+                      divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                      agn = 0;
+                    };
+                  };
+                } else {
+                  divider.insert(0, "1");
+                  cnt += 1;
+                  i += 1;
+                  n += 1;
+                  agn = 0;
+                };
+              };
+            } else {
+              divider[i] = char(cur_val + 48);
+            };
+          };
+        };
+        cur_val = int(eval_str2[n2] - 48) + 1;
+        lst_eval_str2 = eval_str2;
+        if (cur_val < 10) {
+          eval_str2[n2] = char(cur_val + 48);
+        };
+      };
+      eval_str += eval_str2; 
+      divided += "0";
+      divider += "0";
+      n += 1;
+      n_divided += 1;
+      cnt += 1;
+      if (idx_dec > 0) {
+        divider_base[idx_dec] = divider_base[idx_dec - 1]; 
+        idx_dec -= 1;
+        divider_base[idx_dec] = '.'; 
+        if (idx_dec == 0) {
+          cnt += 1;
+          delta = 1;
+        };
+      };
+    };
+  };
+  if (delta_integ > 0) {
+    eval_str[1] = eval_str[0];
+    eval_str[0] = '.';
+    eval_str.insert(0, "0");
+    for (i = 1; i < delta_integ; ++i) {
+      eval_str.insert(2, "0");
+    };
+  };
+  return eval_str;
+};
+
 //@L2 Remainder
 //@L3 Integers
 
