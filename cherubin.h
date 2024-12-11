@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 //@L Addition
 //@L2 Integers
@@ -780,7 +781,7 @@ std::string multflt(std::string &x, std::string &x2) {
 //@U std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
 //@X
 //@D Returns the result of a division between ints or floats represented as std string.
-//@A x : is a int or float that will be divided represented as a std string, must be superior or equal to 1
+//@A x : is a int or float that will be divided represented as a std string, must be superior or equal to 1, refer to <code href="centerizer">centerizer()</code> to center your division to make the divided equal to 1 or higher
 //@A x2 : is a int or float that will divide represented as a std string
 //@X
 //@E
@@ -1708,6 +1709,75 @@ std::string quotientflt(std::string &x, std::string &x2) {
     };
   };
   return eval_str;
+};
+
+//@L2 Center the divided at 1 or higher
+
+//@T centerizer
+//@U std::vector<std::string> centerizer(std::string x, std::string x2)
+//@D Returns the numerator and denominator transformed for the numerator to be higher or equal to 1 
+//@X
+//@A x : is the divided as a std string
+//@A x2 : is the divider as a std string
+//@X
+//@E
+//@X
+
+std::vector<std::string> centerizer(std::string x, std::string x2) {
+  std::vector<std::string> rtn_v = {x, x2};
+  if (x[0] != '0') {
+    return rtn_v;
+  };
+  if (x.length() < 2) {
+    return rtn_v;
+  };
+  unsigned int dec = 1;
+  unsigned int n2 = x2.length();
+  bool is_dec;
+  while (x2[dec] != '.' & dec < n2) {
+    dec += 1;
+  };
+  unsigned int i = 2;
+  const unsigned int n = x.length();
+  if (dec < n2) {
+    is_dec = 1;
+    while (x[i - 2] == '0' & i < n) {
+      x[i - 1] = x[i];
+      x[i] = '.';
+      if (i < n2) {
+        x2[i - 1] = x2[i];
+        x2[i] = '.';
+      } else {
+        if (is_dec) {
+          x2[i - 1] = x2[i];
+          x2[i] = '.';
+          is_dec = 0;
+          x2.pop_back();
+          n2 -= 1;
+        };
+        x2 += "0";
+        n2 += 1;
+      };
+      i += 1;
+    };
+    if (x2[n2 - 1] == '.') {
+      x2.pop_back();
+    };
+  } else {
+    while (x[i - 2] == '0' & i < n) {
+      x[i - 1] = x[i];
+      x[i] = '.';
+      x2 += "0";
+      i += 1;
+    };
+  };
+  x = x.substr(i - 2, n - 1);
+  if (x[n - i + 1] == '.') {
+    x.pop_back();
+  };
+  rtn_v[0] = x;
+  rtn_v[1] = x2;
+  return rtn_v;
 };
 
 //@L Factorial
