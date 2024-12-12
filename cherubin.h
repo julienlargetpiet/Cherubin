@@ -805,8 +805,8 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
   unsigned int cnt = 0;
   unsigned int i2;
   int i;
-  unsigned int dec1;
-  unsigned int dec2;
+  unsigned int dec1 = 0;
+  unsigned int dec2 = 0;
   unsigned int integ1;
   unsigned int integ2;
   bool is_dec1 = 0;
@@ -823,11 +823,15 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
         agn = 0;
       };
     };
-    dec1 = n - cnt - 1;
-    integ1 = n - dec1 - 2;
+    if (cnt + 1 < n) {
+      dec1 = n - cnt - 1;
+      integ1 = n - dec1 - 2;
+    } else {
+      integ1 = n;
+    };
   } else {
     dec1 = 0;
-    integ1 = n - 1;
+    integ1 = n;
   };
   if (n_divided > 2) {
     cnt = 0;
@@ -842,11 +846,15 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
         agn = 0;
       };
     };
-    dec2 = n_divided - cnt - 1;
-    integ2 = n_divided - dec2 - 2;
+    if (cnt + 1 < n_divided) {
+      dec2 = n_divided - cnt - 1;
+      integ2 = n_divided - dec2 - 2;
+    } else {
+      integ2 = n_divided;
+    };
   } else {
     dec2 = 0;
-    integ2 = n_divided - 1;
+    integ2 = n_divided;
   };
   int delta_integ = integ1 - integ2 + 1;
   if (delta_integ > 0) {
@@ -925,10 +933,10 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
       };
       if (!agn2) {
         divider = lst_divider;
-        if (cnt != lst_n) {
+        if (n != lst_n) {
           cnt -= 1;
+          n = lst_n;
         };
-        n = lst_n;
         break;
       } else if (i == n) {
         break;
@@ -1012,7 +1020,7 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
     idx_dec -= 1;
     divider_base[idx_dec] = '.'; 
     if (idx_dec == 0) {
-      cnt += 2;
+      cnt += 1;
       divider_base = divider_base.substr(1, divider_base.length() - 1);
     };
     eval_str += ".";
@@ -1045,8 +1053,8 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
             eval_str2 = lst_eval_str2;
             if (n != lst_n) {
               cnt -= 1;
+              n = lst_n;
             };
-            n = lst_n;
             break;
           } else if (i == n) {
             break;
@@ -1111,7 +1119,7 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
         idx_dec -= 1;
         divider_base[idx_dec] = '.'; 
         if (idx_dec == 0) {
-          cnt += 2;
+          cnt += 1;
           divider_base = divider_base.substr(1, divider_base.length() - 1);
         };
       };
