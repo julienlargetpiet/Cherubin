@@ -1780,12 +1780,126 @@ std::vector<std::string> centerizer(std::string x, std::string x2) {
   return rtn_v;
 };
 
+//@L Power
+//@L2 Integers
+
+//@T powerint
+//@U std::string powerint(std::string &x, std::string &x2)
+//@X
+//@D Returns the result of int power to int as a std string
+//@A x : is the int that will be elevated to an exponent, represented as a std string
+//@A x2 : is the integer exponent, represented as a std string
+//@X
+//@E
+//@X
+
+std::string powerint(std::string &x, std::string &x2) {
+  if (x[0] == '-' || x2[0] == '-') {
+    return "";
+  };
+  std::string cur_str = x;
+  std::string eval_str = "1";
+  std::string lst_str;
+  std::string eval_str2;
+  unsigned int n = x.length();
+  unsigned int n2 = 0;
+  unsigned int n3 = 0;
+  unsigned int cnt = 0;
+  int cur_val;
+  int bf_cnt;
+  bool agn;
+  while (eval_str != x2) {
+    eval_str2 = "1";
+    lst_str = cur_str;
+    cnt = 0;
+    n3 = 0;
+    while (eval_str2 != x) {
+      for (int i = cnt; i < n; ++i) {
+        cur_val = (int(cur_str[i]) - 48) + (int(lst_str[i - cnt]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          cur_str[i] = char(cur_val + 48);
+          bf_cnt = 0;
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (cur_str[i - bf_cnt] == '9') {
+                cur_str[i - bf_cnt] = '0';
+              } else {
+                cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
+                agn = 0;
+              };
+            } else {
+              cur_str.insert(0, "1");
+              i += 1;
+              n += 1;
+              cnt += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          cur_str[i] = char(cur_val + 48);
+        };
+      };
+      cur_val = int(eval_str2[n3] - 48) + 1;
+      if (cur_val > 9) {
+        eval_str2[n3] = '0';
+        bf_cnt = 0;
+        agn = 1;
+        while (agn) {
+          bf_cnt += 1;
+          if (n3 - bf_cnt > -1) {
+            if (eval_str2[n3 - bf_cnt] == '9') {
+              eval_str2[n3 - bf_cnt] = '0';
+            } else {
+              eval_str2[n3 - bf_cnt] = char(eval_str2[n3 - bf_cnt] + 1);
+              agn = 0;
+            };
+          } else {
+            eval_str2.insert(0, "1");
+            n3 += 1;
+            agn = 0;
+          };
+        };
+      } else {
+        eval_str2[n3] = char(eval_str2[n3] + 1);
+      };
+    };
+    cur_val = int(eval_str[n2] - 48) + 1;
+    if (cur_val > 9) {
+      eval_str[n2] = '0';
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (n2 - bf_cnt > -1) {
+          if (eval_str[n2 - bf_cnt] == '9') {
+            eval_str[n2 - bf_cnt] = '0';
+          } else {
+            eval_str[n2 - bf_cnt] = char(eval_str[n2 - bf_cnt] + 1);
+            agn = 0;
+          };
+        } else {
+          eval_str.insert(0, "1");
+          n2 += 1;
+          agn = 0;
+        };
+      };
+    } else {
+      eval_str[n2] = char(eval_str[n2] + 1);
+    };
+  };
+  return cur_str;
+};
+
 //@L Factorial
 
 //@T factorial
 //@U std::string factorial(std::string &x)
 //@X
-//@A x : is an integer as a std string
+//@D Returns the factorial (of a positive integer number), represented as a std string
+//@A x : is an positive integer as a std string
 //@X
 //@E
 //@X
