@@ -1133,6 +1133,86 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
   return eval_str;
 };
 
+//@T dividebase10
+//@U std::string dividebase10(std::string &x, unsigned int accuracy = 9)
+//@X
+//@D Returns the result of a division base 10.
+//@A x : is the int or float that will be divided, as a std string
+//@X
+//@E
+//@X
+
+std::string dividebase10(std::string &x, unsigned int accuracy = 9) {
+  if (accuracy == 0) {
+    return "";
+  };
+  unsigned int i = 0;
+  unsigned int n = x.length();
+  unsigned int lst_n;
+  unsigned int idx_dec;
+  bool agn = 1;
+  std::string to_add = x;
+  if (n > 2) {
+    while (agn) {
+      i += 1;
+      if (i + 1 == n) {
+        agn = 0;
+      } else if (to_add[i] == '.'){
+        idx_dec = i;
+        agn = 0;
+      };
+    };
+    if (i + 1 < n) {
+      if (accuracy + 1 > idx_dec) {
+        lst_n = idx_dec;
+        for (i = 0; i < accuracy - lst_n + 1; ++i) {
+          to_add.insert(0, "0");
+          idx_dec += 1;
+          n += 1;
+        };
+      };
+      for (i = 0; i < accuracy; ++i) {
+        to_add[idx_dec] = to_add[idx_dec - 1];
+        idx_dec -= 1;
+        to_add[idx_dec] = '.';
+      };
+    }else {
+      if (accuracy + 1 > n) {
+        lst_n = n;
+        for (i = 0; i < accuracy - lst_n + 1; ++i) {
+          to_add.insert(0, "0");
+          n += 1;
+        };
+      };
+      to_add += ".";
+      idx_dec = n;
+      n += 1;
+      for (i = 0; i < accuracy; ++i) {
+        to_add[idx_dec] = to_add[idx_dec - 1];
+        idx_dec -= 1;
+        to_add[idx_dec] = '.';
+      };
+    };
+  } else {
+    if (accuracy + 1 > n) {
+      lst_n = n;
+      for (i = 0; i < accuracy - lst_n + 1; ++i) {
+        to_add.insert(0, "0");
+        n += 1;
+      };
+    };
+    to_add += ".";
+    idx_dec = n;
+    n += 1;
+    for (i = 0; i < accuracy; ++i) {
+      to_add[idx_dec] = to_add[idx_dec - 1];
+      idx_dec -= 1;
+      to_add[idx_dec] = '.';
+    };
+  };
+  return to_add;
+};
+
 //@L2 Remainder
 //@L3 Integers
 
