@@ -802,7 +802,6 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
   unsigned int n_divided = x.length();
   unsigned int idx_dec;
   unsigned int idx_dec2;
-  unsigned int delta = 0;
   unsigned int cnt = 0;
   unsigned int i2;
   int i;
@@ -890,7 +889,6 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
       n += 1;
     };
   } else if (!is_dec1 || !is_dec2) {
-    std::cout << "HEREE\n";
     divided += ".0";
     divider += ".0";
     divider_base += ".0";
@@ -1014,15 +1012,15 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
     idx_dec -= 1;
     divider_base[idx_dec] = '.'; 
     if (idx_dec == 0) {
-      cnt += 1;
-      delta = 1;
+      cnt += 2;
+      divider_base = divider_base.substr(1, divider_base.length() - 1);
     };
     eval_str += ".";
     for (unsigned int i2 = 1; i2 < nb_decimal; ++i2) {
       eval_str2 = "0";
       agn2 = 1;
       n2 = 0;
-      while (agn2) { 
+      while (agn2) {
         if (n > n_divided) {
           divider = lst_divider;
           eval_str2 = lst_eval_str2;
@@ -1058,7 +1056,7 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
         lst_n = n;
         for (i = cnt; i < n; ++i) {
           if (divider[i] != '.') {
-            cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt + delta]) - 48);
+            cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt]) - 48);
             if (cur_val > 9) {
               cur_val -= 10;
               divider[i] = char(cur_val + 48);
@@ -1113,8 +1111,8 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
         idx_dec -= 1;
         divider_base[idx_dec] = '.'; 
         if (idx_dec == 0) {
-          cnt += 1;
-          delta = 1;
+          cnt += 2;
+          divider_base = divider_base.substr(1, divider_base.length() - 1);
         };
       };
     };
@@ -1129,6 +1127,9 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
       post_dec -= 1;
       eval_str[post_dec] = '.';
     };
+  };
+  if (eval_str[0] == '.') {
+    eval_str.insert(0, "0");
   };
   return eval_str;
 };
