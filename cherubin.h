@@ -1147,12 +1147,13 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
 //@X
 //@D Returns the result of a division base 10.
 //@A x : is the int or float that will be divided, as a std string
+//@A base : is the number of 0 of the base 10 multiplicator
 //@X
 //@E
 //@X
 
-std::string dividebase10(std::string &x, unsigned int accuracy = 9) {
-  if (accuracy == 0) {
+std::string dividebase10(std::string &x, unsigned int base = 9) {
+  if (base == 0) {
     return "";
   };
   unsigned int i = 0;
@@ -1172,23 +1173,23 @@ std::string dividebase10(std::string &x, unsigned int accuracy = 9) {
       };
     };
     if (i + 1 < n) {
-      if (accuracy + 1 > idx_dec) {
+      if (base + 1 > idx_dec) {
         lst_n = idx_dec;
-        for (i = 0; i < accuracy - lst_n + 1; ++i) {
+        for (i = 0; i < base - lst_n + 1; ++i) {
           to_add.insert(0, "0");
           idx_dec += 1;
           n += 1;
         };
       };
-      for (i = 0; i < accuracy; ++i) {
+      for (i = 0; i < base; ++i) {
         to_add[idx_dec] = to_add[idx_dec - 1];
         idx_dec -= 1;
         to_add[idx_dec] = '.';
       };
     }else {
-      if (accuracy + 1 > n) {
+      if (base + 1 > n) {
         lst_n = n;
-        for (i = 0; i < accuracy - lst_n + 1; ++i) {
+        for (i = 0; i < base - lst_n + 1; ++i) {
           to_add.insert(0, "0");
           n += 1;
         };
@@ -1196,16 +1197,16 @@ std::string dividebase10(std::string &x, unsigned int accuracy = 9) {
       to_add += ".";
       idx_dec = n;
       n += 1;
-      for (i = 0; i < accuracy; ++i) {
+      for (i = 0; i < base; ++i) {
         to_add[idx_dec] = to_add[idx_dec - 1];
         idx_dec -= 1;
         to_add[idx_dec] = '.';
       };
     };
   } else {
-    if (accuracy + 1 > n) {
+    if (base + 1 > n) {
       lst_n = n;
-      for (i = 0; i < accuracy - lst_n + 1; ++i) {
+      for (i = 0; i < base - lst_n + 1; ++i) {
         to_add.insert(0, "0");
         n += 1;
       };
@@ -1213,7 +1214,7 @@ std::string dividebase10(std::string &x, unsigned int accuracy = 9) {
     to_add += ".";
     idx_dec = n;
     n += 1;
-    for (i = 0; i < accuracy; ++i) {
+    for (i = 0; i < base; ++i) {
       to_add[idx_dec] = to_add[idx_dec - 1];
       idx_dec -= 1;
       to_add[idx_dec] = '.';
