@@ -2273,7 +2273,7 @@ std::string poweroddn(std::string &x, std::string &x2) {
           if (eval_str[n2 - bf_cnt] == '9') {
             eval_str[n2 - bf_cnt] = '0';
           } else {
-            eval_str[n2 - bf_cnt] = char(eval_str[n2 - bf_cnt] + 1);
+            eval_str[n2 - bf_cnt] = char(int(eval_str[n2 - bf_cnt]) + 1);
             agn = 0;
           };
         } else {
