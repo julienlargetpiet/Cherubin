@@ -2155,7 +2155,7 @@ std::string powerint2(std::string &x, unsigned int &x2) {
 
 std::string poweroddn(std::string &x, std::string &x2) {
   if (x2 == "0") {
-    return "0";
+    return x;
   };
   int i;
   int i2;
@@ -2264,7 +2264,7 @@ std::string poweroddn(std::string &x, std::string &x2) {
     cur_val = int(eval_str[n2] - 48) + 1;
     if (cur_val > 9) {
       cur_val -= 10;
-      eval_str[n2] = cur_val;
+      eval_str[n2] = char(cur_val + 48);
       agn = 1;
       bf_cnt = 0;
       while(agn) {
