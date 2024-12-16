@@ -2195,7 +2195,11 @@ std::string poweroddn(std::string &x, std::string &x2) {
       };
       n -= 1;
       lst_n -= 1;
+    } else {
+      rtn_str = x;
     };
+  } else {
+    rtn_str = x;
   };
   for (i = 0; i < n; ++i) {
     rtn_str2 += "0";
