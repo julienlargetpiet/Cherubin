@@ -775,6 +775,72 @@ std::string multflt(std::string &x, std::string &x2) {
   return cur_str;
 };
 
+//@T multbase10
+//@U std::string multbase10(std::string x, unsigned int base = 9)
+//@X
+//@A x : is the int of float that will be multiplied, as a std string
+//@A base : is the number of 0 of the base 10 multiplicator
+//@X
+//@E
+//@X
+
+std::string multbase10(std::string x, unsigned int base = 9) {
+  int i = 0;
+  unsigned int idx_dec;
+  unsigned int lst_i;
+  unsigned int lst_n;
+  unsigned int n = x.length();
+  bool agn = 1;
+  if (n > 2) {
+    while (agn) {
+      i += 1;
+      if (i + 1 == n) {
+        agn = 0;
+      } else if (x[i] == '.') {
+        idx_dec = i;
+        agn = 0;
+      };
+    };
+    if (i + 1 < n) {
+      if (base > n - 1 - i) {
+        lst_i = i;
+        lst_n = n;
+        for (i = 0; i < base + 2 + lst_i - lst_n; ++i) {
+          x += "0";
+          n += 1;
+        };
+      };
+      for (i = 0; i < base; ++i) {
+        x[idx_dec] = x[idx_dec + 1];
+        idx_dec += 1;
+        x[idx_dec] = '.';
+      };
+      i = -1;
+      agn = 1;
+      while (agn) {
+        i += 1;
+        if (i + 1 == n) {
+          agn = 0;
+        } else if (x[i] != '0') {
+          agn = 0;
+        };
+      };
+      if (i > 0) {
+        x = x.substr(i, n - 1);
+      };
+    } else {
+      for (i = 0; i < base; ++i) {
+        x += "0";
+      };
+    };
+  } else {
+   for (i = 0; i < base; ++i) {
+      x += "0";
+    };
+  };
+  return x;
+};
+
 //@L Division
 
 //@T divide
@@ -2075,6 +2141,155 @@ std::string powerint2(std::string &x, unsigned int &x2) {
     eval_int += 1;
   };
   return cur_str;
+};
+
+//@T poweroddn
+//@U std::string poweroddn(std::string &x, std::string &x2)
+//@X
+//@D Returns the result of an int or float, as a std string to the power of 2 to the power of n, which is an int as a std string. 
+//@A x : is the int or float (as a std string) that will be raised to the power of x2
+//@A x2 : is an int
+//@X
+//@E
+//@X
+
+std::string poweroddn(std::string &x, std::string &x2) {
+  if (x2 == "0") {
+    return "0";
+  };
+  int i;
+  int i2;
+  unsigned int i3;
+  unsigned int n = x.length();
+  unsigned int lst_n = n;
+  bool agn;
+  unsigned int n2 = 0;
+  unsigned int add_zero = 0;
+  int cur_val;
+  int intr_val;
+  int bf_cnt;
+  int delta = 0;
+  unsigned int delta2;
+  std::string divider;
+  std::string eval_str = "0";
+  std::string rtn_str = "";
+  std::string rtn_str2 = "";
+  if (n > 2) {
+    agn = 1;
+    i = 0;
+    while (agn) {
+      rtn_str += x[i];
+      i += 1;
+      if (i + 1 == n) {
+        agn = 0;
+      } else if (x[i] == '.'){
+        agn = 0;
+      };
+    };
+    if (i + 1 < n) {
+      add_zero = n - 1 - i;
+      i += 1;
+      while (i < n) {
+        rtn_str += x[i];
+        i += 1;
+      };
+      n -= 1;
+      lst_n -= 1;
+    };
+  };
+  for (i = 0; i < n; ++i) {
+    rtn_str2 += "0";
+  };
+  while (eval_str != x2) {
+    add_zero *= 2;
+    cur_val = int(rtn_str[0] - 48) * int(rtn_str[0] - 48);
+    delta = 0;
+    delta2 = 0;
+    if (cur_val > 9) {
+      rtn_str2 += "0";
+      n += 1;
+      delta2 = 1;
+    };
+    for (i3 = 1; i3 < lst_n; ++i3) {
+      rtn_str2 += "0";
+      n += 1;
+      delta += 1;
+    };
+    for (i = 0; i < n; ++i) {
+      rtn_str2[i] = '0';
+    };
+    for (i2 = delta + delta2; i2 < n; ++i2) {
+      for (i = 0; i < lst_n; ++i) {
+        cur_val = int(rtn_str2[i2 + i - delta] - 48) + int(rtn_str[i2 - delta - delta2] - 48) * int(rtn_str[i] - 48);
+        if (cur_val < 10) {
+          rtn_str2[i2 + i - delta] = char(cur_val + 48);
+        } else {
+          intr_val = 1;
+          while (cur_val - (intr_val + 1) * 10 > -1) {
+            intr_val += 1;
+          };
+          cur_val -= intr_val * 10;
+          rtn_str2[i2 + i - delta] = char(cur_val + 48);
+          cur_val = int(rtn_str2[i2 + i - delta - 1] - 48) + intr_val;
+          if (cur_val < 10) {
+            rtn_str2[i2 + i - delta - 1] = char(cur_val + 48);   
+          } else {
+            cur_val -= 10;
+            rtn_str2[i2 + i - delta - 1] = char(cur_val + 48);
+            agn = 1;
+            bf_cnt = 0;
+            while (agn) { 
+              bf_cnt += 1;
+              if (i2 + i - delta - bf_cnt - 1 > - 1) {
+                if (rtn_str2[i2 + i - delta - bf_cnt - 1] == '9') {
+                  rtn_str2[i2 + i - delta - bf_cnt - 1] = '0'; 
+                } else {
+                  rtn_str2[i2 + i - delta - bf_cnt - 1] = char(int(rtn_str2[i2 + i - delta - bf_cnt - 1]) + 1); 
+                  agn = 0;
+                };
+              } else {
+                delta2 += 1;
+                i2 += 1;
+                n += 1;
+                rtn_str2.insert(0, 1, '1');
+                agn = 0;
+              };
+            };
+          };
+        };
+      };
+    };
+    rtn_str = rtn_str2;
+    lst_n = n;
+    cur_val = int(eval_str[n2] - 48) + 1;
+    if (cur_val > 9) {
+      cur_val -= 10;
+      eval_str[n2] = cur_val;
+      agn = 1;
+      bf_cnt = 0;
+      while(agn) {
+        bf_cnt += 1;
+        if (n2 - bf_cnt > -1) {
+          if (eval_str[n2 - bf_cnt] == '9') {
+            eval_str[n2 - bf_cnt] = '0';
+          } else {
+            eval_str[n2 - bf_cnt] = char(eval_str[n2 - bf_cnt] + 1);
+            agn = 0;
+          };
+        } else {
+          eval_str.insert(0, "1");
+          n2 += 1;
+          agn = 0;
+        };
+      };
+    } else {
+      eval_str[n2] = char(cur_val + 48);
+    };
+  };
+  if (add_zero != 0) {
+    rtn_str2.insert(n - add_zero, ".");
+  };
+  return rtn_str2;
 };
 
 //@L Factorial
