@@ -775,6 +775,167 @@ std::string multflt(std::string &x, std::string &x2) {
   return cur_str;
 };
 
+//@T multflt2
+//@U std::string multflt2(std::string &x, std::string &x2)
+//@X
+//@D Same as <code>multflt</code>, but with another algorithm.
+//@A x : is a floating points or integer as a std string
+//@A x2 : is a floating points or integer as a std string
+//@X
+//@E
+//@X
+
+std::string multflt2(std::string &x, std::string &x2) {
+  if (x2 == "0") {
+    return "0";
+  };
+  int i;
+  int i2;
+  unsigned int i3;
+  int n = x.length();
+  int n2 = x2.length();
+  bool agn;
+  int add_zero = 0;
+  int cur_val;
+  int intr_val;
+  int bf_cnt;
+  int delta = 0;
+  unsigned int delta2 = 0;
+  std::string divider;
+  std::string rtn_str = "";
+  std::string rtn_str2 = "";
+  std::string rtn_str3 = "";
+  if (n > 2) {
+    agn = 1;
+    i = 0;
+    while (agn) {
+      rtn_str += x[i];
+      i += 1;
+      if (i + 1 == n) {
+        agn = 0;
+      } else if (x[i] == '.'){
+        agn = 0;
+      };
+    };
+    if (i + 1 < n) {
+      add_zero = n - 1 - i;
+      i += 1;
+      while (i < n) {
+        rtn_str += x[i];
+        i += 1;
+      };
+      if (x[0] != '0') {
+        n -= 1;
+      } else {
+        n -= 2;
+        rtn_str = rtn_str.substr(1, i - 2);
+      };
+    } else {
+      rtn_str = x;
+    };
+  } else {
+    rtn_str = x;
+  };
+  if (n2 > 2) {
+    agn = 1;
+    i = 0;
+    while (agn) {
+      rtn_str3 += x2[i];
+      i += 1;
+      if (i + 1 == n2) {
+        agn = 0;
+      } else if (x2[i] == '.'){
+        agn = 0;
+      };
+    };
+    if (i + 1 < n2) {
+      add_zero += n2 - 1 - i;
+      i += 1;
+      while (i < n2) {
+        rtn_str3 += x2[i];
+        i += 1;
+      };
+      if (x2[0] != '0') {
+        n2 -= 1;
+      } else {
+        n2 -= 2;
+        rtn_str3 = rtn_str3.substr(1, i - 2);
+      };
+    } else {
+      rtn_str3 = x2;
+    };
+  } else {
+    rtn_str3 = x2; 
+  };
+  for (i = 1; i < n + n2; ++i) {
+    rtn_str2 += "0";
+  };
+  cur_val = int(rtn_str3[0] - 48) * int(rtn_str[0] - 48);
+  if (cur_val > 9) {
+    rtn_str2 += "0";
+    n2 += 1;
+    delta2 = 1;
+  };
+  for (i3 = 1; i3 < add_zero; ++i3) {
+    rtn_str2 += "0";
+    n2 += 1;
+    delta += 1;
+  };
+  for (i2 = delta + delta2; i2 < n2; ++i2) {
+    for (i = 0; i < n; ++i) {
+      cur_val = int(rtn_str2[i2 + i - delta] - 48) + int(rtn_str3[i2 - delta - delta2] - 48) * int(rtn_str[i] - 48);
+      if (cur_val < 10) {
+        rtn_str2[i2 + i - delta] = char(cur_val + 48);
+      } else {
+        intr_val = 1;
+        while (cur_val - (intr_val + 1) * 10 > -1) {
+          intr_val += 1;
+        };
+        cur_val -= intr_val * 10;
+        rtn_str2[i2 + i - delta] = char(cur_val + 48);
+        cur_val = int(rtn_str2[i2 + i - delta - 1] - 48) + intr_val;
+        if (cur_val < 10) {
+          rtn_str2[i2 + i - delta - 1] = char(cur_val + 48);   
+        } else {
+          cur_val -= 10;
+          rtn_str2[i2 + i - delta - 1] = char(cur_val + 48);
+          agn = 1;
+          bf_cnt = 0;
+          while (agn) { 
+            bf_cnt += 1;
+            if (i2 + i - delta - bf_cnt - 1 > - 1) {
+              if (rtn_str2[i2 + i - delta - bf_cnt - 1] == '9') {
+                rtn_str2[i2 + i - delta - bf_cnt - 1] = '0'; 
+              } else {
+                rtn_str2[i2 + i - delta - bf_cnt - 1] = char(int(rtn_str2[i2 + i - delta - bf_cnt - 1]) + 1); 
+                agn = 0;
+              };
+            } else {
+              delta2 += 1;
+              i2 += 1;
+              n2 += 1;
+              rtn_str2.insert(0, 1, '1');
+              agn = 0;
+            };
+          };
+        };
+      };
+    };
+  };
+  if (add_zero != 0) {
+    delta = n2 + n - add_zero * 2;
+    if (delta > 0){
+      rtn_str2.insert(delta, ".");
+    } else {
+      rtn_str2.insert(0, "0.");
+      for (i = delta; i < 0; ++i) {
+        rtn_str2.insert(2, 1, '0');
+      };
+    };
+  };
+  return rtn_str2;
+};
+
 //@T multbase10
 //@U std::string multbase10(std::string x, unsigned int base = 9)
 //@X
