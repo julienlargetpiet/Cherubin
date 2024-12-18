@@ -2842,3 +2842,20 @@ std::string roundstr(std::string &x, int &digits) {
   return rtn_str;
 };
 
+//@T pop_last
+//@U std::string pop_last (std::string x)
+//@X
+//@D Removes unnecessary 0
+//@A is an float as a std string
+//@X
+//@E
+//@X
+
+std::string pop_last (std::string x) {
+  unsigned int n = x.length() - 1;
+  while (x[n] == '0') {
+    x.pop_back();
+    n -= 1;
+  };
+  return x;
+};
