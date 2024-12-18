@@ -1468,7 +1468,7 @@ std::string dividebase10_2(std::string x, int divider) {
   bool agn;
   unsigned int idx_dec;
   if (divider > 0) {
-    i = 0;
+    i = -1;
     agn = 1;
     while (agn) {
       i += 1;
