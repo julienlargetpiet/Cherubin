@@ -1450,6 +1450,61 @@ std::string dividebase10(std::string &x, unsigned int base = 9) {
   return to_add;
 };
 
+//@T dividebase10_2
+//@U std::string dividebase10_2(std::string x, int divider)
+//@X
+//@D Returns the result of an int or float (as a std string) divided by a base 10 divider.
+//@A x : is the int of float that will be divided
+//@A divider : is an int that indicates the number of zero of the base 10 divider
+//@X
+//@E
+//@X
+
+std::string dividebase10_2(std::string x, int divider) {
+  std::string to_power;
+  std::string intr_str;
+  int n = x.length();
+  int i;
+  bool agn;
+  unsigned int idx_dec;
+  if (divider > 0) {
+    i = 0;
+    agn = 1;
+    while (agn) {
+      i += 1;
+      if (i + 1 == n) {
+        agn = 0;
+      } else if (x[i] == '.') {
+        idx_dec = i;
+        agn = 0;
+      };
+    };
+    if (i + 1 < n) {
+      if (i - divider > 0) {
+        for (i = 0; i < divider; ++i) {
+          x[idx_dec] = x[idx_dec - 1];
+          idx_dec -= 1;
+          x[idx_dec] = '.';
+        };
+      } else {
+        intr_str = x.substr(idx_dec + 1, n - 1);
+        x = "0." + x.substr(0, idx_dec - 1) + intr_str;
+        x.insert(2, divider - idx_dec, '0');
+      };
+    } else {
+       if (n - divider > 0) {
+        x.insert(n - divider, 1, '.');
+      } else {
+        x.insert(0, "0.");
+        x.insert(2, divider - n, '0');
+      }; 
+    };
+  } else {
+    return "";
+  };
+  return x;
+};
+
 //@L2 Remainder
 //@L3 Integers
 
