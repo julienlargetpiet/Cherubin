@@ -1040,6 +1040,7 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
   bool agn;
   bool is_dec1 = 0;
   bool is_dec2 = 0;
+  unsigned int bgn = 0;
   while (i < n) {
     if (divider[i] == '.') {
       is_dec2 = 1;
@@ -1074,7 +1075,6 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
     divided = intr_str + divided;
   };
   if (idx_dec > idx_dec2) {
-     std::cout << "oui\n";
     for (i = 0; i < idx_dec - idx_dec2; ++i) {
       divider.push_back('0');
       divider_base.push_back('0');
@@ -1089,7 +1089,7 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
   };
   int delta_integ = n - n_divided + 1;
   idx_dec = n;
-  if (delta_integ >= 0) {
+  if (delta_integ > -1) {
     for (i = 0; i < delta_integ; ++i) {
       divided += "0";
       n_divided += 1;
@@ -1219,6 +1219,9 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
   n_divided += 2;
   eval_str += eval_str2;
   post_dec = eval_str.length();
+  if (post_dec > 1 & delta_integ > -1) {
+    bgn = 1;
+  };
   if (nb_decimal > 1) {
     divided += "0";
     divider += "0";
@@ -1335,7 +1338,7 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
     };
   };
   if (delta_integ > 0) {
-    for (i = 0; i < delta_integ; ++i) {
+    for (i = bgn; i < delta_integ; ++i) {
       eval_str.insert(0, "0");
       post_dec += 1;
     };
