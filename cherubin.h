@@ -2670,6 +2670,181 @@ std::string poweroddn(std::string &x, std::string &x2) {
   return rtn_str2;
 };
 
+//@L Exponential
+
+//@T chexp1
+//@U std::string chexp1(std::string x, int accuracy = 1000)
+//@X
+//@D Returns the result of an exponential. Works with the formula (1 + x/accuracy) ** accuracy
+//@A x : is the int or float that will be elevated to exponentiation
+//@A accuracy : is the accuracy factor, the higher it is, the more precise it gets at a computational cost
+//@X
+//@E
+//@X
+
+std::string chexp1(std::string x, int accuracy = 1000) {
+  if (accuracy == 1 || accuracy == 0) {
+    return "";
+  };
+  unsigned int n = x.length();
+  unsigned int i;
+  int i2;
+  int i3;
+  bool agn;
+  unsigned int idx_dec = 0;
+  int cur_val;
+  int delta = 0;
+  unsigned int delta2;
+  int intr_val;
+  unsigned int intr_val2;
+  int bf_cnt;
+  unsigned int int_val;
+  std::string rtn_str;
+  std::string ref_str = "";
+  std::string cur_str = "";
+  std::string intr_str = "";
+  i = -1;
+  agn = 1;
+  while (agn) {
+    i += 1;
+    if (i + 1 == n) {
+      ref_str += x[i];
+      cur_str += "0";
+      agn = 0;
+    } else if (x[i] == '.') {
+      idx_dec = i;
+      agn = 0;
+    } else {
+      ref_str += x[i];
+      cur_str += "0";
+    };
+  };
+  if (i + 1 < n) {
+    int_val = i;
+    i += 1;
+    while (i < n) {
+      ref_str += x[i];
+      cur_str += "0";
+      i += 1;
+    };
+    idx_dec = n - 1 - idx_dec;
+    n -= 1;
+  } else {
+    int_val = n;
+  };
+  intr_val = 1;
+  intr_val2 = 1;
+  while (accuracy - 10 * intr_val > 0) {
+    intr_val *= 10;
+    intr_val2 += 1;
+  };
+  idx_dec += intr_val2;
+  if (intr_val2 < int_val) {
+    cur_val = int(ref_str[n - 1 - intr_val2] - 48) + 1;
+    if (cur_val > 9) {
+      cur_val -= 10;
+      ref_str[n - 1 - intr_val2] = char(cur_val + 48);
+      agn = 1;
+      bf_cnt = 0;
+      while (agn) {
+        if (n - 1 - intr_val2 - bf_cnt > -1) {
+          if (ref_str[n - 1 - intr_val2 - bf_cnt] == '9') {
+            ref_str[n - 1 - intr_val2 - bf_cnt] = '0';
+          } else {
+            ref_str[n - 1 - intr_val2 - bf_cnt] = char(int(ref_str[n - 1 - intr_val2 - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          agn = 0;
+          ref_str.insert(0, 1, '1');
+          n += 1;
+        };
+      };
+    } else {
+      ref_str[n - 1 - intr_val2] = char(cur_val + 48);
+    };
+  } else {
+    intr_str = "1";
+    cur_str.push_back('0');
+    n += 1;
+    for (i = int_val; i < intr_val2; ++i) {
+      cur_str.push_back('0');
+      n += 1;
+      intr_str.push_back('0');
+    };
+    ref_str = intr_str + ref_str;
+  };
+  rtn_str = ref_str;
+  unsigned int n2 = n;
+  unsigned int add_zero = idx_dec;
+  for (i = 1; i < accuracy; ++i) {
+    cur_val = int(ref_str[0] - 48) * int(rtn_str[0] - 48);
+    delta2 = 0;
+    delta = 0;
+    if (cur_val > 9) {
+      delta2 = 1;
+      n += 1;
+      cur_str.push_back('0');
+    };
+    for (i2 = 1; i2 < n2; ++i2) {
+      delta += 1;
+      n += 1;
+      cur_str.push_back('0');
+    };
+    for (i2 = delta + delta2; i2 < n; ++i2) {
+      for (i3 = 0; i3 < n2; ++i3) {
+        cur_val = int(cur_str[i2 - delta + i3] - 48) + int(rtn_str[i2 - delta - delta2] - 48) * int(ref_str[i3] - 48);
+        if (cur_val < 10) {
+          cur_str[i2 + i3 - delta] = char(cur_val + 48);
+        } else {
+          intr_val = 1;
+          while (cur_val - (intr_val + 1) * 10 > 0) {
+            intr_val += 1;
+          };
+          cur_val -= intr_val * 10;
+          cur_str[i2 + i3 - delta] = char(cur_val + 48); 
+          cur_val = int(cur_str[i2 + i3 - delta - 1] - 48) + intr_val;
+          if (cur_val < 10) {
+            cur_str[i2 + i3 - delta - 1] = char(cur_val + 48);
+          } else {
+            cur_val -= 10;
+            cur_str[i2 + i3 - delta - 1] = char(cur_val + 48);
+            agn = 1;
+            bf_cnt = 0;
+            while (agn) {
+              bf_cnt += 1;
+              if (i2 + i3 - delta - 1 - bf_cnt > -1) {
+                if (cur_str[i2 + i3 - delta - 1 - bf_cnt] == '9') {
+                  cur_str[i2 + i3 - delta - 1 - bf_cnt] = '0';
+                } else {
+                  cur_str[i2 + i3 - delta - 1 - bf_cnt] = char(int(cur_str[i2 + i3 - delta - 1 - bf_cnt]) + 1);
+                  agn = 0;
+                };
+              } else {
+                agn = 0;
+                cur_str.insert(0, 1, '1');
+                n += 1;
+                delta2 += 1;
+                i2 += 1;
+              }
+            };
+          };
+        };
+      };
+    };
+    rtn_str = cur_str;
+    for (i2 = 0; i2 < n; ++i2) {
+      cur_str[i2] = '0';
+    };
+  };
+  if (n > idx_dec * accuracy) {
+    rtn_str.insert(n - idx_dec * accuracy, 1, '.');
+  } else {
+    
+  };
+  return rtn_str;
+};
+
 //@L Factorial
 
 //@T factorial
