@@ -1004,10 +1004,327 @@ std::string multbase10(std::string x, unsigned int base = 9) {
 
 //@L Division
 
+//@T divide2
+//@U std::string divide2(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
+//@X
+//@D Returns the result of a division between ints or floats represented as std string.
+//@A x : is a int or float that will be divided represented as a std string, must be superior or equal to 1, refer to <code href="centerizer">centerizer()</code> to center your division to make the divided equal to 1 or higher
+//@A x2 : is a int or float that will divide represented as a std string
+//@A nb_decimal : is an int representing the number of decimal to keep as a result
+//@X
+//@E
+//@X
+
+std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
+  if (x[0] == '-' || x2[0] == '-') {
+    return "";
+  };
+  std::string divided = x;
+  std::string divider = x2;
+  std::string divider_base = divider;
+  std::string lst_divider = divider;
+  std::string eval_str = "";
+  std::string eval_str2 = "0";
+  std::string lst_eval_str2 = "0";
+  std::string intr_str;
+  unsigned int n = x2.length();
+  unsigned int n_divided = x.length();
+  unsigned int idx_dec = 0;
+  unsigned int idx_dec2 = 0;
+  unsigned int cnt = 0;
+  unsigned int i2;
+  int i = 0;
+  unsigned int dec1 = 0;
+  unsigned int dec2 = 0;
+  unsigned int integ1;
+  unsigned int integ2;
+  bool agn;
+  bool is_dec1 = 0;
+  bool is_dec2 = 0;
+  unsigned int bgn = 0;
+  while (i < n) {
+    if (divider[i] == '.') {
+      is_dec2 = 1;
+      break;
+    };
+    dec2 += 1;
+    i += 1;
+  };
+  i = 0;
+  while (i < n_divided) {
+    if (divided[i] == '.') {
+      is_dec1 = 1;
+      break;
+    };
+    dec1 += 1;
+    i += 1;
+  };
+  if (is_dec2) {
+    n -= 1;
+    idx_dec2 = n - dec2;
+    intr_str = divider.substr(0, dec2);
+    divider = divider.substr(dec2 + 1, n);
+    divider = intr_str + divider;
+    divider_base = divider;
+    lst_divider = divider;
+  };
+  if (is_dec1) {
+    n_divided -= 1;
+    idx_dec = n_divided - dec1;
+    intr_str = divided.substr(0, dec1);
+    divided = divided.substr(dec1 + 1, n_divided);
+    divided = intr_str + divided;
+  };
+  if (idx_dec > idx_dec2) {
+    for (i = 0; i < idx_dec - idx_dec2; ++i) {
+      divider.push_back('0');
+      divider_base.push_back('0');
+      lst_divider.push_back('0');
+      n += 1;
+    };
+  } else if (idx_dec < idx_dec2) {
+    for (i = 0; i < idx_dec2 - idx_dec; ++i) {
+      divided.push_back('0');
+      n_divided += 1;
+    };
+  };
+  int delta_integ = n - n_divided + 1;
+  int delta_integ2;
+  idx_dec = n;
+  if (delta_integ > -1) {
+    delta_integ2 = delta_integ;
+    for (i = 0; i < delta_integ; ++i) {
+      divided += "0";
+      n_divided += 1;
+    };
+  } else {
+    delta_integ2 = -1 * delta_integ - 1;
+  };
+  cnt = 0;
+  int n2 = 0;
+  int cur_val;
+  int bf_cnt;
+  bool agn2 = 1;
+  unsigned int post_dec;
+  unsigned int lst_n = n;
+  while (agn2) { 
+    if (n > n_divided) {
+      divider = lst_divider;
+      cnt -= 1;
+      n -= 1;
+      break;
+    } else if (n == n_divided) {
+      i = 0;
+      while (i < n) {
+        if (divided[i] != divider[i]) {
+          if (int(divided[i] - 48) < int(divider[i] - 48)) {
+            agn2 = 0;
+            break;
+          } else {
+            break;
+          };
+        };
+        i += 1;
+      };
+      if (!agn2) {
+        divider = lst_divider;
+        if (n != lst_n) {
+          cnt -= 1;
+          n = lst_n;
+        };
+        break;
+      } else if (i == n) {
+        cur_val = int(eval_str2[n2] - 48) + 1;
+        if (cur_val > 9) {
+          eval_str2[n2] = '0';
+          bf_cnt = 0;
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (n2 - bf_cnt > -1) {
+              if (eval_str2[n2 - bf_cnt] == '9') {
+                eval_str2[n2 - bf_cnt] = '0';
+              } else {
+                eval_str2[n2 - bf_cnt] = char(int(eval_str2[n2 - bf_cnt]) + 1);
+                agn = 0;
+              };
+            } else {
+              eval_str2.insert(0, "1");
+              n2 += 1;
+              agn = 0;
+            };
+          }
+        } else {
+          eval_str2[n2] = char(cur_val + 48);
+        };
+        break;
+      };
+    };
+    lst_divider = divider;
+    lst_n = n;
+    for (i = cnt; i < n; ++i) {
+      cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt]) - 48);
+      if (cur_val > 9) {
+        cur_val -= 10;
+        divider[i] = char(cur_val + 48);
+        bf_cnt = 0;
+        agn = 1;
+        while (agn) {
+          bf_cnt += 1;
+          if (i - bf_cnt > -1) {
+            if (divider[i - bf_cnt] != '.') {
+              if (divider[i - bf_cnt] == '9') {
+                divider[i - bf_cnt] = '0';
+              } else {
+                divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                agn = 0;
+              };
+            };
+          } else {
+            divider.insert(0, "1");
+            cnt += 1;
+            i += 1;
+            n += 1;
+            agn = 0;
+          };
+        };
+      } else {
+        divider[i] = char(cur_val + 48);
+      };
+    };
+    cur_val = int(eval_str2[n2] - 48) + 1;
+    if (cur_val > 9) {
+      eval_str2[n2] = '0';
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (n2 - bf_cnt > -1) {
+          if (eval_str2[n2 - bf_cnt] == '9') {
+            eval_str2[n2 - bf_cnt] = '0';
+          } else {
+            eval_str2[n2 - bf_cnt] = char(int(eval_str2[n2 - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          eval_str2.insert(0, "1");
+          n2 += 1;
+          agn = 0;
+        };
+      }
+    } else {
+      eval_str2[n2] = char(cur_val + 48);
+    };
+  };
+  eval_str += eval_str2;
+  post_dec = eval_str.length();
+  if (post_dec > 1 & delta_integ > -1) {
+    bgn = 1;
+  };
+  divided += "0";
+  divider += "0";
+  n_divided += 1;
+  n += 1;
+  cnt += 1;
+  eval_str += ".";
+  for (int i2 = 0; i2 < nb_decimal - delta_integ2; ++i2) {
+    eval_str2 = "0";
+    agn2 = 1;
+    n2 = 0;
+    while (agn2) {
+      if (n > n_divided) {
+        divider = lst_divider;
+        eval_str2 = lst_eval_str2;
+        cnt -= 1;
+        n -= 1;
+        break;
+      } else if (n == n_divided) {
+        i = 0;
+        while (i < n) {
+          if (divided[i] != divider[i]) {
+            if (int(divided[i] - 48) < int(divider[i] - 48)) {
+              agn2 = 0;
+              break;
+            } else {
+              break;
+            };
+          };
+          i += 1;
+        };
+        if (!agn2) {
+          divider = lst_divider;
+          eval_str2 = lst_eval_str2;
+          if (n != lst_n) {
+            cnt -= 1;
+            n = lst_n;
+          };
+          break;
+        } else if (i == n) {
+          break;
+        };
+      };
+      lst_divider = divider;
+      lst_n = n;
+      for (i = cnt; i < n; ++i) {
+          cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt]) - 48);
+          if (cur_val > 9) {
+            cur_val -= 10;
+            divider[i] = char(cur_val + 48);
+            bf_cnt = 0;
+            agn = 1;
+            while (agn) {
+              bf_cnt += 1;
+              if (i - bf_cnt > -1) {
+                if (divider[i - bf_cnt] == '9') {
+                  divider[i - bf_cnt] = '0';
+                } else {
+                  divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                  agn = 0;
+                };
+              } else {
+                divider.insert(0, "1");
+                cnt += 1;
+                i += 1;
+                n += 1;
+                agn = 0;
+              };
+            };
+          } else {
+            divider[i] = char(cur_val + 48);
+          };
+      };
+      cur_val = int(eval_str2[n2] - 48) + 1;
+      lst_eval_str2 = eval_str2;
+      eval_str2[n2] = char(cur_val + 48);
+    };
+    eval_str += eval_str2; 
+    divided += "0";
+    divider += "0";
+    n += 1;
+    n_divided += 1;
+    cnt += 1;
+  };
+  if (delta_integ > 0) {
+    for (i = bgn; i < delta_integ; ++i) {
+      eval_str.insert(0, "0");
+      post_dec += 1;
+    };
+    for (i = 0; i < delta_integ; ++i) {
+      eval_str[post_dec] = eval_str[post_dec - 1];
+      post_dec -= 1;
+      eval_str[post_dec] = '.';
+    };
+    for (i = 0; i < delta_integ2 - nb_decimal; ++i) {
+      eval_str.pop_back();
+    };
+  };
+  return eval_str;
+};
+
 //@T divide
 //@U std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
 //@X
-//@D Returns the result of a division between ints or floats represented as std string.
+//@D !!Obsolete!! Returns the result of a division between ints or floats represented as std string.
 //@A x : is a int or float that will be divided represented as a std string, must be superior or equal to 1, refer to <code href="centerizer">centerizer()</code> to center your division to make the divided equal to 1 or higher
 //@A x2 : is a int or float that will divide represented as a std string
 //@X
