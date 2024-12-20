@@ -1316,9 +1316,7 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
         };
         cur_val = int(eval_str2[n2] - 48) + 1;
         lst_eval_str2 = eval_str2;
-        if (cur_val < 10) {
-          eval_str2[n2] = char(cur_val + 48);
-        };
+        eval_str2[n2] = char(cur_val + 48);
       };
       eval_str += eval_str2; 
       divided += "0";
