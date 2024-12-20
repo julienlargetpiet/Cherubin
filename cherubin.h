@@ -1784,8 +1784,8 @@ std::string dividebase10_2(std::string x, int divider) {
           x[idx_dec] = '.';
         };
       } else {
-        intr_str = x.substr(idx_dec + 1, n - 1);
-        x = "0." + x.substr(0, idx_dec - 1) + intr_str;
+        intr_str = x.substr(idx_dec + 1, n);
+        x = "0." + x.substr(0, idx_dec) + intr_str;
         x.insert(2, divider - idx_dec, '0');
       };
     } else {
