@@ -1241,7 +1241,7 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
                 agn = 0;
               };
             } else {
-              eval_str2.insert(0, "1");
+              eval_str2.insert(0, 1, '1');
               n2 += 1;
               agn = 0;
             };
@@ -1273,7 +1273,7 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
               };
             };
           } else {
-            divider.insert(0, "1");
+            divider.insert(0, 1, '1');
             cnt += 1;
             i += 1;
             n += 1;
@@ -1299,7 +1299,7 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
             agn = 0;
           };
         } else {
-          eval_str2.insert(0, "1");
+          eval_str2.insert(0, 1, '1');
           n2 += 1;
           agn = 0;
         };
@@ -1374,7 +1374,7 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
                   agn = 0;
                 };
               } else {
-                divider.insert(0, "1");
+                divider.insert(0, 1, '1');
                 cnt += 1;
                 i += 1;
                 n += 1;
@@ -3380,8 +3380,8 @@ std::string factorial(std::string &x) {
 //@X
 
 bool is_greater(std::string &x, std::string &x2) {
-  const unsigned int n = x.size();
-  const unsigned int n2 = x.size();
+  const unsigned int n = x.length();
+  const unsigned int n2 = x2.length();
   unsigned int val1;
   unsigned int val2;
   if (n == n2) {
@@ -3398,8 +3398,10 @@ bool is_greater(std::string &x, std::string &x2) {
     };
   } else if (n > n2) {
     return 1;
+  } else {
+    return 0;
   };
-  return 0;
+  return 1;
 };
 
 //@L Round
