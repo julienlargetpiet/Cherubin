@@ -79,8 +79,8 @@ std::string addint(std::string &x, std::string &x2) {
 //@U std::string addflt(std::string &x, std::string &x2)
 //@X
 //@D Returns the addition of two floating points as a std string. Accepts integers, but if you plan to add integers, <code>addint</code> is preferable to use.
-//@A 
-//@A
+//@A x : is one of the int or float that will be part of the addition operation 
+//@A x2 : is one of the int or float that will be part of the addition operation 
 //@E
 //@X
 
@@ -219,6 +219,102 @@ std::string addflt(std::string &x, std::string &x2) {
     return "";
   };
   return cur_str;
+};
+
+//@T addflt2
+//@U std::string addflt(std::string x, std::string x2)
+//@X
+//@D Same as <code>addflt</code> with another algorithm.
+//@A x : is one of the int or float that will be part of the addition operation 
+//@A x2 : is one of the int or float that will be part of the addition operation 
+//@E
+//@X
+
+std::string addflt2(std::string x, std::string &x2) {
+  int i = 0;
+  unsigned int i2 = 0;
+  unsigned int cnt = 0;
+  unsigned int dec_val = 0;
+  unsigned int dec_val2 = 0;
+  unsigned int idx_dec = 0;
+  unsigned int n = x.length();
+  unsigned int cur_val;
+  int bf_cnt;
+  bool agn;
+  const unsigned int n2 = x2.length();
+  std::string intr_str;
+  while (i < n) {
+    if (x[i] == '.') {
+      dec_val = n - 1 - i;
+      intr_str = x.substr(0, i);
+      x = x.substr(i + 1, n);
+      x = intr_str + x;
+      n-= 1;
+      break;
+    };
+    i += 1;
+  };
+  while (i2 < n2) {
+    if (x2[i2] == '.') {
+      dec_val2 = n2 - 1 - i2;
+      intr_str = x2.substr(0, i2);
+      x2 = x2.substr(i2 + 1, n2);
+      x2 = intr_str + x2;
+      break;
+    };
+    i2 += 1;
+  };
+  if (i < i2) {
+    for (i = i; i < i2; ++i) {
+      x.insert(0, 1, '0');
+      n += 1;
+    };
+  } else if (i > i2) {
+    cnt = i - i2;
+  };
+  if (dec_val < dec_val2) {
+    for (i = 0; i < dec_val2 - dec_val; ++i) {
+      x.push_back('0');
+      n += 1;
+    };
+    idx_dec = n - dec_val2;
+  } else if (dec_val > 0) {
+    idx_dec = n - dec_val;
+    n -= (dec_val - dec_val2);
+  };
+  for (i = cnt; i < n; ++i) {
+    cur_val = int(x[i] - 48) + int(x2[i - cnt] - 48);
+    if (cur_val > 9) {
+      cur_val -= 10;
+      x[i] = char(cur_val + 48);
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (i - bf_cnt > -1) {
+          if (x[i - bf_cnt] == '9') {
+            x[i - bf_cnt] = '0';
+          } else {
+            x[i - bf_cnt] = char(int(x[i - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          x.insert(0, 1, '1');
+          i += 1;
+          n += 1;
+          cnt += 1;
+          agn = 0;
+          idx_dec += 1;
+        };
+      };
+    } else {
+      x[i] = char(cur_val + 48);
+    };
+  };
+  if (idx_dec != 0) {
+    x.insert(idx_dec, 1, '.');
+  };
+  return x;
 };
 
 //@L Substraction
