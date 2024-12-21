@@ -1185,16 +1185,12 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
     };
   };
   int delta_integ = n - n_divided + 1;
-  int delta_integ2;
   idx_dec = n;
   if (delta_integ > -1) {
-    delta_integ2 = delta_integ;
     for (i = 0; i < delta_integ; ++i) {
       divided += "0";
       n_divided += 1;
     };
-  } else {
-    delta_integ2 = -1 * delta_integ - 1;
   };
   cnt = 0;
   int n2 = 0;
@@ -1323,7 +1319,7 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
   n += 1;
   cnt += 1;
   eval_str += ".";
-  for (int i2 = 0; i2 < nb_decimal - delta_integ2; ++i2) {
+  for (int i2 = 0; i2 < nb_decimal; ++i2) {
     eval_str2 = "0";
     agn2 = 1;
     n2 = 0;
@@ -1409,9 +1405,6 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
       eval_str[post_dec] = eval_str[post_dec - 1];
       post_dec -= 1;
       eval_str[post_dec] = '.';
-    };
-    for (i = 0; i < delta_integ2 - nb_decimal; ++i) {
-      eval_str.pop_back();
     };
   };
   return eval_str;
