@@ -3483,7 +3483,7 @@ bool is_greaterflt(std::string &x, std::string &x2) {
       };
     }
     return 0;
-  } else if (n > n2) {
+  } else if (integ_val > integ_val2) {
     return 1;
   } else {
     return 0;
