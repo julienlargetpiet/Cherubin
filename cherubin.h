@@ -3547,16 +3547,16 @@ std::string roundstr(std::string &x, int &digits) {
   return rtn_str;
 };
 
-//@T pop_last
-//@U std::string pop_last (std::string x)
+//@T rmzero
+//@U std::string rmzero(std::string x)
 //@X
-//@D Removes unnecessary 0
+//@D Removes unnecessary 0 at the end of a floating point.
 //@A is an float as a std string
 //@X
 //@E
 //@X
 
-std::string pop_last(std::string x) {
+std::string rmzero(std::string x) {
   unsigned int n = x.length() - 1;
   while (x[n] == '0') {
     x.pop_back();
@@ -3564,3 +3564,107 @@ std::string pop_last(std::string x) {
   };
   return x;
 };
+
+//@T intpart
+//@U std::string intpart(std::string x)
+//@X
+//@D Returns the integer part of a float
+//@A x : is a float as a std string
+//@X
+//@E
+//@X
+
+std::string intpart(std::string x) {
+  unsigned int i = x.length() - 1;
+  while (x[i] != '.') {
+    x.pop_back();
+    --i;
+  };
+  x.pop_back();
+  return x;
+}
+
+//@T fltpart
+//@U std::string fltpart(std::string &x)
+//@X
+//@D Returns the float part of a float
+//@A x : is a float as a std string
+//@X
+//@E
+//@X
+
+std::string fltpart(std::string &x) {
+  std::string rtn_str = "";
+  const unsigned int n = x.length();
+  unsigned int i = 0;
+  while (x[i] != '.') {
+    i += 1;
+  };
+  i += 1;
+  while (i < n) {
+    rtn_str.push_back(x[i]);
+    i += 1;
+  };
+  return rtn_str;
+}
+
+//@T is_decimal
+//@U bool is_decimal(std::string &x)
+//@X
+//@D Returns if a number as a std string, is a float
+//@A x : is the input number, as a std string
+//@X
+//@E
+//@X
+
+bool is_decimal(std::string &x) {
+  bool rtn = 0;
+  const unsigned int n = x.length();
+  for (unsigned int i = 0; i < n; ++i) {
+    if (x[i] == '.') {
+      return 1;
+    };
+  };
+  return 0;
+};
+
+///// NOT TO BE USED  ////
+
+double chstod(const std::string &x) {
+  double rtn = int(x[0]) - 48;
+  const int n = x.size();
+  int i = 1;
+  int m = 1;
+  while (int(x[i]) != 46) {
+    rtn *= 10;
+    rtn += (int(x[i]) - 48);
+    i += 1;
+  };
+  i += 1;
+  while (i < n) {
+    m *= 10;
+    rtn *= 10;
+    rtn += (int(x[i]) - 48);
+    i += 1;
+  };
+  return rtn / m;
+};
+
+std::string itos(unsigned int x) {
+  unsigned int cnt;
+  unsigned int mlt_val = 1;
+  std::string rtn_str = "";
+  while (mlt_val <= x) {
+    cnt = 0;
+    while (x % (10 * mlt_val) != 0) {
+      x -= mlt_val;
+      cnt += 1;
+    };
+    mlt_val *= 10;
+    rtn_str.insert(0, 1, char(cnt + 48));
+  };
+  return rtn_str;
+};
+
+
+
