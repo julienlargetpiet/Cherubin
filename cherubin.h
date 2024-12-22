@@ -512,7 +512,7 @@ std::string subsflt(std::string &x, std::string &x2) {
         } else {
           cur_str[i] = char(cur_val + 48);
         };
-        if (cur_str[0] == '0') {
+        if (cur_str[0] == '0' & cur_str.length() > 1) {
           cur_str = cur_str.substr(1, cur_str.length());
           bf_str = bf_str.substr(1, cur_str.length());
           i -= 1;
@@ -3372,9 +3372,9 @@ std::string factorial(std::string &x) {
 //@T is_greater
 //@U bool is_greater(std::string &x, std::string &x2)
 //@X
-//@D Returns 1 if the first number (as a std string) is greater than the second (as a std string) .
-//@A x : is a number as a string
-//@A x2 : is a number as a string
+//@D Returns 1 if the first number (int as a std string) is greater than the second (int as a std string) .
+//@A x : is a int as a string
+//@A x2 : is a int as a string
 //@X
 //@E
 //@X
@@ -3396,6 +3396,93 @@ bool is_greater(std::string &x, std::string &x2) {
         };
       };
     };
+  } else if (n > n2) {
+    return 1;
+  } else {
+    return 0;
+  };
+  return 1;
+};
+
+//@T is_greaterflt
+//@U bool is_greaterflt(std::string &x, std::string &x2)
+//@X
+//@D Returns 1 if the first number, int or float (as a std string) is greater than the second, int or float (as a std string) .
+//@A x : is a number (int or float) as a string
+//@A x2 : is a number (int or float) as a string
+//@X
+//@E
+//@X
+
+bool is_greaterflt(std::string &x, std::string &x2) {
+  const unsigned int n = x.length();
+  const unsigned int n2 = x2.length();
+  unsigned int integ_val;
+  unsigned int integ_val2;
+  unsigned int dec_val;
+  unsigned int dec_val2;
+  unsigned int dec_valf;
+  unsigned int i = 0;
+  for (integ_val = 0; integ_val < n; ++integ_val) {
+    if (x[integ_val] == '.') {
+      break;
+    };
+  };
+  dec_val = n - 1 - integ_val;
+  for (integ_val2 = 0; integ_val2 < n2; ++integ_val2) {
+    if (x2[integ_val2] == '.') {
+      break;
+    };
+  };
+  dec_val2 = n2 - 1 - integ_val2;
+  if (dec_val < dec_val2) {
+    dec_valf = dec_val;
+  } else {
+    dec_valf = dec_val2;
+  };
+  unsigned int val1;
+  unsigned int val2;
+  if (integ_val == integ_val2) {
+    while (i < integ_val) {
+      val1 = int(x[i]);
+      val2 = int(x2[i]);
+      if (val1 != val2) {
+        if (val1 > val2) {
+          return 1;
+        } else {
+          return 0;
+        };
+      };
+      i += 1;
+    };
+    while (i < n + dec_valf) {
+      val1 = int(x[i]);
+      val2 = int(x2[i]);
+      if (val1 != val2) {
+        if (val1 > val2) {
+          return 1;
+        } else {
+          return 0;
+        };
+      };
+      i += 1;
+    };
+    if (dec_valf != dec_val2) {
+      while (i < n + dec_val2)  {
+        if (x2[i] != '0') {
+          return 0;
+        };
+        i += 1;
+      };
+    } else if (dec_valf != dec_val) {
+      while (i < n + dec_val)  {
+        if (x[i] != '0') {
+          return 1;
+        };
+        i += 1;
+      };
+    }
+    return 0;
   } else if (n > n2) {
     return 1;
   } else {
@@ -3469,7 +3556,7 @@ std::string roundstr(std::string &x, int &digits) {
 //@E
 //@X
 
-std::string pop_last (std::string x) {
+std::string pop_last(std::string x) {
   unsigned int n = x.length() - 1;
   while (x[n] == '0') {
     x.pop_back();
