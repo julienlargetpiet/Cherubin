@@ -106,7 +106,7 @@ std::string chexp2(std::string &x, unsigned int nb_polynomial = 21) {
 std::string chlognatural1(std::string &x) {
   std::string base_natural = "2.718281";
   std::string cbase_natural = base_natural;
-  std::string lst_str;
+  std::string lst_str = "1";
   std::string intr_str;
   std::string rslt;
   std::string base_add = "0";
