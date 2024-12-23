@@ -1317,7 +1317,7 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
   };
   eval_str += eval_str2;
   post_dec = eval_str.length();
-  if (post_dec > 1 & delta_integ > -1) {
+  if (post_dec > 1) {
     bgn = 1;
   };
   divided += "0";
@@ -1418,8 +1418,8 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
     delta_integ -= 1;
     for (i = 0; i < delta_integ; ++i) {
       eval_str.push_back('0');
-      eval_str[i + 2] = eval_str[i + 3];
-      eval_str[i + 3] = '.';
+      eval_str[i + 1 + bgn] = eval_str[i + 3];
+      eval_str[i + 2 + bgn] = '.';
     };
   };
   return eval_str;
