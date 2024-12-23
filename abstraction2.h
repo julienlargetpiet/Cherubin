@@ -26,4 +26,9 @@ std::string subsabstraction(std::string x, std::string x2) {
   };
 };
 
-
+std::string chlogn(std::string &x, std::string base) {
+  std::string rtn_str = chlognatural1(x);
+  base = chlognatural1(base);
+  rtn_str = divide2(rtn_str, base);
+  return rtn_str;
+};
