@@ -115,6 +115,9 @@ std::string chlognatural1(std::string &x) {
   while (is_greaterflt(x, base_natural)) {
     lst_str = base_natural;
     base_natural = multflt2(base_natural, cbase_natural);
+    if (is_decimal(base_natural)) {
+      base_natural = rmzero(base_natural);
+    };
     base_add = addint(base_add, addr);
   };
   rslt = divide2(x, lst_str);
