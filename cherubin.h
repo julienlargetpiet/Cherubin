@@ -1184,12 +1184,19 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
       n_divided += 1;
     };
   };
-  int delta_integ = n - n_divided + 1;
+  int delta_integ = n - n_divided;
   idx_dec = n;
   if (delta_integ > -1) {
-    for (i = 0; i < delta_integ; ++i) {
+    for (i = -1; i < delta_integ; ++i) {
       divided += "0";
       n_divided += 1;
+    };
+  } else if (delta_integ < -1) {
+    for (i = -1; i > delta_integ; --i) {
+      divider.push_back('0');
+      divider_base.push_back('0');
+      lst_divider.push_back('0');
+      n += 1;
     };
   };
   cnt = 0;
@@ -1396,15 +1403,23 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
     n_divided += 1;
     cnt += 1;
   };
-  if (delta_integ > 0) {
-    for (i = bgn; i < delta_integ; ++i) {
-      eval_str.insert(0, "0");
+  if (delta_integ > -1) {
+    for (i = bgn; i <= delta_integ; ++i) {
+      eval_str.insert(0, 1, '0');
       post_dec += 1;
     };
-    for (i = 0; i < delta_integ; ++i) {
+    for (i = -1; i < delta_integ; ++i) {
       eval_str[post_dec] = eval_str[post_dec - 1];
       post_dec -= 1;
       eval_str[post_dec] = '.';
+    };
+  } else if (delta_integ < -1) {
+    delta_integ *= -1;
+    delta_integ -= 1;
+    for (i = 0; i < delta_integ; ++i) {
+      eval_str.push_back('0');
+      eval_str[i + 2] = eval_str[i + 3];
+      eval_str[i + 3] = '.';
     };
   };
   return eval_str;
