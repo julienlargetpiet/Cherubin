@@ -3518,12 +3518,17 @@ bool is_decimal(std::string &x) {
 };
 
 //@T centerizer
-//@U std::vector<std::string> centerizer(std::string x, std::string x2)
+//@U std::vector&ltstd::string&gt centerizer(std::string x, std::string x2)
 //@D Returns the numerator and denominator transformed for the numerator to be higher or equal to 1 
 //@X
 //@A x : is the divided as a std string
 //@A x2 : is the divider as a std string
 //@X
+//@E
+//@E std::string x = "0.001562";
+//@E std::string x2 = "6.8987";
+//@E std::vector&ltstd::string&gt out = centerizerb(x, x2);
+//@E "1.562" "6898.7"
 //@E
 //@X
 
