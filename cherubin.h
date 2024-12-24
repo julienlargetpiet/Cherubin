@@ -11,7 +11,15 @@
 //@A x : is the first positive int as a string
 //@A x2 is the second positive int as a string
 //@X
+//@E std::string a = "4";
+//@E std::string b = "112";
+//@E addint(a, b);
+//@E "116"
 //@E
+//@E x = "1458970";
+//@E x2 = "563489287";
+//@E addint(x, x2);
+//@E "564948257"
 //@X
 
 std::string addint(std::string &x, std::string &x2) {
@@ -81,6 +89,11 @@ std::string addint(std::string &x, std::string &x2) {
 //@D Returns the addition of two floating points as a std string. Accepts integers, but if you plan to add integers, <code>addint</code> is preferable to use.
 //@A x : is one of the int or float that will be part of the addition operation 
 //@A x2 : is one of the int or float that will be part of the addition operation 
+//@E
+//@E std::string x = "14589.70";
+//@E std::string x2 = "5634.89287";
+//@E adflt(x, x2);
+//@E "20224.59287"
 //@E
 //@X
 
@@ -228,6 +241,11 @@ std::string addflt(std::string &x, std::string &x2) {
 //@A x : is one of the int or float that will be part of the addition operation 
 //@A x2 : is one of the int or float that will be part of the addition operation 
 //@E
+//@E std::string x = "14589.70";
+//@E std::string x2 = "5634.89287";
+//@E adflt2(x, x2);
+//@E "20224.59287"
+//@E
 //@X
 
 std::string addflt2(std::string x, std::string &x2) {
@@ -328,6 +346,11 @@ std::string addflt2(std::string x, std::string &x2) {
 //@A x2 is the second positive int as a string, must be lower or equal to x
 //@X
 //@E
+//@E std::string x = "1458970";
+//@E std::string x2 = "563489287";
+//@E subsint(x2, x);
+//@E "562030317"
+//@E
 //@X
 
 std::string subsint(std::string &x, std::string &x2) {
@@ -392,6 +415,11 @@ std::string subsint(std::string &x, std::string &x2) {
 //@A x : is a number represented as a string, must be higher or equal to the second number 
 //@A x2 : is a number represented as a string, must be lower or equal to the second number 
 //@X
+//@E
+//@E std::string x = "14589.70";
+//@E std::string x2 = "56348.9287";
+//@E subsflt(x2, x) ;
+//@E "41759.2287" 
 //@E
 //@X
 
@@ -537,6 +565,11 @@ std::string subsflt(std::string &x, std::string &x2) {
 //@A x2 : is an unsigned integer higher than 0 
 //@X
 //@E
+//@E std::string x = "1458970";
+//@E unsigned int x2b = 45;
+//@E multint(x, x2);
+//@E "65653650"
+//@E
 //@X
 
 std::string multint(std::string &x, unsigned int &x2) {
@@ -594,6 +627,11 @@ std::string multint(std::string &x, unsigned int &x2) {
 //@A x : is an integer higher tha 0 as a std string
 //@A x2 : is an integer higher than 0 as a std string
 //@X
+//@E
+//@E std::string x = "1458970";
+//@E std::string x2 = "563489287";
+//@E multint2(x, x2);
+//@E "822113965054390"
 //@E
 //@X
 
@@ -683,6 +721,11 @@ std::string multint2(std::string &x, std::string &x2) {
 //@A x : is a floating points or integer as a std string
 //@A x2 : is a floating points or integer as a std string
 //@X
+//@E
+//@E std::string x = "1458.970";
+//@E std::string x2 = "563489.287";
+//@E multflt(x, x2);
+//@E "822113965.054390"
 //@E
 //@X
 
@@ -879,6 +922,11 @@ std::string multflt(std::string &x, std::string &x2) {
 //@A x2 : is a floating points or integer as a std string
 //@X
 //@E
+//@E std::string x = "1458.970";
+//@E std::string x2 = "563489.287";
+//@E multflt2(x, x2);
+//@E "822113965.05439000000"
+//@E
 //@X
 
 std::string multflt2(std::string &x, std::string &x2) {
@@ -1039,6 +1087,10 @@ std::string multflt2(std::string &x, std::string &x2) {
 //@A base : is the number of 0 of the base 10 multiplicator
 //@X
 //@E
+//@E std::string x = "1458.970";
+//@E multbase10(x);
+//@E "1458970000000.0"
+//@E
 //@X
 
 std::string multbase10(std::string x, unsigned int base = 9) {
@@ -1108,6 +1160,11 @@ std::string multbase10(std::string x, unsigned int base = 9) {
 //@A x2 : is a int or float that will divide represented as a std string
 //@A nb_decimal : is an int representing the number of decimal to keep as a result
 //@X
+//@E
+//@E std::string x = "1458.970";
+//@E std::string x2 = "563489.287";
+//@E divide2(x2, x);
+//@E "386.22400"
 //@E
 //@X
 
@@ -1432,6 +1489,11 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
 //@A x : is a int or float that will be divided represented as a std string, must be superior or equal to 1, refer to <code href="centerizer">centerizer()</code> to center your division to make the divided equal to 1 or higher
 //@A x2 : is a int or float that will divide represented as a std string
 //@X
+//@E
+//@E std::string x = "1458.970";
+//@E std::string x2 = "563489.287";
+//@E divide(x2, x);
+//@E "386.2240" 
 //@E
 //@X
 
@@ -1778,6 +1840,10 @@ std::string divide(std::string &x, std::string &x2, unsigned int nb_decimal = 5)
 //@A base : is the number of 0 of the base 10 multiplicator
 //@X
 //@E
+//@E std::string x2 = "563489.287";
+//@E dividebase10(x2);
+//@E "0.000563489287"
+//@E
 //@X
 
 std::string dividebase10(std::string &x, unsigned int base = 9) {
@@ -1852,16 +1918,20 @@ std::string dividebase10(std::string &x, unsigned int base = 9) {
 };
 
 //@T dividebase10_2
-//@U std::string dividebase10_2(std::string x, int divider)
+//@U std::string dividebase10_2(std::string x, int divider = 9)
 //@X
 //@D Returns the result of an int or float (as a std string) divided by a base 10 divider.
 //@A x : is the int of float that will be divided
 //@A divider : is an int that indicates the number of zero of the base 10 divider
 //@X
 //@E
+//@E std::string x2 = "563489.287";
+//@E dividebase10_2(x2);
+//@E "0.000563489287"
+//@E
 //@X
 
-std::string dividebase10_2(std::string x, int divider) {
+std::string dividebase10_2(std::string x, int divider = 9) {
   std::string to_power;
   std::string intr_str;
   int n = x.length();
@@ -1915,6 +1985,11 @@ std::string dividebase10_2(std::string x, int divider) {
 //@D Returns the remainder of a division between two int represented as a std string
 //@A x : is the int that will be divided, represented as a string, must be greater or equal to x2
 //@A x2 : is the divider which is a int represented as a string, must be lower or equal to x
+//@E
+//@E std::string x = "1458970";
+//@E std::string x2 = "563489287";
+//@E remainderint(x2, x);
+//@E "326867"
 //@E
 //@X
 
@@ -2027,6 +2102,11 @@ std::string remainderint(std::string &x, std::string &x2) {
 //@D Returns the remainder of a division between two int or floating point represented as a std string
 //@A x : is the int or floating point that will be divided, represented as a string, must be greater or equal to x2
 //@A x2 : is the divider which is a int or floating point represented as a string, must be lower or equal to x
+//@E
+//@E std::string x = "14589.70";
+//@E std::string x2 = "56348.9287";
+//@E remainderflt(x2, x);
+//@E "12579.8287"
 //@E
 //@X
 
@@ -2222,6 +2302,11 @@ std::string remainderflt(std::string &x, std::string &x2) {
 //@A x2 : is the int that will divide x, represented as a string.
 //@X
 //@E
+//@E std::string x = "1458970";
+//@E std::string x2 = "563489287";
+//@E quotientint(x2, x);
+//@E "386"
+//@E
 //@X
 
 std::string quotientint(std::string &x, std::string &x2) {
@@ -2323,6 +2408,11 @@ std::string quotientint(std::string &x, std::string &x2) {
 //@A x : is the int or floating point that will be divided, represented as a string.
 //@A x2 : is the int or floating point that will divide x, represented as a string.
 //@X
+//@E
+//@E std::string x = "14589.70";
+//@E std::string x2 = "563489.287";
+//@E quotientflt(x2, x);
+//@E "38"
 //@E
 //@X
 
@@ -2484,281 +2574,8 @@ std::string quotientflt(std::string &x, std::string &x2) {
   return eval_str;
 };
 
-//@L2 Center the divided at 1 or higher
-
-//@T centerizer
-//@U std::vector<std::string> centerizer(std::string x, std::string x2)
-//@D Returns the numerator and denominator transformed for the numerator to be higher or equal to 1 
-//@X
-//@A x : is the divided as a std string
-//@A x2 : is the divider as a std string
-//@X
-//@E
-//@X
-
-std::vector<std::string> centerizer(std::string x, std::string x2) {
-  std::vector<std::string> rtn_v = {x, x2};
-  if (x[0] != '0') {
-    return rtn_v;
-  };
-  if (x.length() < 2) {
-    return rtn_v;
-  };
-  unsigned int dec = 1;
-  unsigned int n2 = x2.length();
-  bool is_dec;
-  while (x2[dec] != '.' & dec < n2) {
-    dec += 1;
-  };
-  unsigned int i = 2;
-  const unsigned int n = x.length();
-  if (dec < n2) {
-    is_dec = 1;
-    while (x[i - 2] == '0' & i < n) {
-      x[i - 1] = x[i];
-      x[i] = '.';
-      if (i < n2) {
-        x2[i - 1] = x2[i];
-        x2[i] = '.';
-      } else {
-        if (is_dec) {
-          x2[i - 1] = x2[i];
-          x2[i] = '.';
-          is_dec = 0;
-          x2.pop_back();
-          n2 -= 1;
-        };
-        x2 += "0";
-        n2 += 1;
-      };
-      i += 1;
-    };
-    if (x2[n2 - 1] == '.') {
-      x2.pop_back();
-    };
-  } else {
-    while (x[i - 2] == '0' & i < n) {
-      x[i - 1] = x[i];
-      x[i] = '.';
-      x2 += "0";
-      i += 1;
-    };
-  };
-  x = x.substr(i - 2, n - 1);
-  if (x[n - i + 1] == '.') {
-    x.pop_back();
-  };
-  rtn_v[0] = x;
-  rtn_v[1] = x2;
-  return rtn_v;
-};
-
 //@L Power
 //@L2 Integers
-
-//@T powerint
-//@U std::string powerint(std::string &x, std::string &x2)
-//@X
-//@D Returns the result of int power to int as a std string
-//@A x : is the int that will be elevated to an exponent, represented as a std string
-//@A x2 : is the integer exponent, represented as a std string
-//@X
-//@E
-//@X
-
-std::string powerint(std::string &x, std::string &x2) {
-  if (x[0] == '-' || x2[0] == '-') {
-    return "";
-  };
-  if (x2 == "0") {
-    return "1";
-  };
-  std::string cur_str = x;
-  std::string eval_str = "1";
-  std::string lst_str;
-  std::string eval_str2;
-  unsigned int n = x.length();
-  unsigned int n2 = 0;
-  unsigned int n3 = 0;
-  unsigned int cnt = 0;
-  int cur_val;
-  int bf_cnt;
-  bool agn;
-  while (eval_str != x2) {
-    eval_str2 = "1";
-    lst_str = cur_str;
-    cnt = 0;
-    n3 = 0;
-    while (eval_str2 != x) {
-      for (int i = cnt; i < n; ++i) {
-        cur_val = (int(cur_str[i]) - 48) + (int(lst_str[i - cnt]) - 48);
-        if (cur_val > 9) {
-          cur_val -= 10;
-          cur_str[i] = char(cur_val + 48);
-          bf_cnt = 0;
-          agn = 1;
-          while (agn) {
-            bf_cnt += 1;
-            if (i - bf_cnt > -1) {
-              if (cur_str[i - bf_cnt] == '9') {
-                cur_str[i - bf_cnt] = '0';
-              } else {
-                cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
-                agn = 0;
-              };
-            } else {
-              cur_str.insert(0, "1");
-              i += 1;
-              n += 1;
-              cnt += 1;
-              agn = 0;
-            };
-          };
-        } else {
-          cur_str[i] = char(cur_val + 48);
-        };
-      };
-      cur_val = int(eval_str2[n3] - 48) + 1;
-      if (cur_val > 9) {
-        eval_str2[n3] = '0';
-        bf_cnt = 0;
-        agn = 1;
-        while (agn) {
-          bf_cnt += 1;
-          if (n3 - bf_cnt > -1) {
-            if (eval_str2[n3 - bf_cnt] == '9') {
-              eval_str2[n3 - bf_cnt] = '0';
-            } else {
-              eval_str2[n3 - bf_cnt] = char(eval_str2[n3 - bf_cnt] + 1);
-              agn = 0;
-            };
-          } else {
-            eval_str2.insert(0, "1");
-            n3 += 1;
-            agn = 0;
-          };
-        };
-      } else {
-        eval_str2[n3] = char(eval_str2[n3] + 1);
-      };
-    };
-    cur_val = int(eval_str[n2] - 48) + 1;
-    if (cur_val > 9) {
-      eval_str[n2] = '0';
-      bf_cnt = 0;
-      agn = 1;
-      while (agn) {
-        bf_cnt += 1;
-        if (n2 - bf_cnt > -1) {
-          if (eval_str[n2 - bf_cnt] == '9') {
-            eval_str[n2 - bf_cnt] = '0';
-          } else {
-            eval_str[n2 - bf_cnt] = char(eval_str[n2 - bf_cnt] + 1);
-            agn = 0;
-          };
-        } else {
-          eval_str.insert(0, "1");
-          n2 += 1;
-          agn = 0;
-        };
-      };
-    } else {
-      eval_str[n2] = char(eval_str[n2] + 1);
-    };
-  };
-  return cur_str;
-};
-
-//@T powerint2
-//@U std::string powerint2(std::string &x, unsigned int &x2)
-//@X
-//@D Returns the result of int power to int as a std string. It is preferable to use this function if the exponent can be described as an unsigned int.
-//@A x : is the int that will be elevated to an exponent, represented as a std string
-//@A x2 : is the integer exponent, represented as an unsigned int
-//@X
-//@E
-//@X
-
-std::string powerint2(std::string &x, unsigned int &x2) {
-  if (x[0] == '-') {
-    return "";
-  };
-  if (x2 == 0) {
-    return "1";
-  };
-  std::string cur_str = x;
-  unsigned int eval_int = 1;
-  std::string lst_str;
-  std::string eval_str2;
-  unsigned int n = x.length();
-  unsigned int n2 = 0;
-  unsigned int n3 = 0;
-  unsigned int cnt = 0;
-  int cur_val;
-  int bf_cnt;
-  bool agn;
-  while (eval_int != x2) {
-    eval_str2 = "1";
-    lst_str = cur_str;
-    cnt = 0;
-    n3 = 0;
-    while (eval_str2 != x) {
-      for (int i = cnt; i < n; ++i) {
-        cur_val = (int(cur_str[i]) - 48) + (int(lst_str[i - cnt]) - 48);
-        if (cur_val > 9) {
-          cur_val -= 10;
-          cur_str[i] = char(cur_val + 48);
-          bf_cnt = 0;
-          agn = 1;
-          while (agn) {
-            bf_cnt += 1;
-            if (i - bf_cnt > -1) {
-              if (cur_str[i - bf_cnt] == '9') {
-                cur_str[i - bf_cnt] = '0';
-              } else {
-                cur_str[i - bf_cnt] = char(int(cur_str[i - bf_cnt]) + 1);
-                agn = 0;
-              };
-            } else {
-              cur_str.insert(0, "1");
-              i += 1;
-              n += 1;
-              cnt += 1;
-              agn = 0;
-            };
-          };
-        } else {
-          cur_str[i] = char(cur_val + 48);
-        };
-      };
-      cur_val = int(eval_str2[n3] - 48) + 1;
-      if (cur_val > 9) {
-        eval_str2[n3] = '0';
-        bf_cnt = 0;
-        agn = 1;
-        while (agn) {
-          bf_cnt += 1;
-          if (n3 - bf_cnt > -1) {
-            if (eval_str2[n3 - bf_cnt] == '9') {
-              eval_str2[n3 - bf_cnt] = '0';
-            } else {
-              eval_str2[n3 - bf_cnt] = char(eval_str2[n3 - bf_cnt] + 1);
-              agn = 0;
-            };
-          } else {
-            eval_str2.insert(0, "1");
-            n3 += 1;
-            agn = 0;
-          };
-        };
-      } else {
-        eval_str2[n3] = char(eval_str2[n3] + 1);
-      };
-    };
-    eval_int += 1;
-  };
-  return cur_str;
-};
 
 //@T powerint3
 //@U std::string powerint3(std::string &x, std::string &x2)
@@ -2767,6 +2584,11 @@ std::string powerint2(std::string &x, unsigned int &x2) {
 //@A x : is an int or float as a std string
 //@A x2 : is an inst as a std string
 //@X
+//@E
+//@E std::string x = "14589";
+//@E std::string x2 = "56";
+//@E powerint3(x, x2);
+//@E "153260190174219811934128137332827906929119558402173805060214522716822523044456122073019142584098371366854238645863580507697977504775933822261516593995310407783049191696069368377535301569706808049310753775157932309020336358163020676961"
 //@E
 //@X
 
@@ -2926,6 +2748,11 @@ std::string powerint3(std::string &x, std::string &x2) {
 //@A x2 : is an int
 //@X
 //@E
+//@E std::string x = "14.589";
+//@E std::string x2 = "6";
+//@E poweroddn(x, x2);
+//@E "314509345202142665193410679125428033118438342864761586343543406788602813321.829414037501712790360016267236804103022451365560402812257231544584303307790019122009329449912834283039886749776498473622284482191189951072052752453908143338819524431841597590758370489688259841" 
+//@E
 //@X
 
 std::string poweroddn(std::string &x, std::string &x2) {
@@ -3076,10 +2903,14 @@ std::string poweroddn(std::string &x, std::string &x2) {
 //@T chexp1
 //@U std::string chexp1(std::string x, int accuracy = 1000)
 //@X
-//@D Returns the result of an exponential. Works with the formula (1 + x/accuracy) ** accuracy
+//@D !!Not recommended, just a proof of concept!! Returns the result of an exponential. Works with the formula <b>(1 + x/accuracy) ** accuracy</b>
 //@A x : is the int or float that will be elevated to exponentiation
 //@A accuracy : is the accuracy factor, the higher it is, the more precise it gets at a computational cost
 //@X
+//@E
+//@E std::string x = "8";
+//@E chexp1(x);
+//@E "2887.5672632" // + lot of accuracy
 //@E
 //@X
 
@@ -3255,6 +3086,10 @@ std::string chexp1(std::string x, int accuracy = 1000) {
 //@A x : is an positive integer as a std string
 //@X
 //@E
+//@E std::string x = "1203";
+//@E factorial(x);
+//@E " 110291182274320302868335540036971957964398761049288945189514522265495848012966079388748606697973923857953863340967082130666006801995552084113814868238243311858913795154784617153902296146662261034010473803827569767538493678138342890947302327880659767989629372970546995369789051829636976020229377210033943230084516335699249033857428772315591104623952693868236895725991085709158040233167679112351936991424971264582253948780887379967819939333395587783920859359861012157863588005375328833992235770831819662357991853643303111244309326324373091074509115218770474031745001085058150484834220026432804625434128103617316002317240235816361436134297139959662483729719647267876280118259712947551023653444555174490944979196787361320691724054489811739772152714191015590466907891601064590715046011898180534740537300129250803125492992577415551304378939332611237562776293561035832294489499225804565027267569023949255161282391174997210303446793139678706808650493259713137854061821137461397796722386790250701776810015961428197556815751881087003157545471521009580843663460817191196050241064752581934463558830010132138518790930470384585398937993248316524232578527264460878228840418064555725329100375022428626309365502567689206415068383514463527804702179358835752389190241844166925965937482139489983646084680324516474595845898026896254328710351184166557725020369476995517380367529937617113231359792819905104507614147780421528883484133295052608745099678446222414535404890949882402139712822530829693616183501644591032729707298565386443307563497032672316273198489049829030913715144490221271583537916723475841857831273842405894134590613795155682863064577984556748493737206351932583104172335734280226763088742592195979407131112600953429663256089713211540343880345163689494478845964979135658780819094129142572035559733121669788156352259750384591475246232016769075079376829857776400589333076596715030915886442811852204991104123222836145828125630564312184996547014552284493145574519304072039703973936965896586108737637067695497470660389631858282834386074427079639087770744487891233683053513892666630403886028137795177406237525249875396197418728093989786482185147005153853264518939124417226373486941967057099550815354237514275032081881610961521996825319734630187988769835736334129937206125352211558436128168257565762561098798685898910181724217378427847755791561092496954234588923027413794716484601714639867544884155288670222887376305424677401569213422442327166342634374955584061782891358081777309625180826661062844058991327824113050412205823174208534851051558677681043793002218008919992212282871525955992706178455492690945449945439208089933822268665877269583213533003120330908157497449182538729547002189479274597896996222446035150842524951733342788124468436353810664498768586798231949004761871215217176571499053572447150628068308187071772821239484551881596985264424435373729446965693122971789819834691063207833724791029760000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+//@E
 //@X
 
 std::string factorial(std::string &x) {
@@ -3392,6 +3227,11 @@ std::string factorial(std::string &x) {
 //@A x2 : is a int as a string
 //@X
 //@E
+//@E std::string x = "1203";
+//@E std::string x2 = "6";
+//@E is_greater(x, x2);
+//@E 1
+//@E
 //@X
 
 bool is_greater(std::string &x, std::string &x2) {
@@ -3426,6 +3266,11 @@ bool is_greater(std::string &x, std::string &x2) {
 //@A x : is a number (int or float) as a string
 //@A x2 : is a number (int or float) as a string
 //@X
+//@E
+//@E std::string x = "1.203";
+//@E std::string x2 = "6";
+//@E is_greaterflt(x, x2);
+//@E 0
 //@E
 //@X
 
@@ -3516,6 +3361,14 @@ bool is_greaterflt(std::string &x, std::string &x2) {
 //@A digits : is the number of digits to round from, can be negative
 //@X
 //@E
+//@E std::string x = "156.203";
+//@E int x2b = 2;
+//@E roundstr(x, x2b);
+//@E 156.20
+//@E x2b = -1;
+//@E roundstr(x,; x2b);
+//@E 160 
+//@E
 //@X
 
 std::string roundstr(std::string &x, int &digits) {
@@ -3562,12 +3415,18 @@ std::string roundstr(std::string &x, int &digits) {
   return rtn_str;
 };
 
+//@L Other Tools
+
 //@T rmzero
 //@U std::string rmzero(std::string x)
 //@X
 //@D Removes unnecessary 0 at the end of a floating point.
 //@A is an float as a std string
 //@X
+//@E
+//@E std::string x = "156.203000";
+//@E rmzero(x);
+//@E "156.203"
 //@E
 //@X
 
@@ -3587,6 +3446,10 @@ std::string rmzero(std::string x) {
 //@A x : is a float as a std string
 //@X
 //@E
+//@E std::string x = "156.203";
+//@E intpart(x);
+//@E "156"
+//@E
 //@X
 
 std::string intpart(std::string x) {
@@ -3605,6 +3468,10 @@ std::string intpart(std::string x) {
 //@D Returns the float part of a float
 //@A x : is a float as a std string
 //@X
+//@E
+//@E std::string x = "156.203";
+//@E fltpart(x);
+//@E "203"
 //@E
 //@X
 
@@ -3630,6 +3497,13 @@ std::string fltpart(std::string &x) {
 //@A x : is the input number, as a std string
 //@X
 //@E
+//@E std::string x = "156.203";
+//@E is_decimal(x);
+//@E 1
+//@E x = "156";
+//@E is_decimal(x);
+//@E 0
+//@E
 //@X
 
 bool is_decimal(std::string &x) {
@@ -3641,6 +3515,66 @@ bool is_decimal(std::string &x) {
     };
   };
   return 0;
+};
+
+//@T centerizer
+//@U std::vector<std::string> centerizer(std::string x, std::string x2)
+//@D Returns the numerator and denominator transformed for the numerator to be higher or equal to 1 
+//@X
+//@A x : is the divided as a std string
+//@A x2 : is the divider as a std string
+//@X
+//@E
+//@X
+
+std::vector<std::string> centerizerb(std::string x, std::string x2) {
+  std::vector<std::string> rtn_v = {x, x2};
+  if (x[0] != '0') {
+    return rtn_v;
+  };
+  if (x.length() < 2) {
+    return rtn_v;
+  };
+  unsigned int dec = 1;
+  unsigned int n2 = x2.length();
+  while (x2[dec] != '.' & dec < n2) {
+    dec += 1;
+  };
+  unsigned int i = 2;
+  unsigned int cnt = dec;
+  const unsigned int n = x.length();
+  if (dec < n2) {
+    while (x[i - 2] == '0' & i < n) {
+      x[i - 1] = x[i];
+      x[i] = '.';
+      if (cnt + 1 < n2) {
+        x2[cnt] = x2[cnt + 1];
+        x2[cnt + 1] = '.';
+        if (cnt + 2 == n2) {
+          x2.pop_back();
+          n2 -= 1;
+        };
+      } else {
+        x2.push_back('0');
+      };
+      cnt += 1;
+      i += 1;
+    };
+  } else {
+    while (x[i - 2] == '0' & i < n) {
+      x[i - 1] = x[i];
+      x[i] = '.';
+      x2 += "0";
+      i += 1;
+    };
+  };
+  x = x.substr(i - 2, n - 1);
+  if (x[n - i + 1] == '.') {
+    x.pop_back();
+  };
+  rtn_v[0] = x;
+  rtn_v[1] = x2;
+  return rtn_v;
 };
 
 ///// NOT TO BE USED  ////
@@ -3665,21 +3599,6 @@ double chstod(const std::string &x) {
   return rtn / m;
 };
 
-std::string itos(unsigned int x) {
-  unsigned int cnt;
-  unsigned int mlt_val = 1;
-  std::string rtn_str = "";
-  while (mlt_val <= x) {
-    cnt = 0;
-    while (x % (10 * mlt_val) != 0) {
-      x -= mlt_val;
-      cnt += 1;
-    };
-    mlt_val *= 10;
-    rtn_str.insert(0, 1, char(cnt + 48));
-  };
-  return rtn_str;
-};
 
 
 
