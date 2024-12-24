@@ -1,9 +1,5 @@
-<div class="Div2"><i><b>README</b></i></div><br><center><img src ="logo.jpg" width=250 height=100></center>
-
-Stylished documentation can be found here:
-
-<a href = "https://julienlargetpiet.tech/static/files/0README_cherubin.html">https://julienlargetpiet.tech/static/files/0README_cherubin.html</a>
-
+<body>
+<div class="Div2"><i><b>README</b></i></div><br><center><img src ="logo_cherubin.jpg" width=250 height=100></center>
 <div class="container">
 <div class="Divb">
 <div class="box1"><a><i>Table Of Contents</i></a><br><br><ul>
@@ -116,11 +112,14 @@ Stylished documentation can be found here:
 </div>
 </div>
 <div class="box2">
-<h1 style="color:#2c4786;">Addition</h1>
+<h3>#Description</h3>
+<p>This library if for very large and precise number (integers or floating points) manipulation those who can not be stored in an other datatype than <code>std::string</code> or <code>std::deque</code>. The only limit is the system memory.</p>
+<p>This branch is dedicated to <code>std::string</code> datatype for storing and manipulating numbers, contrary on the other branch (which is in development) that uses <code>std::deque<char></code> for the same purposes. This branch is more appropriate for medium sized number manipulation and the need for a lot of number declaration since a number declaration in the other branch will copy the elements of the declared string (also starting with string for convenience) to a deque at a cost of little computation each time. However, the other branch functions (in development) will be significantly faster especially for exponential functions.</p>
+<br>
+<img style="margin-left: 20px;" height="220" width="360" src="docimage.jpg"><br><h1 style="color:#2c4786;">Addition</h1>
 <h2 id="addabstraction" style="test-align: left;">addabstraction</h2>
 <h3>#Usage</h3>
 <div class="Div"><code>std::string addabstraction(std::string x, std::string x2)</code></div>
-<h3>#Description</h3>
 <p>Returns the result of any addition between positive and/or negative values. Handles the abstraction for <code>addflt</code> function that normally does not accept negative value.</p>
 <h3>#Arguments</h3>
 <table><tr><th>Name</th><th>Definition</th></tr><tr><th>
@@ -949,7 +948,7 @@ x </th><th> is the divided as a std string</th></tr>
 <div class = "Div"><code></code>
 <br><code>std::string x = "0.001562";</code>
 <br><code>std::string x2 = "6.8987";</code>
-<br><code>std::vector&lt;std::string&gt; out = centerizerb(x, x2);</code>
+<br><code>std::vector&lt;std::string&gt; out = centerizer(x, x2);</code>
 <br><code>"1.562" "6898.7"</code>
 <br><code></code>
 </div>
@@ -957,3 +956,4 @@ x </th><th> is the divided as a std string</th></tr>
 <hr class="hr">
 </div>
 </div>
+</body>
