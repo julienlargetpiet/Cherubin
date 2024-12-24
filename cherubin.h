@@ -1,7 +1,26 @@
 #include <iostream>
 #include <vector>
 
-//@L Addition
+//@L1 Addition
+
+//@T addabstraction
+//@U std::string addabstraction(std::string x, std::string x2)
+//@X
+//@D Returns the result of any addition between positive and/or negative values. Handles the abstraction for <code>addflt</code> function that normally does not accept negative value.
+//@A x : the first number (int or float as std string)
+//@A x2 : the second number (int or float as std string)
+//@X
+//@E
+//@E std::string x = "0.5";
+//@E std::string x2 = "2.5";
+//@E addabstraction(x, x2);
+//@E "3.0"
+//@E x2 = "-2.5";
+//@E addabstraction(x, x2);
+//@E "-2.0" 
+//@E
+//@X
+
 //@L2 Integers
 
 //@T addint
@@ -88,7 +107,8 @@ std::string addint(std::string &x, std::string &x2) {
 //@X
 //@D Returns the addition of two floating points as a std string. Accepts integers, but if you plan to add integers, <code>addint</code> is preferable to use.
 //@A x : is one of the int or float that will be part of the addition operation 
-//@A x2 : is one of the int or float that will be part of the addition operation 
+//@A x2 : is one of the int or float that will be part of the addition operation
+//@X
 //@E
 //@E std::string x = "14589.70";
 //@E std::string x2 = "5634.89287";
@@ -240,6 +260,7 @@ std::string addflt(std::string &x, std::string &x2) {
 //@D Same as <code>addflt</code> with another algorithm.
 //@A x : is one of the int or float that will be part of the addition operation 
 //@A x2 : is one of the int or float that will be part of the addition operation 
+//@X
 //@E
 //@E std::string x = "14589.70";
 //@E std::string x2 = "5634.89287";
@@ -335,7 +356,23 @@ std::string addflt2(std::string x, std::string &x2) {
   return x;
 };
 
-//@L Substraction
+//@L1 Substraction
+
+//@T subsabstraction
+//@U std::string subsabstraction(std::string x, std::string x2)
+//@X
+//@D Returns the result of a substraction. Handles the abstraction needed for <code>subsflt</code> function  that normally does not accept negative inputs. 
+//@A x : is the number that will be substracted (int or float as std string)
+//@A x2 : is the number that will substract <code>x</code>
+//@X
+//@E
+//@E std::string x = "-5687.58";
+//@E std::string x2 = "-459372";
+//@E subsabstraction(x2, x);
+//@E "-465059.58"
+//@E
+//@X
+
 //@L2 Integers
 
 //@T subsint
@@ -554,7 +591,23 @@ std::string subsflt(std::string &x, std::string &x2) {
   return cur_str;
 };
 
-//@L Multiplication
+//@L1 Multiplication
+
+//@T multabstraction
+//@U std::string multabstraction(std::string x, std::string x2)
+//@X
+//@D Returns the result of a multiplication. Handles the abstraction for <code>multflt2</code> that normaly does not accept negative values.
+//@A x : is the first number (int or float as std string)
+//@A x2 : is the second number (int or float as std string)
+//@X
+//@E
+//@E std::string x = "-569.87";
+//@E std::string x2 = "459372";
+//@E multabstraction(x, x2);
+//@E "-261782321.640"
+//@E
+//@X
+
 //@L2 Integers
 
 //@T multint
@@ -1150,7 +1203,23 @@ std::string multbase10(std::string x, unsigned int base = 9) {
   return x;
 };
 
-//@L Division
+//@L1 Division
+
+//@T divideabstraction
+//@U std::string divideabstraction(std::string x, std::string x2, unsigned int nb_decimal = 5)
+//@X
+//@D Returns the result of a division. Handles the abstraction for <code>divide2</code> that normaly does not accept negative values.
+//@A x : is the first number (int or float as std string)
+//@A x2 : is the second number (int or float as std string)
+//@A nb_decimal : is the number of decimal to keep
+//@X
+//@E
+//@E std::string x = "-569.87";
+//@E std::string x2 = "459372";
+//@E divideabstraction(x, x2);
+//@E "-0.001240541"
+//@E
+//@X
 
 //@T divide2
 //@U std::string divide2(std::string &x, std::string &x2, unsigned int nb_decimal = 8)
@@ -1985,6 +2054,7 @@ std::string dividebase10_2(std::string x, int divider = 9) {
 //@D Returns the remainder of a division between two int represented as a std string
 //@A x : is the int that will be divided, represented as a string, must be greater or equal to x2
 //@A x2 : is the divider which is a int represented as a string, must be lower or equal to x
+//@X
 //@E
 //@E std::string x = "1458970";
 //@E std::string x2 = "563489287";
@@ -2102,6 +2172,7 @@ std::string remainderint(std::string &x, std::string &x2) {
 //@D Returns the remainder of a division between two int or floating point represented as a std string
 //@A x : is the int or floating point that will be divided, represented as a string, must be greater or equal to x2
 //@A x2 : is the divider which is a int or floating point represented as a string, must be lower or equal to x
+//@X
 //@E
 //@E std::string x = "14589.70";
 //@E std::string x2 = "56348.9287";
@@ -2574,7 +2645,7 @@ std::string quotientflt(std::string &x, std::string &x2) {
   return eval_str;
 };
 
-//@L Power
+//@L1 Power
 //@L2 Integers
 
 //@T powerint3
@@ -2898,7 +2969,25 @@ std::string poweroddn(std::string &x, std::string &x2) {
   return rtn_str2;
 };
 
-//@L Exponential
+//@L2 Floating points
+
+//@T powerflt
+//@U std::string powerflt(std::string &x, std::string &x2, unsigned int nb_polynomial = 20)
+//@X
+//@D Returns the result of a int or float (as std string) to the power of int or float (as std string) 
+//@A x : is the number (int or float as std string) that will be elevated to an exponent
+//@A x2 : is the exponent (int or float as std string)
+//@A nb_polynomial : is the length of the polynomial used for the taylor serie of exp(x) that allow the function to work. The bigger log(x) times x2 is, the bigger <code>nb_polynomial</code> should be.
+//@X
+//@E
+//@E std::string x = "3.478";
+//@E std::string x2 = "10.58";
+//@E powerflt(x, x2);
+//@E "537525.0830373820"
+//@E
+//@X
+
+//@L1 Exponential
 
 //@T chexp1
 //@U std::string chexp1(std::string x, int accuracy = 1000)
@@ -3077,7 +3166,54 @@ std::string chexp1(std::string x, int accuracy = 1000) {
   return rtn_str;
 };
 
-//@L Factorial
+//@T chexp2
+//@U std::string chexp2(std::string &x, unsigned int nb_polynomial = 21)
+//@X
+//@D Returns the result of the exponential function for any value.
+//@A x : is the number (int or float as std string) that we want to calculate the exponential from
+//@A nb_polynomial : is the length of the polynomial used for the taylor serie for the approximation of the exponential function. Higher <code>x</code> is, higher the value of this parameter should be.
+//@X
+//@E
+//@E std::string x = "56.87";
+//@E chexp2(x, 390);
+//@E "17408961367637823234360092375649240274962948816922400656258834086662691682597949182878181506839462714090174265636968592012539404439115388571203863053175373763348307275660537898101671121177016775956775125086597870411101884320489957750.4944500000" 
+//@E
+//@X
+
+
+//@L1 Logarithms
+
+//@T chlognatural1
+//@U std::string chlognatural1(std::string &x)
+//@X
+//@D Returns the result of the natural logarithm for any value. 
+//@A x : is an int or float as std string
+//@X
+//@E
+//@E std::string x = "5687.58";
+//@E chlognatural1(x);
+//@E "8.646042"
+//@E
+//@X
+
+//@L2 Base n
+
+//@T chlogn
+//@U std::string chlogn(std::string &x, std::string base)
+//@X
+//@D Returns the value of a logarithm for any base.
+//@A x : is the value (int or float as std string) we want to find the logarithm from
+//@A base : is the base (int or float as std string) of the logarithm
+//@X
+//@E
+//@E std::string x = "5687.58";
+//@E std::string x2 = "10";
+//@E chlogn(x, x2);
+//@E "3.754931"
+//@E
+//@X
+
+//@L1 Factorial
 
 //@T factorial
 //@U std::string factorial(std::string &x)
@@ -3217,7 +3353,25 @@ std::string factorial(std::string &x) {
   return cur_str;
 };
 
-//@L Comparisons
+//@L1 Inverse functions
+
+//@T inverse
+//@U std::string inverse(std::string &a, std::string &b, std::string (*f)(std::string&, std::string&))
+//@X
+//@D Returns the inverse of the result of a function passed as a parameter.
+//@A f : is the function passed as a parameter
+//@A a : is the first number, as a std string, of the function passed as a parameter
+//@A b : is the second number, as a std string, of the function passed as a parameter
+//@X
+//@E
+//@E std::string x = "3";
+//@E std::string x2 = "10";
+//@E inverse(x, x2, powerint3)
+//@E "0.0000169350" // is 1/3**10
+//@E
+//@X
+
+//@L1 Comparisons
 
 //@T is_greater
 //@U bool is_greater(std::string &x, std::string &x2)
@@ -3351,7 +3505,7 @@ bool is_greaterflt(std::string &x, std::string &x2) {
   return 1;
 };
 
-//@L Round
+//@L1 Round
 
 //@T roundstr
 //@U std::string roundstr(std::string &x, int &digits)
@@ -3415,7 +3569,7 @@ std::string roundstr(std::string &x, int &digits) {
   return rtn_str;
 };
 
-//@L Other Tools
+//@L1 Other Tools
 
 //@T rmzero
 //@U std::string rmzero(std::string x)
@@ -3518,7 +3672,7 @@ bool is_decimal(std::string &x) {
 };
 
 //@T centerizer
-//@U std::vector&ltstd::string&gt centerizer(std::string x, std::string x2)
+//@U std::vector&lt;std::string&gt; centerizer(std::string x, std::string x2)
 //@D Returns the numerator and denominator transformed for the numerator to be higher or equal to 1 
 //@X
 //@A x : is the divided as a std string
@@ -3527,12 +3681,12 @@ bool is_decimal(std::string &x) {
 //@E
 //@E std::string x = "0.001562";
 //@E std::string x2 = "6.8987";
-//@E std::vector&ltstd::string&gt out = centerizerb(x, x2);
+//@E std::vector&lt;std::string&gt; out = centerizer(x, x2);
 //@E "1.562" "6898.7"
 //@E
 //@X
 
-std::vector<std::string> centerizerb(std::string x, std::string x2) {
+std::vector<std::string> centerizer(std::string x, std::string x2) {
   std::vector<std::string> rtn_v = {x, x2};
   if (x[0] != '0') {
     return rtn_v;
