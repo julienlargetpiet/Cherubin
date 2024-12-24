@@ -2,7 +2,7 @@
 
 Stylished documentation can be found here:
 
-<a href = "https://julienlargetpiet.tech/static/files/0README_cherubin.html">https://julienlargetpiet.tech/staticfiles/0README_cherubin.html</a>
+<a href = "https://julienlargetpiet.tech/static/files/0README_cherubin.html">https://julienlargetpiet.tech/static/files/0README_cherubin.html</a>
 
 <div class="container">
 <div class="Divb">
