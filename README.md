@@ -1,4 +1,9 @@
 <div class="Div2"><i><b>README</b></i></div><br><center><img src ="logo.jpg" width=250 height=100></center>
+
+Stylished documentation can be found here:
+
+<a href = "https://julienlargetpiet.tech/static/files/0README_cherubin.html">https://julienlargetpiet.tech/staticfiles/0README_cherubin.html</a>
+
 <div class="container">
 <div class="Divb">
 <div class="box1"><a><i>Table Of Contents</i></a><br><br><ul>
