@@ -729,6 +729,63 @@ std::deque<char> multflt2(std::deque<char> &x, std::deque<char> &x2) {
   return rtn_dq2;
 };
 
+std::deque<char> multbase10(std::deque<char> x, unsigned int base = 9) {
+  int i = 0;
+  unsigned int idx_dec;
+  unsigned int lst_i;
+  unsigned int lst_n;
+  unsigned int n = x.size();
+  bool agn = 1;
+  if (n > 2) {
+    while (agn) {
+      i += 1;
+      if (i + 1 == n) {
+        agn = 0;
+      } else if (x[i] == '.') {
+        idx_dec = i;
+        agn = 0;
+      };
+    };
+    if (i + 1 < n) {
+      if (base > n - 1 - i) {
+        lst_i = i;
+        lst_n = n;
+        for (i = 0; i < base + 2 + lst_i - lst_n; ++i) {
+          x.push_back('0');
+          n += 1;
+        };
+      };
+      for (i = 0; i < base; ++i) {
+        x[idx_dec] = x[idx_dec + 1];
+        idx_dec += 1;
+        x[idx_dec] = '.';
+      };
+      i = -1;
+      agn = 1;
+      while (agn) {
+        i += 1;
+        if (i + 1 == n) {
+          agn = 0;
+        } else if (x[i] != '0') {
+          agn = 0;
+        };
+      };
+      if (i > 0) {
+        x.erase(x.begin(), x.begin() + i);
+      };
+    } else {
+      for (i = 0; i < base; ++i) {
+        x.push_back('0');
+      };
+    };
+  } else {
+   for (i = 0; i < base; ++i) {
+      x.push_back('0');
+    };
+  };
+  return x;
+};
+
 std::string dqtostr(std::deque<char> &x) {
   std::string cur_str = "";
   for (char i : x) {
