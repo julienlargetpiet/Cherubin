@@ -1030,7 +1030,7 @@ std::string multflt2(std::string &x, std::string &x2) {
         n -= 1;
       } else {
         n -= 2;
-        rtn_str = rtn_str.substr(1, i - 2);
+        rtn_str = rtn_str.substr(1, i);
       };
     } else {
       rtn_str = x;
@@ -1061,7 +1061,7 @@ std::string multflt2(std::string &x, std::string &x2) {
         n2 -= 1;
       } else {
         n2 -= 2;
-        rtn_str3 = rtn_str3.substr(1, i - 2);
+        rtn_str3 = rtn_str3.substr(1, i);
       };
     } else {
       rtn_str3 = x2;
