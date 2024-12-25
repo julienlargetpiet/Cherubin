@@ -435,7 +435,7 @@ std::string subsint(std::string &x, std::string &x2) {
       } else {
         cur_str[i] = char(cur_val + 48);
       };
-      if (cur_str[0] == '0') {
+      if (cur_str[0] == '0' & sizen > 1) {
         cur_str = cur_str.substr(1, cur_str.length());
         bf_str = bf_str.substr(1, cur_str.length());
         sizen -= 1;
