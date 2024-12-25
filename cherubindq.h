@@ -460,6 +460,53 @@ std::deque<char> subsflt(std::deque<char> &x, std::deque<char> &x2) {
   return cur_dq;
 };
 
+std::deque<char> multint(std::deque<char> &x, unsigned int &x2) {
+  std::deque<char> cur_dq = x;
+  std::deque<char> cur_dq2 = x;
+  unsigned int cnt = 1;
+  unsigned int n = x.size();
+  int cur_val;
+  unsigned int delta = 0;
+  int bf_cnt;
+  bool agn;
+  int i;
+  if (cur_dq[0] == '-') {
+    return cur_dq;
+  };
+  while (cnt != x2) {
+    for (i = delta; i < n; ++i) {
+      cur_val = (int(cur_dq[i]) - 48) + (int(cur_dq2[i - delta]) - 48);
+      if (cur_val > 9) {
+        cur_val -= 10;
+        cur_dq[i] = char(cur_val + 48);
+        bf_cnt = 0;
+        agn = 1;
+        while (agn) {
+          bf_cnt += 1;
+          if (i - bf_cnt > -1) {
+            if (cur_dq[i - bf_cnt] == '9') {
+              cur_dq[i - bf_cnt] = '0';
+            } else {
+              cur_dq[i - bf_cnt] = char(int(cur_dq[i - bf_cnt]) + 1);
+              agn = 0;
+            };
+          } else {
+            cur_dq.push_front('1');
+            i += 1;
+            delta += 1;
+            n += 1;
+            agn = 0;
+          };
+        };
+      } else {
+        cur_dq[i] = char(cur_val + 48);
+      };
+    };
+    cnt += 1;
+  };
+  return cur_dq;
+};
+
 std::string dqtostr(std::deque<char> &x) {
   std::string cur_str = "";
   for (char i : x) {
