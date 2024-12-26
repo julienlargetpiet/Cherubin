@@ -786,6 +786,320 @@ std::deque<char> multbase10(std::deque<char> x, unsigned int base = 9) {
   return x;
 };
 
+std::deque<char> divide2(std::deque<char> &x, std::deque<char> &x2, int nb_decimal = 5) {
+  std::deque<char> divided = x;
+  std::deque<char> divider = x2;
+  std::deque<char> divider_base = divider;
+  std::deque<char> lst_divider = divider;
+  std::deque<char> eval_dq;
+  std::deque<char> eval_dq2 = {'0'};
+  std::deque<char> lst_eval_dq2 = {'0'};
+  std::deque<char> intr_str;
+  if (x[0] == '-' || x2[0] == '-') {
+    return divided;
+  };
+  unsigned int n = x2.size();
+  unsigned int n_divided = x.size();
+  unsigned int idx_dec = 0;
+  unsigned int idx_dec2 = 0;
+  unsigned int cnt = 0;
+  unsigned int i2;
+  int i = 0;
+  unsigned int dec1 = 0;
+  unsigned int dec2 = 0;
+  unsigned int integ1;
+  unsigned int integ2;
+  bool agn;
+  bool is_dec1 = 0;
+  bool is_dec2 = 0;
+  unsigned int bgn = 0;
+  while (i < n) {
+    if (divider[i] == '.') {
+      is_dec2 = 1;
+      break;
+    };
+    dec2 += 1;
+    i += 1;
+  };
+  i = 0;
+  while (i < n_divided) {
+    if (divided[i] == '.') {
+      is_dec1 = 1;
+      break;
+    };
+    dec1 += 1;
+    i += 1;
+  };
+  if (is_dec2) {
+    n -= 1;
+    idx_dec2 = n - dec2;
+    divider.erase(divider.begin() + dec2);
+    divider_base = divider;
+    lst_divider = divider;
+  };
+  if (is_dec1) {
+    n_divided -= 1;
+    idx_dec = n_divided - dec1;
+    divided.erase(divided.begin() + dec1);
+  };
+  if (idx_dec > idx_dec2) {
+    for (i = 0; i < idx_dec - idx_dec2; ++i) {
+      divider.push_back('0');
+      divider_base.push_back('0');
+      lst_divider.push_back('0');
+      n += 1;
+    };
+  } else if (idx_dec < idx_dec2) {
+    for (i = 0; i < idx_dec2 - idx_dec; ++i) {
+      divided.push_back('0');
+      n_divided += 1;
+    };
+  };
+  int delta_integ = n - n_divided;
+  idx_dec = n;
+  if (delta_integ > -1) {
+    for (i = -1; i < delta_integ; ++i) {
+      divided.push_back('0');
+      n_divided += 1;
+    };
+  } else if (delta_integ < -1) {
+    for (i = -1; i > delta_integ; --i) {
+      divider.push_back('0');
+      divider_base.push_back('0');
+      lst_divider.push_back('0');
+      n += 1;
+    };
+  };
+  cnt = 0;
+  int n2 = 0;
+  int cur_val;
+  int bf_cnt;
+  bool agn2 = 1;
+  unsigned int post_dec;
+  unsigned int lst_n = n;
+  while (agn2) { 
+    if (n > n_divided) {
+      divider = lst_divider;
+      cnt -= 1;
+      n -= 1;
+      break;
+    } else if (n == n_divided) {
+      i = 0;
+      while (i < n) {
+        if (divided[i] != divider[i]) {
+          if (int(divided[i] - 48) < int(divider[i] - 48)) {
+            agn2 = 0;
+            break;
+          } else {
+            break;
+          };
+        };
+        i += 1;
+      };
+      if (!agn2) {
+        divider = lst_divider;
+        if (n != lst_n) {
+          cnt -= 1;
+          n = lst_n;
+        };
+        break;
+      } else if (i == n) {
+        cur_val = int(eval_dq2[n2] - 48) + 1;
+        if (cur_val > 9) {
+          eval_dq2[n2] = '0';
+          bf_cnt = 0;
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (n2 - bf_cnt > -1) {
+              if (eval_dq2[n2 - bf_cnt] == '9') {
+                eval_dq2[n2 - bf_cnt] = '0';
+              } else {
+                eval_dq2[n2 - bf_cnt] = char(int(eval_dq2[n2 - bf_cnt]) + 1);
+                agn = 0;
+              };
+            } else {
+              eval_dq2.push_front('1');
+              n2 += 1;
+              agn = 0;
+            };
+          }
+        } else {
+          eval_dq2[n2] = char(cur_val + 48);
+        };
+        break;
+      };
+    };
+    lst_divider = divider;
+    lst_n = n;
+    for (i = cnt; i < n; ++i) {
+      cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt]) - 48);
+      if (cur_val > 9) {
+        cur_val -= 10;
+        divider[i] = char(cur_val + 48);
+        bf_cnt = 0;
+        agn = 1;
+        while (agn) {
+          bf_cnt += 1;
+          if (i - bf_cnt > -1) {
+            if (divider[i - bf_cnt] != '.') {
+              if (divider[i - bf_cnt] == '9') {
+                divider[i - bf_cnt] = '0';
+              } else {
+                divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                agn = 0;
+              };
+            };
+          } else {
+            divider.push_front('1');
+            cnt += 1;
+            i += 1;
+            n += 1;
+            agn = 0;
+          };
+        };
+      } else {
+        divider[i] = char(cur_val + 48);
+      };
+    };
+    cur_val = int(eval_dq2[n2] - 48) + 1;
+    if (cur_val > 9) {
+      eval_dq2[n2] = '0';
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (n2 - bf_cnt > -1) {
+          if (eval_dq2[n2 - bf_cnt] == '9') {
+            eval_dq2[n2 - bf_cnt] = '0';
+          } else {
+            eval_dq2[n2 - bf_cnt] = char(int(eval_dq2[n2 - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          eval_dq2.push_front('1');
+          n2 += 1;
+          agn = 0;
+        };
+      }
+    } else {
+      eval_dq2[n2] = char(cur_val + 48);
+    };
+  };
+  for (char chr : eval_dq2) {
+    eval_dq.push_back(chr);
+  };
+  post_dec = eval_dq.size();
+  if (post_dec > 1) {
+    bgn = 1;
+  };
+  divided.push_back('0');
+  divider.push_back('0');
+  n_divided += 1;
+  n += 1;
+  cnt += 1;
+  eval_dq.push_back('.');
+  for (int i2 = 0; i2 < nb_decimal; ++i2) {
+    eval_dq2 = {'0'};
+    agn2 = 1;
+    n2 = 0;
+    while (agn2) {
+      if (n > n_divided) {
+        divider = lst_divider;
+        eval_dq2 = lst_eval_dq2;
+        cnt -= 1;
+        n -= 1;
+        break;
+      } else if (n == n_divided) {
+        i = 0;
+        while (i < n) {
+          if (divided[i] != divider[i]) {
+            if (int(divided[i] - 48) < int(divider[i] - 48)) {
+              agn2 = 0;
+              break;
+            } else {
+              break;
+            };
+          };
+          i += 1;
+        };
+        if (!agn2) {
+          divider = lst_divider;
+          eval_dq2 = lst_eval_dq2;
+          if (n != lst_n) {
+            cnt -= 1;
+            n = lst_n;
+          };
+          break;
+        } else if (i == n) {
+          break;
+        };
+      };
+      lst_divider = divider;
+      lst_n = n;
+      for (i = cnt; i < n; ++i) {
+          cur_val = (int(divider[i]) - 48) + (int(divider_base[i - cnt]) - 48);
+          if (cur_val > 9) {
+            cur_val -= 10;
+            divider[i] = char(cur_val + 48);
+            bf_cnt = 0;
+            agn = 1;
+            while (agn) {
+              bf_cnt += 1;
+              if (i - bf_cnt > -1) {
+                if (divider[i - bf_cnt] == '9') {
+                  divider[i - bf_cnt] = '0';
+                } else {
+                  divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                  agn = 0;
+                };
+              } else {
+                divider.push_front('1');
+                cnt += 1;
+                i += 1;
+                n += 1;
+                agn = 0;
+              };
+            };
+          } else {
+            divider[i] = char(cur_val + 48);
+          };
+      };
+      cur_val = int(eval_dq2[n2] - 48) + 1;
+      lst_eval_dq2 = eval_dq2;
+      eval_dq2[n2] = char(cur_val + 48);
+    };
+    for (char chr : eval_dq2) {
+      eval_dq.push_back(chr);
+    };
+    divided.push_back('0');
+    divider.push_back('0');
+    n += 1;
+    n_divided += 1;
+    cnt += 1;
+  };
+  if (delta_integ > -1) {
+    for (i = bgn; i <= delta_integ; ++i) {
+      eval_dq.push_front('0');
+      post_dec += 1;
+    };
+    for (i = -1; i < delta_integ; ++i) {
+      eval_dq[post_dec] = eval_dq[post_dec - 1];
+      post_dec -= 1;
+      eval_dq[post_dec] = '.';
+    };
+  } else if (delta_integ < -1) {
+    delta_integ *= -1;
+    delta_integ -= 1;
+    for (i = 0; i < delta_integ; ++i) {
+      eval_dq.push_back('0');
+      eval_dq[i + 1 + bgn] = eval_dq[i + 3];
+      eval_dq[i + 2 + bgn] = '.';
+    };
+  };
+  return eval_dq;
+};
+
 std::string dqtostr(std::deque<char> &x) {
   std::string cur_str = "";
   for (char i : x) {
