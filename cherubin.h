@@ -2099,6 +2099,7 @@ std::string remainderint(std::string &x, std::string &x2) {
         i += 1;
       };
       if (i == n) {
+        lst_divider = divider;
         break;
       };
       if (agn2 == 0) {
