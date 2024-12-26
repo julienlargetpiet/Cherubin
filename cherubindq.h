@@ -1145,6 +1145,104 @@ std::deque<char> dividebase10_2(std::deque<char> x, int divider = 9) {
   return x;
 };
 
+std::deque<char> remainderint(std::deque<char> &x, std::deque<char> &x2) {
+  if (x[0] == '-' || x2[0] == '-') {
+    return x;
+  };
+  std::deque<char> divided = x;
+  std::deque<char> divider = x2;
+  std::deque<char> divider_base = x2;
+  std::deque<char> lst_divider = divider;
+  unsigned int cnt = 0;
+  unsigned int n = divider.size();
+  unsigned int n_divided = x.size();
+  bool agn;
+  bool agn2 = 1;
+  int bf_cnt = 0;
+  int i;
+  int cur_val;
+  while (agn2) {
+    if (n > n_divided) {
+      break;
+    } else if (n == n_divided) {
+      i = 0;
+      while (i < n) {
+        if (int(divider[i] + 48) > int(divided[i] + 48)) {
+          agn2 = 0;
+          break;
+        } else if (int(divider[i] + 48) < int(divided[i] + 48)) {
+          break;
+        };
+        i += 1;
+      };
+      if (i == n) {
+        lst_divider = divider;
+        break;
+      };
+      if (agn2 == 0) {
+        break;
+      };
+    };
+    lst_divider = divider;
+    for (i = cnt; i < n; ++i) {
+      cur_val = (int(divider_base[i - cnt]) - 48) + (int(divider[i]) - 48);
+      if (cur_val > 9) {
+        cur_val -= 10;
+        divider[i] = char(cur_val + 48);
+        bf_cnt = 0;
+        agn = 1;
+        while (agn) {
+          bf_cnt += 1;
+          if (i - bf_cnt > -1) {
+            if (divider[i - bf_cnt] == '9') {
+              divider[i - bf_cnt] = '0';
+            } else {
+              divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+              agn = 0;
+            };
+          } else {
+            divider.push_front('1');
+            i += 1;
+            n += 1;
+            cnt += 1;
+            agn = 0;
+          };
+        };
+      } else {
+        divider[i] = char(cur_val + 48);
+      };
+    };
+  };
+  cnt = n_divided - lst_divider.size();
+  for (i = cnt; i < n_divided; ++i) {
+    cur_val = int(divided[i] - 48) - int(lst_divider[i - cnt] - 48);
+    if (cur_val < 0) {
+      cur_val += 10; 
+      divided[i] = char(cur_val + 48);
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (divided[i - bf_cnt] == '0') {
+          divided[i - bf_cnt] = '9';
+        } else {
+          divided[i - bf_cnt] = char(int(divided[i - bf_cnt]) - 1);
+          agn = 0;
+        };
+      };
+    } else {
+      divided[i] = char(cur_val + 48); 
+    };
+    if (divided[0] == '0' & n_divided > 1) {
+      lst_divider.pop_front();
+      divided.pop_front();
+      n_divided -= 1;
+      i -= 1;
+    };
+  };
+  return divided;
+};
+
 std::string dqtostr(std::deque<char> &x) {
   std::string cur_str = "";
   for (char i : x) {
