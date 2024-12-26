@@ -113,6 +113,7 @@
 </div>
 <div class="box2">
 <h3>#Description</h3>
+<p>Stylished documentation can be found here. <a href="https://julienlargetpiet.tech/static/files/1README_cherubin.html"> https://julienlargetpiet.tech/static/files/1README_cherubin.html</a> </p>
 <p>This library if for very large and precise number (integers or floating points) manipulation those who can not be stored in an other datatype than <code>std::string</code>. The only limit is the system memory.</p>
 <br>
 <img style="margin-left: 20px;" height="220" width="360" src="docimage.jpg"><br><h1 style="color:#2c4786;">Addition</h1>
