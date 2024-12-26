@@ -2146,14 +2146,10 @@ std::string remainderint(std::string &x, std::string &x2) {
       agn = 1;
       while (agn) {
         bf_cnt += 1;
-        if (i - bf_cnt > 0) {
-          if (divided[i - bf_cnt] == '0') {
-            divided[i - bf_cnt] = '9';
-          } else {
-            divided[i - bf_cnt] = char(int(divided[i - bf_cnt]) - 1);
-            agn = 0;
-          };
+        if (divided[i - bf_cnt] == '0') {
+          divided[i - bf_cnt] = '9';
         } else {
+          divided[i - bf_cnt] = char(int(divided[i - bf_cnt]) - 1);
           agn = 0;
         };
       };
