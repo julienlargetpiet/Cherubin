@@ -1517,6 +1517,164 @@ std::deque<char> quotientint(std::deque<char> &x, std::deque<char> &x2) {
   return eval_dq;
 };
 
+std::deque<char> quotientflt(std::deque<char> &x, std::deque<char> &x2) {
+  if (x[0] == '-' || x2[0] == '-') {
+    return {};
+  };
+  std::deque<char> divided = x;
+  std::deque<char> divider = x2;
+  std::deque<char> divider_base = x2;
+  std::deque<char> eval_dq = {'0'};
+  unsigned int cnt = 0;
+  unsigned int n = divider.size();
+  int n2 = 0;
+  unsigned int n_divided = x.size();
+  unsigned int dec1;
+  unsigned int dec2;
+  bool agn;
+  bool agn2 = 1;
+  bool is_dec1 = 0;
+  bool is_dec2 = 0;
+  if (n > 2) {
+    while (agn2) {
+      cnt += 1;
+      if (cnt + 1 == n) {
+        agn2 = 0;
+      } else if (divider[cnt] == '.') {
+        is_dec1 = 1;
+        agn2 = 0;
+      };
+    };
+    dec1 = n - cnt - 1;
+  } else {
+    dec1 = 0;
+  };
+  if (n_divided > 2) {
+    agn2 = 1;
+    cnt = 0;
+    while (agn2) {
+      cnt += 1;
+      if (cnt + 1 == n_divided) {
+        agn2 = 0;
+      } else if (divided[cnt] == '.') {
+        is_dec2 = 1;
+        agn2 = 0;
+      };
+    };
+    dec2 = n_divided - cnt - 1;
+  } else {
+    dec2 = 0;
+  };
+  if (dec2 > dec1) {
+    if (!is_dec1) {
+      divider.push_back('.');
+      divider_base.push_back('.');
+      n += 1;
+    };
+    for (cnt = 0; cnt < dec2 - dec1; ++cnt) {
+      n += 1;
+      divider.push_back('0');
+      divider_base.push_back('0');
+    };
+  } else if (dec2 < dec1) {
+    if (!is_dec2) {
+      divided.push_back('.');
+      n_divided += 1;
+    };
+    for (cnt = 0; cnt < dec1 - dec2; ++cnt) {
+      divided.push_back('0');
+      n_divided += 1;
+    };
+  };
+  agn2 = 1;
+  cnt = 0;
+  int bf_cnt = 0;
+  int i;
+  unsigned int cur_val;
+  while (agn2) {
+    if (n > n_divided) {
+      break;
+    } else if (n == n_divided) {
+      i = 0;
+      for (i = 0; i < n; ++i) {
+        if (int(divider[i] + 48) > int(divided[i] + 48)) {
+          agn2 = 0;
+          break;
+        } else if (int(divider[i] + 48) < int(divided[i] + 48)) {
+          break;
+        };
+      };
+      if (agn2 == 0) {
+        break;
+      };
+    };
+    for (i = cnt; i < n; ++i) {
+      if (divider[i] != '.') {
+        cur_val = (int(divider_base[i - cnt]) - 48) + (int(divider[i]) - 48);
+        if (cur_val > 9) {
+          cur_val -= 10;
+          divider[i] = char(cur_val + 48);
+          if (i - 1 > 0) {
+            if (divider[i - 1] != '.') {
+              bf_cnt = 0;
+            } else {
+              bf_cnt = 1;
+            };
+          } else {
+            bf_cnt = 0;
+          };
+          agn = 1;
+          while (agn) {
+            bf_cnt += 1;
+            if (i - bf_cnt > -1) {
+              if (divider[i - bf_cnt] != '.') {
+                if (divider[i - bf_cnt] == '9') {
+                  divider[i - bf_cnt] = '0';
+                } else {
+                  divider[i - bf_cnt] = char(int(divider[i - bf_cnt]) + 1);
+                  agn = 0;
+                };
+              };
+            } else {
+              divider.push_front('1');
+              i += 1;
+              n += 1;
+              cnt += 1;
+              agn = 0;
+            };
+          };
+        } else {
+          divider[i] = char(cur_val + 48);
+        };
+      };
+    };
+    cur_val = int(eval_dq[n2] - 48) + 1;
+    if (cur_val > 9) {
+      eval_dq[n2] = '0';
+      bf_cnt = 0;
+      agn = 1;
+      while (agn) {
+        bf_cnt += 1;
+        if (n2 - bf_cnt > -1) {
+          if (eval_dq[n2 - bf_cnt] == '9') {
+            eval_dq[n2 - bf_cnt] = '0';
+          } else {
+            eval_dq[n2 - bf_cnt] = char(int(eval_dq[n2 - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          eval_dq.push_front('1');
+          n2 += 1;
+          agn = 0;
+        };
+      };
+    } else {
+      eval_dq[n2] = char(cur_val + 48);
+    };
+  };
+  return eval_dq;
+};
+
 std::string dqtostr(std::deque<char> &x) {
   std::string cur_str = "";
   for (char i : x) {
