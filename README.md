@@ -113,8 +113,7 @@
 </div>
 <div class="box2">
 <h3>#Description</h3>
-<p>This library if for very large and precise number (integers or floating points) manipulation those who can not be stored in an other datatype than <code>std::string</code> or <code>std::deque</code>. The only limit is the system memory.</p>
-<p>This branch is dedicated to <code>std::string</code> datatype for storing and manipulating numbers, contrary on the other branch (which is in development) that uses <code>std::deque<char></code> for the same purposes. This branch is more appropriate for medium sized number manipulation and the need for a lot of number declaration since a number declaration in the other branch will copy the elements of the declared string (also starting with string for convenience) to a deque at a cost of little computation each time. However, the other branch functions (in development) will be significantly faster especially for exponential functions.</p>
+<p>This library if for very large and precise number (integers or floating points) manipulation those who can not be stored in an other datatype than <code>std::string</code>. The only limit is the system memory.</p>
 <br>
 <img style="margin-left: 20px;" height="220" width="360" src="docimage.jpg"><br><h1 style="color:#2c4786;">Addition</h1>
 <h2 id="addabstraction" style="test-align: left;">addabstraction</h2>
