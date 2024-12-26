@@ -22,6 +22,17 @@ std::string subsabstraction(std::string x, std::string x2) {
   const unsigned int n2 = x2.length();
   if (x == x2) {
     return "0";
+  } else if (x[0] == '-' & x2[0] == '-'){
+    x.erase(x.begin());
+    x2.erase(x2.begin());
+    grt = is_greater(x, x2);
+    if (grt) {
+      rtn_str = "-";
+      rtn_str += subsflt(x, x2);
+      return rtn_str;
+    } else {
+      return subsflt(x2, x);
+    };
   } else if (x2[0] == '-') {
     return addabstraction(x, x2);
   } else if (x[0] == '-') {
