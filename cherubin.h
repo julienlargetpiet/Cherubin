@@ -2169,7 +2169,7 @@ std::string remainderint(std::string &x, std::string &x2) {
   return divided;
 };
 
-//@L3 Floting Points
+//@L3 Floating Points
 
 //@T remainderflt
 //@U std::string remainderflt(std::string &x, std::string &x2)
