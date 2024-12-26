@@ -1675,6 +1675,156 @@ std::deque<char> quotientflt(std::deque<char> &x, std::deque<char> &x2) {
   return eval_dq;
 };
 
+std::deque<char> powerint3(std::deque<char> &x, std::deque<char> &x2) {
+  if (x2.size() == 1) {
+    if (x2[0] == '0') {
+      return {'0'};
+    } else if (x2[0] == '1') {
+      return x;
+    };
+  };
+  int i;
+  int i2;
+  unsigned int i3;
+  unsigned int n = x.size();
+  unsigned int lst_n = n;
+  bool agn;
+  int n2 = 0;
+  unsigned int add_zero = 0;
+  unsigned int ref_add_zero = 0;
+  int cur_val;
+  int intr_val;
+  int bf_cnt;
+  int delta = 0;
+  unsigned int delta2;
+  std::string divider;
+  std::deque<char> eval_dq = {'1'};
+  std::deque<char> rtn_dq;
+  std::deque<char> rtn_dq2;
+  std::deque<char> rtn_dq3;
+  if (n > 2) {
+    agn = 1;
+    i = 0;
+    while (agn) {
+      rtn_dq.push_back(x[i]);
+      i += 1;
+      if (i + 1 == n) {
+        agn = 0;
+      } else if (x[i] == '.'){
+        agn = 0;
+      };
+    };
+    if (i + 1 < n) {
+      add_zero = n - 1 - i;
+      i += 1;
+      while (i < n) {
+        rtn_dq.push_back(x[i]);
+        i += 1;
+      };
+      n -= 1;
+      lst_n -= 1;
+    } else {
+      rtn_dq = x;
+    };
+  } else {
+    rtn_dq = x;
+  };
+  for (i = 0; i < n; ++i) {
+    rtn_dq2.push_back('0');
+  };
+  rtn_dq3 = rtn_dq;
+  ref_add_zero = add_zero;
+  while (eval_dq != x2) {
+    add_zero += ref_add_zero;
+    cur_val = int(rtn_dq3[0] - 48) * int(rtn_dq[0] - 48);
+    delta = 0;
+    delta2 = 0;
+    if (cur_val > 9) {
+      rtn_dq2.push_back('0');
+      n += 1;
+      delta2 = 1;
+    };
+    for (i3 = 1; i3 < lst_n; ++i3) {
+      rtn_dq2.push_back('0');
+      n += 1;
+      delta += 1;
+    };
+    for (i = 0; i < n; ++i) {
+      rtn_dq2[i] = '0';
+    };
+    for (i2 = delta + delta2; i2 < n; ++i2) {
+      for (i = 0; i < lst_n; ++i) {
+        cur_val = int(rtn_dq2[i2 + i - delta] - 48) + int(rtn_dq3[i2 - delta - delta2] - 48) * int(rtn_dq[i] - 48);
+        if (cur_val < 10) {
+          rtn_dq2[i2 + i - delta] = char(cur_val + 48);
+        } else {
+          intr_val = 1;
+          while (cur_val - (intr_val + 1) * 10 > -1) {
+            intr_val += 1;
+          };
+          cur_val -= intr_val * 10;
+          rtn_dq2[i2 + i - delta] = char(cur_val + 48);
+          cur_val = int(rtn_dq2[i2 + i - delta - 1] - 48) + intr_val;
+          if (cur_val < 10) {
+            rtn_dq2[i2 + i - delta - 1] = char(cur_val + 48);   
+          } else {
+            cur_val -= 10;
+            rtn_dq2[i2 + i - delta - 1] = char(cur_val + 48);
+            agn = 1;
+            bf_cnt = 0;
+            while (agn) { 
+              bf_cnt += 1;
+              if (i2 + i - delta - bf_cnt - 1 > - 1) {
+                if (rtn_dq2[i2 + i - delta - bf_cnt - 1] == '9') {
+                  rtn_dq2[i2 + i - delta - bf_cnt - 1] = '0'; 
+                } else {
+                  rtn_dq2[i2 + i - delta - bf_cnt - 1] = char(int(rtn_dq2[i2 + i - delta - bf_cnt - 1]) + 1); 
+                  agn = 0;
+                };
+              } else {
+                delta2 += 1;
+                i2 += 1;
+                n += 1;
+                rtn_dq2.push_front('1');
+                agn = 0;
+              };
+            };
+          };
+        };
+      };
+    };
+    rtn_dq3 = rtn_dq2;
+    cur_val = int(eval_dq[n2] - 48) + 1;
+    if (cur_val > 9) {
+      cur_val -= 10;
+      eval_dq[n2] = char(cur_val + 48);
+      agn = 1;
+      bf_cnt = 0;
+      while(agn) {
+        bf_cnt += 1;
+        if (n2 - bf_cnt > -1) {
+          if (eval_dq[n2 - bf_cnt] == '9') {
+            eval_dq[n2 - bf_cnt] = '0';
+          } else {
+            eval_dq[n2 - bf_cnt] = char(int(eval_dq[n2 - bf_cnt]) + 1);
+            agn = 0;
+          };
+        } else {
+          eval_dq.push_front('1');
+          n2 += 1;
+          agn = 0;
+        };
+      };
+    } else {
+      eval_dq[n2] = char(cur_val + 48);
+    };
+  };
+  if (add_zero != 0) {
+    rtn_dq2.insert(rtn_dq2.begin() + n - add_zero, '.');
+  };
+  return rtn_dq2;
+};
+
 std::string dqtostr(std::deque<char> &x) {
   std::string cur_str = "";
   for (char i : x) {
