@@ -1093,11 +1093,56 @@ std::deque<char> divide2(std::deque<char> &x, std::deque<char> &x2, int nb_decim
     delta_integ -= 1;
     for (i = 0; i < delta_integ; ++i) {
       eval_dq.push_back('0');
-      eval_dq[i + 1 + bgn] = eval_dq[i + 3];
+      eval_dq[i + 1 + bgn] = eval_dq[i + 2 + bgn];
       eval_dq[i + 2 + bgn] = '.';
     };
   };
   return eval_dq;
+};
+
+std::deque<char> dividebase10_2(std::deque<char> x, int divider = 9) {
+  int n = x.size();
+  int i;
+  bool agn;
+  unsigned int idx_dec;
+  if (divider > 0) {
+    i = -1;
+    agn = 1;
+    while (agn) {
+      i += 1;
+      if (i + 1 == n) {
+        agn = 0;
+      } else if (x[i] == '.') {
+        idx_dec = i;
+        agn = 0;
+      };
+    };
+    if (i + 1 < n) {
+      if (i - divider > 0) {
+        for (i = 0; i < divider; ++i) {
+          x[idx_dec] = x[idx_dec - 1];
+          idx_dec -= 1;
+          x[idx_dec] = '.';
+        };
+      } else {
+        x.erase(x.begin() + idx_dec);
+        x.push_front('.');
+        x.push_front('0');
+        x.insert(x.begin() + 2, divider - idx_dec, '0');
+      };
+    } else {
+       if (n - divider > 0) {
+        x.insert(x.begin() + n - divider, '.');
+      } else {
+        x.push_front('.');
+        x.push_front('0');
+        x.insert(x.begin() + 2, divider - n, '0');
+      }; 
+    };
+  } else {
+    return {};
+  };
+  return x;
 };
 
 std::string dqtostr(std::deque<char> &x) {
