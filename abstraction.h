@@ -203,3 +203,63 @@ std::string chlognatural1(std::string &x) {
   return base_add;
 };
 
+std::string chexp3(std::string &x, std::string base = "2.7182818") {
+  if (x == "0") {
+    return "1";
+  };
+  std::string rtn_str = "1";
+  std::string intr_str;
+  std::string base_add = "0";
+  std::string addr = "1";
+  std::string partint = "";
+  std::string partflt;
+  double xval = 0;
+  bool agn = 1;
+  unsigned int i = -1;
+  long unsigned int divider = 10;
+  const unsigned int n = x.length();
+  while (agn) {
+    i += 1;
+    if (i == n) {
+      agn = 0;
+    } else if (x[i] == '.') {
+      agn = 0;
+    } else {
+      partint.push_back(x[i]);
+    };
+  };
+  if (i < n) {
+    agn = 1;
+    while (agn) {
+      i += 1;
+      if (i == n || i == 8) {
+        agn = 0;
+      } else {
+        partflt.push_back(x[i]);
+      };
+    };
+    while (base_add != partint) {
+      rtn_str = multflt2(rtn_str, base);
+      if (is_decimal(rtn_str)) {
+        rtn_str = rmzero(rtn_str);
+      };
+      base_add = addint(base_add, addr);
+    };
+    for (char chr : partflt) {
+      xval += (double)(int(chr) - 48) / divider;
+      divider *= 10;
+    };
+    xval = exp(xval);
+    intr_str = std::to_string(xval);
+    return multflt2(rtn_str, intr_str);
+  } else {
+    while (base_add != x) {
+      rtn_str = multflt2(rtn_str, base);
+      if (is_decimal(rtn_str)) {
+        rtn_str = rmzero(rtn_str);
+      };
+      base_add = addint(base_add, addr);
+    };
+    return rtn_str;
+  };
+};
