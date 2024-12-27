@@ -38,10 +38,10 @@ std::string inverse(std::string &a, std::string &b, std::string (*f)(std::string
 //@E
 //@X
 
-std::string powerflt(std::string &x, std::string &x2, unsigned int nb_polynomial = 20) {
+std::string powerflt(std::string &x, std::string &x2) {
   std::string rtn_str = chlognatural1(x);
   rtn_str = multflt2(rtn_str, x2);
-  return chexp2(rtn_str, nb_polynomial);
+  return chexp3(rtn_str);
 };
 
 
