@@ -2257,6 +2257,7 @@ std::string remainderflt(std::string &x, std::string &x2) {
       n += 1;
     };
   };
+  std::string ref_divider = divider;
   agn2 = 1;
   int bf_cnt = 0;
   bool agn;
@@ -2369,7 +2370,11 @@ std::string remainderflt(std::string &x, std::string &x2) {
       };
     };
   };
-  return divided;
+  if (divided == ref_divider) {
+    return "0";
+  } else {
+    return divided;
+  };
 };
 
 //@L2 Quotient
