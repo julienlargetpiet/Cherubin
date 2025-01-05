@@ -582,7 +582,7 @@ std::string subsflt(std::string &x, std::string &x2) {
         } else {
           cur_str[i] = char(cur_val + 48);
         };
-        if (cur_str[0] == '0' & cur_str.length() > 1) {
+        if (cur_str[0] == '0' & cur_str.length() > 1 & cur_str[1] != '.') {
           cur_str = cur_str.substr(1, cur_str.length());
           bf_str = bf_str.substr(1, cur_str.length());
           i -= 1;
