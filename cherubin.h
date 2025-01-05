@@ -1537,7 +1537,9 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
   };
   if (int(eval_str.back() - 48) > 4) {
     eval_str.pop_back();
-    eval_str.back() = char(int(eval_str.back()) + 1);
+    if (int(eval_str.back() - 48) < 9) {
+      eval_str.back() = char(int(eval_str.back()) + 1);
+    };
   };
   if (delta_integ > -1) {
     for (i = bgn; i <= delta_integ; ++i) {
