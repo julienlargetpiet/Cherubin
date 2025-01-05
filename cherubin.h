@@ -2257,7 +2257,6 @@ std::string remainderflt(std::string &x, std::string &x2) {
       n += 1;
     };
   };
-  std::cout << divider << "\n";
   std::string ref_divider = divider;
   agn2 = 1;
   int bf_cnt = 0;
