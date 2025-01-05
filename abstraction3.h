@@ -49,7 +49,7 @@ std::string powerflt(std::string &x, std::string &x2) {
 //@X
 //@D Returns the result of cosinus(x) with the help of taylor serie
 //@A x : is the input number, int or float as std string
-//@A base : is the closest value of pi
+//@A base : is the closest value of 2 times pi
 //@A nb_polynom : is the ssize of the polynom used for the approximation
 //@X
 //@E std::string x = "-125.5";
@@ -57,12 +57,14 @@ std::string powerflt(std::string &x, std::string &x2) {
 //@E -0.9866278020907 
 //@X
 
-std::string chcos(std::string &x, std::string base = "3.141593", unsigned int nb_polynom = 10) {
+std::string chcos(std::string &x, std::string base = "6.283185", unsigned int nb_polynom = 10) {
   std::string new_x = x;
   if (new_x[0] == '-') {
     new_x = new_x.substr(1, x.length());
   };
-  new_x = remainderflt(new_x, base);
+  if (is_greaterflt(x, base)) {
+    new_x = remainderflt(new_x, base);
+  };
   std::string rslt = "1";
   std::string cur_divided;
   std::string cur_divider;
