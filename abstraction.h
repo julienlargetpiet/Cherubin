@@ -134,6 +134,27 @@ std::string divideabstraction(std::string x, std::string x2, unsigned int nb_dec
   };
 };
 
+//@T remainderabstraction 
+//@U std::string remainderabstraction(std::string &x, std::string &x2)
+//@X
+//@D Handles case where divided is inferior to divider for remainderflt.
+//@A x : int of float as std string
+//@A x2 : int or float as std string
+//@X
+//@E std::string teste1 = "4.58";
+//@E std::string teste2 = "5.245";
+//@E remainderabstraction(teste1, teste2);
+//@E "4.58"
+//@X
+
+std::string remainderabstraction(std::string &x, std::string &x2) {
+  if (is_greaterflt(x, x2)) {
+    return remainderflt(x, x2);
+  } else {
+    return x;
+  };
+};
+
 //@T chexp2
 //@U std::string chexp2(std::string &x, unsigned int nb_polynomial = 21)
 //@X
