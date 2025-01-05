@@ -2179,8 +2179,8 @@ std::string remainderint(std::string &x, std::string &x2) {
 //@U std::string remainderflt(std::string &x, std::string &x2)
 //@X
 //@D Returns the remainder of a division between two int or floating point represented as a std string
-//@A x : is the floating point that will be divided, represented as a string, must be greater or equal to x2
-//@A x2 : is the divider which is a floating point represented as a string, must be lower or equal to x
+//@A x : is the floating point or int that will be divided, represented as a string, must be greater or equal to x2
+//@A x2 : is the divider which is a floating point or int represented as a string, must be lower or equal to x
 //@X
 //@E
 //@E std::string x = "14589.70";
@@ -2257,6 +2257,7 @@ std::string remainderflt(std::string &x, std::string &x2) {
       n += 1;
     };
   };
+  std::cout << divider << "\n";
   std::string ref_divider = divider;
   agn2 = 1;
   int bf_cnt = 0;
