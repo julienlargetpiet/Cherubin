@@ -2361,7 +2361,7 @@ std::string remainderflt(std::string &x, std::string &x2) {
       } else {
         divided[i] = char(cur_val + 48); 
       };
-      if (divided[0] == '0' & n_divided > 1) {
+      if (divided[0] == '0' & n_divided > 1 & divided[1] != '.') {
         lst_divider = lst_divider.substr(1, n);
         divided = divided.substr(1, n);
         n_divided -= 1;
