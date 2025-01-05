@@ -25,7 +25,7 @@ std::string subsabstraction(std::string x, std::string x2) {
   } else if (x[0] == '-' & x2[0] == '-'){
     x.erase(x.begin());
     x2.erase(x2.begin());
-    grt = is_greater(x, x2);
+    grt = is_greaterflt(x, x2);
     if (grt) {
       rtn_str = "-";
       rtn_str += subsflt(x, x2);
@@ -41,7 +41,7 @@ std::string subsabstraction(std::string x, std::string x2) {
       rtn_str += addflt(x, x2);
       return rtn_str;
   } else {
-    grt = is_greater(x, x2);
+    grt = is_greaterflt(x, x2);
     if (grt || x == x2) {
       return subsflt(x, x2);
     } else {

@@ -34,7 +34,7 @@ std::string addabstraction(std::string x, std::string x2) {
     return rtn_str;
   } else if (x2[0] == '-') {
     x2 = x2.substr(1, n2);
-    grt = is_greater(x2, x);
+    grt = is_greaterflt(x2, x);
     if (grt) {
       rtn_str = "-";
       rtn_str += subsflt(x2, x);
@@ -44,7 +44,7 @@ std::string addabstraction(std::string x, std::string x2) {
     };
   } else if (x[0] == '-') {
     x = x.substr(1, n);
-    grt = is_greater(x, x2);
+    grt = is_greaterflt(x, x2);
     if (grt) {
       rtn_str = "-";
       rtn_str += subsflt(x, x2);
