@@ -62,8 +62,18 @@ std::string chcos(std::string &x, std::string base = "6.283185", unsigned int nb
   if (new_x[0] == '-') {
     new_x = new_x.substr(1, x.length());
   };
-  if (is_greaterflt(x, base)) {
+  if (is_greaterflt(new_x, base) || x == base) {
     new_x = remainderflt(new_x, base);
+  };
+  bool eq_zero = 1;
+  for (char chr : new_x) {
+    if (chr != '0' & chr != '.') {
+      eq_zero = 0;
+      break;
+    };
+  };
+  if (eq_zero) {
+    return "1";
   };
   std::string rslt = "1";
   std::string cur_divided;
@@ -71,9 +81,13 @@ std::string chcos(std::string &x, std::string base = "6.283185", unsigned int nb
   std::string addr = "2";
   std::string cur_add = "2";
   std::string cur_rslt;
+  std::vector<std::string> cur_vec;
   for (unsigned int i = 1; i < nb_polynom; ++i) {
     cur_divided = powerint3(new_x, cur_add);
     cur_divider = factorial(cur_add);
+    cur_vec = centerizer(cur_divided, cur_divider);
+    cur_divided = cur_vec[0];
+    cur_divider = cur_vec[1];
     cur_rslt = divide2(cur_divided, cur_divider);
     if (i % 2 == 0) {
       rslt = addabstraction(rslt, cur_rslt);
