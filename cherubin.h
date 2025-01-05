@@ -1457,6 +1457,7 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
   n += 1;
   cnt += 1;
   eval_str += ".";
+  nb_decimal += 1;
   for (int i2 = 0; i2 < nb_decimal; ++i2) {
     eval_str2 = "0";
     agn2 = 1;
@@ -1533,6 +1534,10 @@ std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
     n += 1;
     n_divided += 1;
     cnt += 1;
+  };
+  if (int(eval_str.back() - 48) > 4) {
+    eval_str.pop_back();
+    eval_str.back() = char(int(eval_str.back()) + 1);
   };
   if (delta_integ > -1) {
     for (i = bgn; i <= delta_integ; ++i) {
