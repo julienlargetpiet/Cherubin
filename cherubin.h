@@ -3547,7 +3547,7 @@ bool is_greaterflt(std::string &x, std::string &x2) {
       };
       i += 1;
     };
-    while (i < n + dec_valf) {
+    while (i < dec_valf) {
       val1 = int(x[i]);
       val2 = int(x2[i]);
       if (val1 != val2) {
