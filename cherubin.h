@@ -988,7 +988,24 @@ std::string multflt(std::string &x, std::string &x2) {
 //@X
 
 std::string multflt2(std::string &x, std::string &x2) {
-  if (x2 == "0") {
+  bool is_zero = 1;
+  for (char chr : x) {
+    if (chr != '.' & chr != '0') {
+      is_zero = 0;
+      break;
+    };
+  };
+  if (is_zero) {
+    return "0";
+  };
+  is_zero = 1;
+  for (char chr : x2) {
+    if (chr != '.' & chr != '0') {
+      is_zero = 0;
+      break;
+    };
+  };
+  if (is_zero) {
     return "0";
   };
   int i;
@@ -1252,6 +1269,16 @@ std::string multbase10(std::string x, unsigned int base = 9) {
 std::string divide2(std::string &x, std::string &x2, int nb_decimal = 5) {
   if (x[0] == '-' || x2[0] == '-') {
     return "";
+  };
+  bool is_zero = 1;
+  for (char chr : x) {
+    if (chr != '0' & chr != '.') {
+      is_zero = 0;
+      break;
+    };
+  };
+  if (is_zero) {
+    return "0";
   };
   std::string divided = x;
   std::string divider = x2;
