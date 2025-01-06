@@ -3838,6 +3838,24 @@ double chstod(const std::string &x) {
   return rtn / m;
 };
 
+//@T is_zero
+//@U bool is_zero(std::string &x)
+//@X
+//@D Returns 1 if the input (int or float as std string) is equal to 0
+//@A x : the input number, int or float as std string
+//@X 
+//@E std::string x = "0.007800";
+//@E is_zero(x);
+//@E 0
+//@X
 
+bool is_zero(std::string &x) {
+  for (char chr : x) {
+    if (chr != '.' & chr != '0') {
+      return 0;
+    };
+  };
+  return 1;
+};
 
 
