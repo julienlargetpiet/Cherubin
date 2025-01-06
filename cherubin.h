@@ -1135,6 +1135,13 @@ std::string multflt2(std::string &x, std::string &x2) {
       };
     };
   };
+  if (rtn_str2.length() > 1) {
+    i = 0;
+    while (rtn_str2[i] == '0' & rtn_str2[i + 1] != '.') {
+      i += 1;
+    };
+    rtn_str2 = rtn_str2.substr(i, rtn_str.length());
+  };
   return rtn_str2;
 };
 
@@ -3864,5 +3871,6 @@ bool is_zero(std::string &x) {
   };
   return 1;
 };
+
 
 
