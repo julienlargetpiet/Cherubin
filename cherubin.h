@@ -3549,7 +3549,7 @@ bool is_greaterflt(std::string &x, std::string &x2) {
       };
       i += 1;
     };
-    while (i < integ_val + dec_valf) {
+    while (i < integ_val + dec_valf + 1) {
       val1 = int(x[i]);
       val2 = int(x2[i]);
       if (val1 != val2) {
@@ -3562,14 +3562,14 @@ bool is_greaterflt(std::string &x, std::string &x2) {
       i += 1;
     };
     if (dec_valf != dec_val2) {
-      while (i < n + dec_val2)  {
+      while (i < integ_val + dec_val2 + 1)  {
         if (x2[i] != '0') {
           return 0;
         };
         i += 1;
       };
     } else if (dec_valf != dec_val) {
-      while (i < n + dec_val)  {
+      while (i < integ_val + dec_val + 1) {
         if (x[i] != '0') {
           return 1;
         };
