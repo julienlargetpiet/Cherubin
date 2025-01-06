@@ -147,7 +147,11 @@ std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_
     cur_add = addint(cur_add, addr);
   };
   if (is_negative) {
-    rslt = "-" + rslt;
+    if (rslt[0] != '-') {
+      rslt = "-" + rslt;
+    } else {
+      rslt.erase(rslt.begin());
+    };
   };
   return rslt;
 };
