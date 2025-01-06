@@ -3549,7 +3549,7 @@ bool is_greaterflt(std::string &x, std::string &x2) {
       };
       i += 1;
     };
-    while (i < dec_valf) {
+    while (i < integ_val + dec_valf) {
       val1 = int(x[i]);
       val2 = int(x2[i]);
       if (val1 != val2) {
@@ -3812,9 +3812,11 @@ std::vector<std::string> centerizer(std::string x, std::string x2) {
     x.pop_back();
   };
   if (x2.length() > 1) {
-    if (x2[0] == '0' & x2[1] != '.') {
-      x2 = x2.substr(1, x2.length());
+    i = 0;
+    while (x2[i] == '0' & x2[i + 1] != '.') {
+      i += 1;
     };
+    x2 = x2.substr(i, x2.length());
   };
   rtn_v[0] = x;
   rtn_v[1] = x2;
