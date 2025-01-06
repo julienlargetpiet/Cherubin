@@ -3522,13 +3522,13 @@ bool is_greaterflt(std::string &x, std::string &x2) {
       break;
     };
   };
-  dec_val = n - 1 - integ_val;
+  dec_val = n - integ_val;
   for (integ_val2 = 0; integ_val2 < n2; ++integ_val2) {
     if (x2[integ_val2] == '.') {
       break;
     };
   };
-  dec_val2 = n2 - 1 - integ_val2;
+  dec_val2 = n2 - integ_val2;
   if (dec_val < dec_val2) {
     dec_valf = dec_val;
   } else {
@@ -3549,7 +3549,7 @@ bool is_greaterflt(std::string &x, std::string &x2) {
       };
       i += 1;
     };
-    while (i < integ_val + dec_valf + 1) {
+    while (i < integ_val + dec_valf) {
       val1 = int(x[i]);
       val2 = int(x2[i]);
       if (val1 != val2) {
@@ -3562,14 +3562,14 @@ bool is_greaterflt(std::string &x, std::string &x2) {
       i += 1;
     };
     if (dec_valf != dec_val2) {
-      while (i < integ_val + dec_val2 + 1)  {
+      while (i < integ_val + dec_val2)  {
         if (x2[i] != '0') {
           return 0;
         };
         i += 1;
       };
     } else if (dec_valf != dec_val) {
-      while (i < integ_val + dec_val + 1) {
+      while (i < integ_val + dec_val) {
         if (x[i] != '0') {
           return 1;
         };
