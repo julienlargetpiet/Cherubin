@@ -121,6 +121,9 @@ std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_
   std::string new_x = x;
   if (is_greaterflt(x, base)) {
     new_x = remainderflt(x, base);
+  }; 
+  if (is_zero(new_x)) {
+    return "0";
   };
   std::string rslt = new_x;
   std::string cur_add = "3";
@@ -128,9 +131,13 @@ std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_
   std::string cur_divided;
   std::string cur_divider;
   std::string cur_rslt;
+  std::vector<std::string> cur_v;
   for (unsigned int i = 1; i < n_polynom; ++i) {
     cur_divided = powerint3(new_x, cur_add);
     cur_divider = factorial(cur_add);
+    cur_v = centerizer(cur_divided, cur_divider);
+    cur_divided = cur_v[0];
+    cur_divider = cur_v[1];
     cur_rslt = divide2(cur_divided, cur_divider);
     if (i % 2 == 0) {
       rslt = addabstraction(rslt, cur_rslt);
