@@ -156,3 +156,55 @@ std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_
   return rslt;
 };
 
+
+std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10) {
+  bool is_negative = 0;
+  if (x[0] == '-') {
+    x = x.substr(1, x.length());
+    is_negative = 1;
+  };
+  std::string cur_divider;
+  std::string cur_divided1;
+  std::string cur_divided2;
+  std::string cur_dividedf;
+  std::string cur_rslt;
+  std::string cur_add = "3";
+  std::string addr = "2";
+  std::string rslt = x;
+  std::string cnt;
+  std::string ref_subs = "2";
+  std::string ref_subsb = "1";
+  std::string val_pi = multflt2(base, ref_subs);
+  std::vector<std::string> cur_v;
+  for (unsigned int i = 1; i < n_polynom; ++i) {
+    cur_divided1 = powerint3(x, cur_add);
+    cnt = cur_add;
+    cnt = subsint(cnt, ref_subs);
+    cur_divided2 = cnt;
+    if (cnt != "1") {
+      cnt = subsint(cnt, ref_subs);
+      while (cnt != "1") {
+        cur_divided2 = multint2(cur_divided2, cnt); 
+        cnt = subsint(cnt, ref_subs);
+      };
+    };
+    cur_dividedf = multabstraction(cur_divided1, cur_divided2);
+    cur_divider = cur_add;
+    cnt = subsint(cur_add, ref_subsb);
+    while (cnt != "0") {
+      cur_divider = multint2(cur_divider, cnt);
+      cnt = subsint(cnt, ref_subs);
+    };
+    cur_v = centerizer(cur_dividedf, cur_divider);
+    cur_dividedf = cur_v[0];
+    cur_divider = cur_v[1];
+    cur_rslt = divideabstraction(cur_dividedf, cur_divider);
+    rslt = addabstraction(rslt, cur_rslt);
+    cur_add = addint(cur_add, addr);
+  };
+  rslt = subsabstraction(base, rslt);
+  if (is_negative) {
+    rslt = subsabstraction(val_pi, rslt);
+  };
+  return rslt;
+};
