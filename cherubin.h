@@ -3811,6 +3811,11 @@ std::vector<std::string> centerizer(std::string x, std::string x2) {
   if (x[n - i + 1] == '.') {
     x.pop_back();
   };
+  if (x2.length() > 1) {
+    if (x2[0] == '0' & x2[1] != '.') {
+      x2 = x2.substr(1, x2.length());
+    };
+  };
   rtn_v[0] = x;
   rtn_v[1] = x2;
   return rtn_v;
