@@ -99,3 +99,49 @@ std::string chcos(std::string &x, std::string base = "6.283185", unsigned int nb
   return rslt;
 };
 
+//@T chsin 
+//@U std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_polynom = 15)
+//@X
+//@D Returns the result of sinus function.
+//@A x : is the input int of float as std string
+//@A base : is the closest value to 2 times pi
+//@A n_polynom : is the length of the polynom used by the taylor serie
+//@X
+//@E std::string x = "5.8";
+//@E std::string out = chsin(x);
+//@E "-0.464629431880273"
+//@X
+
+std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_polynom = 15) {
+  bool is_negative = 0;
+  if (x[0] == '-') {
+    is_negative = 1;
+    x = x.substr(1, x.length());
+  };
+  std::string new_x = x;
+  if (is_greaterflt(x, base)) {
+    new_x = remainderflt(x, base);
+  };
+  std::string rslt = new_x;
+  std::string cur_add = "3";
+  std::string addr = "2";
+  std::string cur_divided;
+  std::string cur_divider;
+  std::string cur_rslt;
+  for (unsigned int i = 1; i < n_polynom; ++i) {
+    cur_divided = powerint3(new_x, cur_add);
+    cur_divider = factorial(cur_add);
+    cur_rslt = divide2(cur_divided, cur_divider);
+    if (i % 2 == 0) {
+      rslt = addabstraction(rslt, cur_rslt);
+    } else {
+      rslt = subsabstraction(rslt, cur_rslt);
+    };
+    cur_add = addint(cur_add, addr);
+  };
+  if (is_negative) {
+    rslt = "-" + rslt;
+  };
+  return rslt;
+};
+
