@@ -77,5 +77,30 @@ std::string chlogn(std::string &x, std::string base) {
   return rtn_str;
 };
 
+//@T chlognaturalabstraction
+//@U std::string chlognaturalabstraction(std::string &x)
+//@X
+//@D Returns the result for log(x)
+//@A x : is the input (int or float as std string)
+//@X
+//@E
+//@X
 
+std::string chlognaturalabstraction(std::string &x) {
+  std::string rtn_str;
+  std::string ref_val = "1";
+  std::vector<std::string> cur_v;
+  if (is_greaterflt(x, ref_val) || x == ref_val) {
+    return chlognatural1(x);
+  } else {
+    rtn_str = x;
+    cur_v = centerizer(ref_val, rtn_str);
+    rtn_str = cur_v[1];
+    ref_val = cur_v[0];
+    rtn_str = divide2(ref_val, rtn_str);
+    rtn_str = chlognatural1(rtn_str);
+    rtn_str.insert(0, 1, '-');
+    return rtn_str;
+  };
+};
 
