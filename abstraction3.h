@@ -39,9 +39,50 @@ std::string inverse(std::string &a, std::string &b, std::string (*f)(std::string
 //@X
 
 std::string powerflt(std::string &x, std::string &x2) {
-  std::string rtn_str = chlognatural1(x);
-  rtn_str = multflt2(rtn_str, x2);
-  return chexp3(rtn_str);
+  std::string new_x2 = x2;
+  std::string rtn_str;
+  std::string divided = "1";
+  bool is_negative = 0;
+  if (x2[0] == '-') {
+    new_x2 = new_x2.substr(1, new_x2.length());
+    is_negative = 1;
+  };
+  rtn_str = chlognatural1(x);
+  rtn_str = multflt2(rtn_str, new_x2);
+  rtn_str = chexp3(rtn_str);
+  if (is_negative) {
+    return divide2(divided, rtn_str);
+  } else {
+    return rtn_str;
+  };
+};
+
+//@T chlognabstraction
+//@U std::string chlognabstraction(std::string &x, std::string &base)
+//@X
+//@D Returns the result for logn(x)
+//@A x : is the input (int or float as std string)
+//@A base : is the base of the log
+//@X
+//@E
+//@X
+
+std::string chlognabstraction(std::string &x, std::string &base) {
+  std::string rtn_str;
+  std::string ref_val = "1";
+  std::vector<std::string> cur_v;
+  if (is_greaterflt(x, ref_val) || x == ref_val) {
+    return chlogn(x, base);
+  } else {
+    rtn_str = x;
+    cur_v = centerizer(ref_val, rtn_str);
+    rtn_str = cur_v[1];
+    ref_val = cur_v[0];
+    rtn_str = divide2(ref_val, rtn_str);
+    rtn_str = chlogn(rtn_str, base);
+    rtn_str.insert(0, 1, '-');
+    return rtn_str;
+  };
 };
 
 //@T chcos
@@ -156,6 +197,9 @@ std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_
   return rslt;
 };
 
+//@T chacos
+
+// plus to center at 1
 
 std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10) {
   bool is_negative = 0;
