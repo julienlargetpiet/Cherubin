@@ -28,7 +28,7 @@ std::string inverse(std::string &a, std::string &b, std::string (*f)(std::string
 //@X
 //@D Returns the result of a int or float (as std string) to the power of int or float (as std string) 
 //@A x : is the number (int or float as std string) that will be elevated to an exponent
-//@A x2 : is the exponent (int or float as std string)
+//@A x2 : is the exponent (int or float as std string), can be negative
 //@A nb_polynomial : is the length of the polynomial used for the taylor serie of exp(x) that allow the function to work. The bigger log(x) times x2 is, the bigger <code>nb_polynomial</code> should be.
 //@E
 //@E std::string x = "3.478";
@@ -47,9 +47,15 @@ std::string powerflt(std::string &x, std::string &x2) {
     new_x2 = new_x2.substr(1, new_x2.length());
     is_negative = 1;
   };
-  rtn_str = chlognatural1(x);
-  rtn_str = multflt2(rtn_str, new_x2);
-  rtn_str = chexp3(rtn_str);
+  rtn_str = chlognaturalabstraction(x);
+  rtn_str = multabstraction(rtn_str, new_x2);
+  if (rtn_str[0] != '-') {
+    rtn_str = chexp3(rtn_str);
+  } else {
+    rtn_str = rtn_str.substr(1, rtn_str.length());
+    rtn_str = chexp3(rtn_str);
+    rtn_str = divide2(divided, rtn_str);
+  };
   if (is_negative) {
     return divide2(divided, rtn_str);
   } else {
