@@ -3309,6 +3309,30 @@ std::string chexp1(std::string x, int accuracy = 1000) {
 //@E
 //@X
 
+//@T chlognabstraction
+//@U std::string chlognabstraction(std::string &x, std::string &base)
+//@X
+//@D Returns the result for logn(x)
+//@A x : is the input (int or float as std string)
+//@A base : is the base of the log
+//@X
+//@E std::string x = "0.9";
+//@E std::string base = "1.570796";
+//@E chlognaturalabstraction(x, base);
+//@E "-0.152004"
+//@X
+
+//@T chlognaturalabstraction
+//@U std::string chlognaturalabstraction(std::string &x)
+//@X
+//@D Returns the result for log(x)
+//@A x : is the input (int or float as std string)
+//@X
+//@E std::string x = "0.9";
+//@E chlognaturalabstraction(x);
+//@E "-0.105361"
+//@X
+
 //@L1 Factorial
 
 //@T factorial
@@ -3466,6 +3490,62 @@ std::string factorial(std::string &x) {
   };
   return cur_str;
 };
+
+//@L Trigonometry
+
+//@T chcos
+//@U std::string chcos(std::string &x, std::string base = "3.141593", unsigned int nb_polynom = 10)
+//@X
+//@D Returns the result of cosinus(x) with the help of taylor serie
+//@A x : is the input number, int or float as std string
+//@A base : is the closest value of 2 times pi
+//@A nb_polynom : is the ssize of the polynom used for the approximation
+//@X
+//@E std::string x = "-125.5";
+//@E std::string final_rslt = chcos(x);
+//@E -0.9866278020907 
+//@X
+
+//@T chsin 
+//@U std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_polynom = 15)
+//@X
+//@D Returns the result of sinus function.
+//@A x : is the input int of float as std string
+//@A base : is the closest value to 2 times pi
+//@A n_polynom : is the length of the polynom used by the taylor serie
+//@X
+//@E std::string x = "5.8";
+//@E std::string out = chsin(x);
+//@E "-0.464629431880273"
+//@X
+
+//@T chtan
+//@U std::string chtan(std::string &x, std::string base = "6.283185", unsigned int n_polynom = 10)
+//@X
+//@D Returns the result of tan(x)
+//@A x : is the input number, int or float as std string 
+//@A base : is the closest value to 2 times pi
+//@A n_polynom : is the length of the polynom used for the taylor approximation
+//@X
+//@E std::string x = "-3.5";
+//@E unsigned int nb = 10;
+//@E std::string base = "6.283185";
+//@E std::string out = chtan(x, base, nb);
+//@E "-0.374584" 
+//@X
+
+//@T chacos
+//@U std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10)
+//@X
+//@D Returns the result of acos(x)
+//@A x : is the input (int or float as std string)
+//@A base : is the closest value to pi / 2
+//@A n_polynom : is the size of the polynom used for the approximation of arcos with taylor serie
+//@X
+//@E std::string x = "-0.99";
+//@E chacos(x);
+//@E "3.00017080000"
+//@X
 
 //@L1 Inverse functions
 
