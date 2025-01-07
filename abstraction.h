@@ -190,7 +190,7 @@ std::string chexp2(std::string &x, unsigned int nb_polynomial = 21) {
 //@U std::string chlognatural1(std::string &x)
 //@X
 //@D Returns the result of the natural logarithm for any value. 
-//@A x : is an int or float as std string
+//@A x : is an int or float as std string, greater or equal to 1
 //@X
 //@E
 //@E std::string x = "5687.58";
@@ -284,3 +284,33 @@ std::string chexp3(std::string &x, std::string base = "2.7182818") {
     return rtn_str;
   };
 };
+
+//@T is_greaterabstraction
+//@U bool is_greaterabstraction(std::string &x, std::string &x2)
+//@X
+//@D Returns if the first argument is greater than the second one.
+//@A x : is a number int or float as std string
+//@A x2 : is a number int or float as std string
+//@X
+//@E std::string x = "-0.32";
+//@E std::string x2 = "-0.15";
+//@E is_greaterabstraction(x, x2);
+//@E 0
+//@X
+
+bool is_greaterabstraction(std::string &x, std::string &x2) {
+  std::string new_x;
+  std::string new_x2;
+  if (x2[0] == '-' & x[0] == '-') {
+    new_x = x.substr(1, x.length());
+    new_x2 = x2.substr(1, x2.length());
+    return is_greaterflt(new_x2, new_x);
+  } else if (x[0] == '-') {
+    return 0;
+  } else if (x2[0] == '-') {
+    return 1;
+  } else {
+    return is_greaterflt(x, x2);
+  };
+};
+
