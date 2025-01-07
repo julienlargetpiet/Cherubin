@@ -3039,7 +3039,7 @@ std::string poweroddn(std::string &x, std::string &x2) {
 //@X
 //@D Returns the result of a int or float (as std string) to the power of int or float (as std string) 
 //@A x : is the number (int or float as std string) that will be elevated to an exponent
-//@A x2 : is the exponent (int or float as std string)
+//@A x2 : is the exponent (int or float as std string), can be negative
 //@A nb_polynomial : is the length of the polynomial used for the taylor serie of exp(x) that allow the function to work. The bigger log(x) times x2 is, the bigger <code>nb_polynomial</code> should be.
 //@X
 //@E
@@ -3283,7 +3283,7 @@ std::string chexp1(std::string x, int accuracy = 1000) {
 //@U std::string chlognatural1(std::string &x)
 //@X
 //@D Returns the result of the natural logarithm for any value. 
-//@A x : is an int or float as std string
+//@A x : is an int or float as std string, greater or equal to 1
 //@X
 //@E
 //@E std::string x = "5687.58";
@@ -3857,26 +3857,23 @@ std::vector<std::string> centerizer(std::string x, std::string x2) {
   return rtn_v;
 };
 
-///// NOT TO BE USED  ////
+//@T chabs
+//@U std::string chabs(std::string &x)
+//@X
+//@D Returns the absolute value of the input
+//@A x : is the input, a float or int as std string
+//@X
+//@E std::string x = "-0.645";
+//@E chabs(x);
+//@E "0.645"
+//@X
 
-double chstod(const std::string &x) {
-  double rtn = int(x[0]) - 48;
-  const int n = x.size();
-  int i = 1;
-  int m = 1;
-  while (int(x[i]) != 46) {
-    rtn *= 10;
-    rtn += (int(x[i]) - 48);
-    i += 1;
+std::string chabs(std::string &x) {
+  std::string new_x = x;
+  if (new_x[0] == '-') {
+    new_x = new_x.substr(1, x.length());
   };
-  i += 1;
-  while (i < n) {
-    m *= 10;
-    rtn *= 10;
-    rtn += (int(x[i]) - 48);
-    i += 1;
-  };
-  return rtn / m;
+  return new_x;
 };
 
 //@T is_zero
@@ -3899,5 +3896,25 @@ bool is_zero(std::string &x) {
   return 1;
 };
 
+///// NOT TO BE USED  ////
 
+double chstod(const std::string &x) {
+  double rtn = int(x[0]) - 48;
+  const int n = x.size();
+  int i = 1;
+  int m = 1;
+  while (int(x[i]) != 46) {
+    rtn *= 10;
+    rtn += (int(x[i]) - 48);
+    i += 1;
+  };
+  i += 1;
+  while (i < n) {
+    m *= 10;
+    rtn *= 10;
+    rtn += (int(x[i]) - 48);
+    i += 1;
+  };
+  return rtn / m;
+};
 
