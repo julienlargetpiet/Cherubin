@@ -70,6 +70,9 @@ std::string subsabstraction(std::string x, std::string x2) {
 std::string chlogn(std::string &x, std::string base) {
   std::string rtn_str = chlognatural1(x);
   base = chlognatural1(base);
+  std::vector<std::string> cur_v = centerizer(rtn_str, base);
+  rtn_str = cur_v[0];
+  base = cur_v[1];
   rtn_str = divide2(rtn_str, base);
   return rtn_str;
 };
