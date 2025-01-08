@@ -138,7 +138,8 @@
 <h3>#Description</h3>
 <p>This library if for very large and precise number (integers or floating points) manipulation those who can not be stored in an other datatype than <code>std::string</code> or <code>std::deque</code>. The only limit is the system memory.</p>
 <br>
-<img style="margin-left: 20px;" height="220" width="360" src="docimage.jpg"><br><h1 style="color:#2c4786;">Addition</h1>
+<img style="margin-left: 20px;" height="220" width="360" src="docimage.jpg"><br><br>
+<img style="margin-left: 20px;" height="220" width="360" src="docimage2.jpg"><br><h1 style="color:#2c4786;">Addition</h1>
 <h2 id="addabstraction" style="test-align: left;">addabstraction</h2>
 <h3>#Usage</h3>
 <div class="Div"><code>std::string addabstraction(std::string x, std::string x2)</code></div>
