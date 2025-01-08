@@ -301,7 +301,7 @@ std::string chatan(std::string &x, unsigned int n_polynom = 10) {
   std::string addr = "2";
   std::string cur_add = "3";
   std::string ref_addr = "0.8";
-  std::string ref_addr2 = "0.57";
+  std::string ref_addr2 = "0.570796";
   std::string divided;
   std::string divided2;
   std::string divider;
