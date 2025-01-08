@@ -277,3 +277,67 @@ std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n
   return rslt;
 };
 
+//@T chatan
+//@U std::string chatan(std::string &x, unsigned int n_polynom = 10)
+//@X
+//@D Returns the result of atan(x)
+//@A x : is the input int or float as std string
+//@A n_polynom : is the length of the polynom used for the approximation with the taylor serie
+//@X
+//@E std::string x = "11.9";
+//@E chatan(x);
+//@E "1.489401"
+//@X
+
+std::string chatan(std::string &x, unsigned int n_polynom = 10) {
+  bool is_negative = 0;
+  std::string new_x = x;
+  if (x[0] == '-') {
+    new_x = new_x.substr(1, new_x.length());
+    is_negative = 1;
+  };
+  std::string rslt = new_x;
+  std::string ref_fmax = "1";
+  std::string addr = "2";
+  std::string cur_add = "3";
+  std::string ref_addr = "0.8";
+  std::string ref_addr2 = "0.57";
+  std::string divided;
+  std::string divided2;
+  std::string divider;
+  std::string fct;
+  std::vector<std::string> cur_v;
+  if (!is_greaterflt(new_x, ref_fmax)) {
+    for (unsigned int i = 1; i < n_polynom; ++i) {
+      divided = powerint3(new_x, cur_add);
+      cur_v = centerizer(divided, cur_add);
+      divided = cur_v[0];
+      divider = cur_v[1];
+      fct = divide2(divided, divider);
+      if (i % 2 != 0) {
+        rslt = subsabstraction(rslt, fct);
+      } else {
+        rslt = addabstraction(rslt, fct);
+      };
+      cur_add = addint(cur_add, addr);
+    };
+  } else if (!is_greaterflt(new_x, addr)) {
+    divided = chlognatural1(new_x);
+    cur_v = centerizer(divided, addr);
+    divided = cur_v[0];
+    divider = cur_v[1];
+    fct = divide2(divided, divider);
+    rslt = addflt(fct, ref_addr);
+  } else {
+    divided2 = divide2(ref_fmax, new_x);
+    divided2 = chexp3(divided2);
+    divided = divide2(ref_fmax, divided2);
+    rslt = addflt(divided, ref_addr2);
+  };
+  if (is_negative) {
+    rslt = "-" + rslt;
+  };
+  return rslt;
+};
+
+
