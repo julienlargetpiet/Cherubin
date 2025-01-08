@@ -230,7 +230,7 @@ std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n
   std::string cur_rslt;
   std::string cur_add = "3";
   std::string addr = "2";
-  std::string rslt = x;
+  std::string rslt = new_x;
   std::string cnt;
   std::string ref_subs = "2";
   std::string ref_subsb = "1";
