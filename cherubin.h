@@ -3260,7 +3260,7 @@ std::string chexp1(std::string x, int accuracy = 1000) {
 //@X
 //@E
 //@E std::string x = "700";
-//@E std::cout << chexp3(x) << "\n";
+//@E chexp3(x);
 //@E "10142246218121174560521
 //@E 600483590985178822731162
 //@E 265840307494321815475955
