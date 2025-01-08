@@ -3547,6 +3547,31 @@ std::string factorial(std::string &x) {
 //@E "3.00017080000"
 //@X
 
+//@T chasin
+//@U std::string chasin(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10)
+//@X
+//@D Returns the result of asin(x)
+//@A x : is the input, int or float as std string
+//@A base : is the closest value to pi/2 
+//@A n_polynom : is the size of the polynom used for the approximation by the taylor serie
+//@X
+//@E std::string x = "-0.97";
+//@E chasin(x);
+//@E "-1.32584700000"
+//@X
+
+//@T chatan
+//@U std::string chatan(std::string &x, unsigned int n_polynom = 10)
+//@X
+//@D Returns the result of atan(x)
+//@A x : is the input int or float as std string
+//@A n_polynom : is the length of the polynom used for the approximation with the taylor serie
+//@X
+//@E std::string x = "11.9";
+//@E chatan(x);
+//@E "1.489401"
+//@X
+
 //@L1 Inverse functions
 
 //@T inverse
