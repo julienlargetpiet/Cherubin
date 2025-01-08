@@ -3491,7 +3491,7 @@ std::string factorial(std::string &x) {
   return cur_str;
 };
 
-//@L Trigonometry
+//@L1 Trigonometry
 
 //@T chcos
 //@U std::string chcos(std::string &x, std::string base = "3.141593", unsigned int nb_polynom = 10)
