@@ -4,6 +4,7 @@
 //@D This library if for very large and precise number (integers or floating points) manipulation those who can not be stored in an other datatype than <code>std::string</code> or <code>std::deque</code>. The only limit is the system memory.
 
 //@M docimage.jpg
+//@M docimage2.jpg
 
 //@L1 Addition
 
