@@ -85,8 +85,25 @@
 <b><li style="margin-left:40px; color: #2c4786;">Base n</li></b>
 <a href="#chlogn" style="margin-left:60px;">chlogn</a>
 <br>
+<a href="#chlognabstraction" style="margin-left:60px;">chlognabstraction</a>
+<br>
+<a href="#chlognaturalabstraction" style="margin-left:60px;">chlognaturalabstraction</a>
+<br>
 <b><li style="margin-left:20px; color: #2c4786;">Factorial</li></b>
 <a href="#factorial" style="margin-left:40px;">factorial</a>
+<br>
+<b><li style="margin-left:20px; color: #2c4786;">Trigonometry</li></b>
+<a href="#chcos" style="margin-left:40px;">chcos</a>
+<br>
+<a href="#chsin " style="margin-left:40px;">chsin </a>
+<br>
+<a href="#chtan" style="margin-left:40px;">chtan</a>
+<br>
+<a href="#chacos" style="margin-left:40px;">chacos</a>
+<br>
+<a href="#chasin" style="margin-left:40px;">chasin</a>
+<br>
+<a href="#chatan" style="margin-left:40px;">chatan</a>
 <br>
 <b><li style="margin-left:20px; color: #2c4786;">Inverse functions</li></b>
 <a href="#inverse" style="margin-left:40px;">inverse</a>
@@ -110,13 +127,16 @@
 <br>
 <a href="#centerizer" style="margin-left:40px;">centerizer</a>
 <br>
+<a href="#chabs" style="margin-left:40px;">chabs</a>
+<br>
+<a href="#is_zero" style="margin-left:40px;">is_zero</a>
+<br>
 </ul><br>
 </div>
 </div>
 <div class="box2">
 <h3>#Description</h3>
 <p>This library if for very large and precise number (integers or floating points) manipulation those who can not be stored in an other datatype than <code>std::string</code> or <code>std::deque</code>. The only limit is the system memory.</p>
-<p>This branch is dedicated to <code>std::string</code> datatype for storing and manipulating numbers, contrary on the other branch (which is in development) that uses <code>std::deque<char></code> for the same purposes. This branch is more appropriate for medium sized number manipulation and the need for a lot of number declaration since a number declaration in the other branch will copy the elements of the declared string (also starting with string for convenience) to a deque at a cost of little computation each time. However, the other branch functions (in development) will be significantly faster especially for exponential functions.</p>
 <br>
 <img style="margin-left: 20px;" height="220" width="360" src="docimage.jpg"><br><h1 style="color:#2c4786;">Addition</h1>
 <h2 id="addabstraction" style="test-align: left;">addabstraction</h2>
@@ -539,8 +559,8 @@ x </th><th> is the int that will be divided, represented as a string, must be gr
 <p>Returns the remainder of a division between two int or floating point represented as a std string</p>
 <h3>#Arguments</h3>
 <table><tr><th>Name</th><th>Definition</th></tr><tr><th>
-x </th><th> is the int or floating point that will be divided, represented as a string, must be greater or equal to x2</th></tr>
-<tr><th>x2 </th><th> is the divider which is a int or floating point represented as a string, must be lower or equal to x</th></tr>
+x </th><th> is the floating point or int that will be divided, represented as a string, must be greater or equal to x2</th></tr>
+<tr><th>x2 </th><th> is the divider which is a floating point or int represented as a string, must be lower or equal to x</th></tr>
 </table>
 <br>
 <h3>#Example(s)</h3>
@@ -665,7 +685,7 @@ x </th><th> is the int or float (as a std string) that will be raised to the pow
 <h3>#Arguments</h3>
 <table><tr><th>Name</th><th>Definition</th></tr><tr><th>
 x </th><th> is the number (int or float as std string) that will be elevated to an exponent</th></tr>
-<tr><th>x2 </th><th> is the exponent (int or float as std string)</th></tr>
+<tr><th>x2 </th><th> is the exponent (int or float as std string), can be negative</th></tr>
 <tr><th>nb_polynomial </th><th> is the length of the polynomial used for the taylor serie of exp(x) that allow the function to work. The bigger log(x) times x2 is, the bigger <code>nb_polynomial</code> should be.</th></tr>
 </table>
 <br>
@@ -742,7 +762,7 @@ x </th><th> is the input number (int or float as std string)</th></tr>
 <h3>#Example(s)</h3>
 <div class = "Div"><code></code>
 <br><code>std::string x = "700";</code>
-<br><code>std::cout << chexp3(x) << "\n";</code>
+<br><code>chexp3(x);</code>
 <br><code>"10142246218121174560521</code>
 <br><code>600483590985178822731162</code>
 <br><code>265840307494321815475955</code>
@@ -768,7 +788,7 @@ x </th><th> is the input number (int or float as std string)</th></tr>
 <p>Returns the result of the natural logarithm for any value. </p>
 <h3>#Arguments</h3>
 <table><tr><th>Name</th><th>Definition</th></tr><tr><th>
-x </th><th> is an int or float as std string</th></tr>
+x </th><th> is an int or float as std string, greater or equal to 1</th></tr>
 </table>
 <br>
 <h3>#Example(s)</h3>
@@ -799,6 +819,42 @@ x </th><th> is the value (int or float as std string) we want to find the logari
 <br><code>chlogn(x, x2);</code>
 <br><code>"3.754931"</code>
 <br><code></code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="chlognabstraction" style="test-align: left;">chlognabstraction</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chlognabstraction(std::string &x, std::string &base)</code></div>
+<h3>#Description</h3>
+<p>Returns the result for logn(x)</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input (int or float as std string)</th></tr>
+<tr><th>base </th><th> is the base of the log</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "0.9";</code>
+<br><code>std::string base = "1.570796";</code>
+<br><code>chlognaturalabstraction(x, base);</code>
+<br><code>"-0.152004"</code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="chlognaturalabstraction" style="test-align: left;">chlognaturalabstraction</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chlognaturalabstraction(std::string &x)</code></div>
+<h3>#Description</h3>
+<p>Returns the result for log(x)</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input (int or float as std string)</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "0.9";</code>
+<br><code>chlognaturalabstraction(x);</code>
+<br><code>"-0.105361"</code>
 </div>
 <br>
 <hr class="hr">
@@ -837,6 +893,122 @@ x </th><th> is an positive integer as a std string</th></tr>
 <br><code>7808873799678199393333955877</code>
 <br><code>83920859359861012157863588005..."</code>
 <br><code></code>
+</div>
+<br>
+<hr class="hr">
+<h1 style="color:#2c4786;">Trigonometry</h1>
+<h2 id="chcos" style="test-align: left;">chcos</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chcos(std::string &x, std::string base = "3.141593", unsigned int nb_polynom = 10)</code></div>
+<h3>#Description</h3>
+<p>Returns the result of cosinus(x) with the help of taylor serie</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input number, int or float as std string</th></tr>
+<tr><th>base </th><th> is the closest value of 2 times pi</th></tr>
+<tr><th>nb_polynom </th><th> is the ssize of the polynom used for the approximation</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "-125.5";</code>
+<br><code>std::string final_rslt = chcos(x);</code>
+<br><code>-0.9866278020907 </code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="chsin " style="test-align: left;">chsin </h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chsin(std::string &x, std::string base = "6.283185", unsigned int n_polynom = 15)</code></div>
+<h3>#Description</h3>
+<p>Returns the result of sinus function.</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input int of float as std string</th></tr>
+<tr><th>base </th><th> is the closest value to 2 times pi</th></tr>
+<tr><th>n_polynom </th><th> is the length of the polynom used by the taylor serie</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "5.8";</code>
+<br><code>std::string out = chsin(x);</code>
+<br><code>"-0.464629431880273"</code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="chtan" style="test-align: left;">chtan</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chtan(std::string &x, std::string base = "6.283185", unsigned int n_polynom = 10)</code></div>
+<h3>#Description</h3>
+<p>Returns the result of tan(x)</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input number, int or float as std string </th></tr>
+<tr><th>base </th><th> is the closest value to 2 times pi</th></tr>
+<tr><th>n_polynom </th><th> is the length of the polynom used for the taylor approximation</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "-3.5";</code>
+<br><code>unsigned int nb = 10;</code>
+<br><code>std::string base = "6.283185";</code>
+<br><code>std::string out = chtan(x, base, nb);</code>
+<br><code>"-0.374584" </code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="chacos" style="test-align: left;">chacos</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10)</code></div>
+<h3>#Description</h3>
+<p>Returns the result of acos(x)</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input (int or float as std string)</th></tr>
+<tr><th>base </th><th> is the closest value to pi / 2</th></tr>
+<tr><th>n_polynom </th><th> is the size of the polynom used for the approximation of arcos with taylor serie</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "-0.99";</code>
+<br><code>chacos(x);</code>
+<br><code>"3.00017080000"</code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="chasin" style="test-align: left;">chasin</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chasin(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10)</code></div>
+<h3>#Description</h3>
+<p>Returns the result of asin(x)</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input, int or float as std string</th></tr>
+<tr><th>base </th><th> is the closest value to pi/2 </th></tr>
+<tr><th>n_polynom </th><th> is the size of the polynom used for the approximation by the taylor serie</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "-0.97";</code>
+<br><code>chasin(x);</code>
+<br><code>"-1.32584700000"</code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="chatan" style="test-align: left;">chatan</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chatan(std::string &x, unsigned int n_polynom = 10)</code></div>
+<h3>#Description</h3>
+<p>Returns the result of atan(x)</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input int or float as std string</th></tr>
+<tr><th>n_polynom </th><th> is the length of the polynom used for the approximation with the taylor serie</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "11.9";</code>
+<br><code>chatan(x);</code>
+<br><code>"1.489401"</code>
 </div>
 <br>
 <hr class="hr">
@@ -1029,6 +1201,40 @@ x </th><th> is the divided as a std string</th></tr>
 <br><code>std::vector&lt;std::string&gt; out = centerizer(x, x2);</code>
 <br><code>"1.562" "6898.7"</code>
 <br><code></code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="chabs" style="test-align: left;">chabs</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chabs(std::string &x)</code></div>
+<h3>#Description</h3>
+<p>Returns the absolute value of the input</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input, a float or int as std string</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "-0.645";</code>
+<br><code>chabs(x);</code>
+<br><code>"0.645"</code>
+</div>
+<br>
+<hr class="hr">
+<h2 id="is_zero" style="test-align: left;">is_zero</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>bool is_zero(std::string &x)</code></div>
+<h3>#Description</h3>
+<p>Returns 1 if the input (int or float as std string) is equal to 0</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> the input number, int or float as std string</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "0.007800";</code>
+<br><code>is_zero(x);</code>
+<br><code>0</code>
 </div>
 <br>
 <hr class="hr">
