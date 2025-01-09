@@ -39,6 +39,9 @@ std::string inverse(std::string &a, std::string &b, std::string (*f)(std::string
 //@X
 
 std::string powerflt(std::string &x, std::string &x2) {
+  if (x == "0" || x == "-0") {
+    return "0";
+  };
   std::string new_x2 = x2;
   std::string rtn_str;
   std::string divided = "1";
@@ -269,7 +272,7 @@ std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n
   } else {
     rslt = subsflt(ref_subsb, new_x);
     rslt = multflt2(rslt, ref_subs);
-    rslt = powerflt(rslt, ref_square);
+    rslt = powerint3(rslt, ref_square);
   };
   if (is_negative) {
     rslt = subsabstraction(val_pi, rslt);
