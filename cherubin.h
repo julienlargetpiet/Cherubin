@@ -2719,9 +2719,11 @@ std::string quotientflt(std::string &x, std::string &x2) {
 
 std::string powerint3(std::string &x, std::string &x2) {
   if (x2 == "0") {
-    return "0";
+    return "1";
   } else if (x2 == "1") {
     return x;
+  } else if (x == "0" || x == "-0") {
+    return "0";
   };
   int i;
   int i2;
