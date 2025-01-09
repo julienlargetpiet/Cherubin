@@ -41,23 +41,77 @@ std::string chtan(std::string &x, std::string base = "6.283185", unsigned int n_
   return rslt;
 };
 
-//@T chasin
-//@U std::string chasin(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10)
+//@T chacos
+//@U std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10)
 //@X
-//@D Returns the result of asin(x)
-//@A x : is the input, int or float as std string
-//@A base : is the closest value to pi/2 
-//@A n_polynom : is the size of the polynom used for the approximation by the taylor serie
+//@D Returns the result of acos(x)
+//@A x : is the input (int or float as std string)
+//@A base : is the closest value to pi / 2
+//@A n_polynom : is the size of the polynom used for the approximation of arcos with taylor serie
 //@X
-//@E std::string x = "-0.97";
-//@E chasin(x);
-//@E "-1.32584700000"
+//@E std::string x = "-0.99";
+//@E chacos(x);
+//@E "3.00017080000"
 //@X
 
-std::string chasin(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10) {
-  std::string rtn_str = chacos(x, base, n_polynom);
-  rtn_str = subsabstraction(base, rtn_str);
-  return rtn_str;
+std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n_polynom = 10) {
+  bool is_negative = 0;
+  std::string new_x = x;
+  if (x[0] == '-') {
+    new_x = new_x.substr(1, x.length());
+    is_negative = 1;
+  };
+  std::string cur_divider;
+  std::string cur_divided1;
+  std::string cur_divided2;
+  std::string cur_dividedf;
+  std::string cur_rslt;
+  std::string cur_add = "3";
+  std::string addr = "2";
+  std::string rslt = new_x;
+  std::string cnt;
+  std::string ref_subs = "2";
+  std::string ref_subsb = "1";
+  std::string val_pi = multflt2(base, ref_subs);
+  std::vector<std::string> cur_v;
+  std::string ref_max = "0.92";
+  std::string ref_square = "0.5";
+  if (!is_greaterflt(new_x, ref_max)) {
+    for (unsigned int i = 1; i < n_polynom; ++i) {
+      cur_divided1 = powerint3(new_x, cur_add);
+      cnt = cur_add;
+      cnt = subsint(cnt, ref_subs);
+      cur_divided2 = cnt;
+      if (cnt != "1") {
+        cnt = subsint(cnt, ref_subs);
+        while (cnt != "1") {
+          cur_divided2 = multint2(cur_divided2, cnt); 
+          cnt = subsint(cnt, ref_subs);
+        };
+      };
+      cur_dividedf = multabstraction(cur_divided1, cur_divided2);
+      cur_divider = cur_add;
+      cnt = subsint(cur_add, ref_subsb);
+      while (cnt != "0") {
+        cur_divider = multint2(cur_divider, cnt);
+        cnt = subsint(cnt, ref_subs);
+      };
+      cur_v = centerizer(cur_dividedf, cur_divider);
+      cur_dividedf = cur_v[0];
+      cur_divider = cur_v[1];
+      cur_rslt = divideabstraction(cur_dividedf, cur_divider);
+      rslt = addabstraction(rslt, cur_rslt);
+      cur_add = addint(cur_add, addr);
+    };
+    rslt = subsabstraction(base, rslt);
+  } else {
+    rslt = subsflt(ref_subsb, new_x);
+    rslt = multflt2(rslt, ref_subs);
+    rslt = powerflt(rslt, ref_square);
+  };
+  if (is_negative) {
+    rslt = subsabstraction(val_pi, rslt);
+  };
+  return rslt;
 };
-
 
