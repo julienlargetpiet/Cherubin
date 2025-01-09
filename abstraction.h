@@ -24,9 +24,7 @@ std::string addabstraction(std::string x, std::string x2) {
   bool grt;
   const unsigned int n = x.length();
   const unsigned int n2 = x2.length();
-  if (x == x2) {
-    return "0";
-  } else if (x[0] == '-' & x2[0] == '-') {
+  if (x[0] == '-' & x2[0] == '-') {
     rtn_str = "-";
     x = x.substr(1, n);
     x2 = x2.substr(1, n2);
