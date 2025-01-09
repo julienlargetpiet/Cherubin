@@ -3649,7 +3649,7 @@ bool is_greater(std::string &x, std::string &x2) {
 //@E
 //@X
 
-bool is_greaterflt(std::string &x, std::string &x2) {
+bool is_greaterflt(std::string x, std::string x2) {
   const unsigned int n = x.length();
   const unsigned int n2 = x2.length();
   unsigned int integ_val;

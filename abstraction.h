@@ -298,7 +298,7 @@ std::string chexp3(std::string &x, std::string base = "2.7182818") {
 //@E 0
 //@X
 
-bool is_greaterabstraction(std::string &x, std::string &x2) {
+bool is_greaterabstraction(std::string x, std::string x2) {
   std::string new_x;
   std::string new_x2;
   if (x2[0] == '-' & x[0] == '-') {
