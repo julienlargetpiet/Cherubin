@@ -115,3 +115,37 @@ std::string chacos(std::string &x, std::string base = "1.570796", unsigned int n
   return rslt;
 };
 
+//@T chgamma
+//@U std::string chgamma(std::string x)
+//@X
+//@D Returns the result of gamma(x)
+//@A x : is the input, int or float as std string
+//@X
+//@E std::string x = "11.9";
+//@E std::string out = chgamma(x);
+//@E out = rmzero(out);
+//@E "31041633.57806124915329208135736828050223671388095918020510420603776136542459656770574445893880530538152652348731494406662229882831077376"
+//@X
+
+std::string chgamma(std::string x) {
+  if (x[0] == '-') {
+    return "";
+  };
+  std::string ref_subs = "1";
+  std::string ref_power = "0.5";
+  std::string ref_mult = "6.28318530718";
+  std::string exp_val = "2.718281828459";
+  std::string rtn_str;
+  std::string other_part;
+  if (is_decimal(x)) {
+    x = subsflt(x, ref_subs);
+    rtn_str = divide2(x, exp_val);
+    rtn_str = powerflt(rtn_str, x);
+    other_part = multflt2(x, ref_mult);
+    other_part = powerflt(other_part, ref_power);
+    return multflt2(rtn_str, other_part);
+  } else {
+    return factorial(x);
+  };
+};
+
