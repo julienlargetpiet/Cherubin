@@ -105,6 +105,9 @@
 <br>
 <a href="#chatan" style="margin-left:40px;">chatan</a>
 <br>
+<b><li style="margin-left:20px; color: #2c4786;">Gamma function (decimal factorial)</li></b>
+<a href="#chgamma" style="margin-left:40px;">chgamma</a>
+<br>
 <b><li style="margin-left:20px; color: #2c4786;">Inverse functions</li></b>
 <a href="#inverse" style="margin-left:40px;">inverse</a>
 <br>
@@ -1010,6 +1013,29 @@ x </th><th> is the input int or float as std string</th></tr>
 <div class = "Div"><code>std::string x = "11.9";</code>
 <br><code>chatan(x);</code>
 <br><code>"1.489401"</code>
+</div>
+<br>
+<hr class="hr">
+<h1 style="color:#2c4786;">Gamma function (decimal factorial)</h1>
+<h2 id="chgamma" style="test-align: left;">chgamma</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chgamma(std::string x)</code></div>
+<h3>#Description</h3>
+<p>Returns the result of gamma(x)</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the input, int or float as std string</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "11.9";</code>
+<br><code>std::string out = chgamma(x);</code>
+<br><code>out = rmzero(out);</code>
+<br><code>"31041633.57806124915329208135736</code>
+<br><code>828050223671388095918020510420603</code>
+<br><code>776136542459656770574445893880530</code>
+<br><code>538152652348731494406662229882831</code>
+<br><code>077376"</code>
 </div>
 <br>
 <hr class="hr">
