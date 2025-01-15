@@ -18,3 +18,32 @@ std::string chasin(std::string &x, std::string base = "1.570796", unsigned int n
   rtn_str = subsabstraction(base, rtn_str);
   return rtn_str;
 };
+
+//@T chbeta
+//@U std::string chbeta(std::string &x, std::string &x2)
+//@X
+//@D Returns the result of the beta function
+//@A x : is the first input
+//@A y : is the second input
+//@X
+//@E std::string x = "2";
+//@E std::string y = "3";
+//@E std::string out = chbeta(x, y);
+//@E "0.08333333" 
+//@X
+
+std::string chbeta(std::string &x, std::string &y) {
+  std::string divided1 = chgamma(x);
+  std::string divided2 = chgamma(y);
+  std::string dividedf = multflt(divided1, divided2);
+  std::string divider;
+  std::string ref_subs = "1";
+  std::string x_divider = addflt(x, y);
+  if (is_decimal(x_divider)) {
+    x_divider = rmzero(x_divider);
+  };
+  divider = chgamma(x_divider);
+  return divide2(dividedf, divider);
+};
+
+

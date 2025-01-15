@@ -137,8 +137,8 @@ std::string chgamma(std::string x) {
   std::string exp_val = "2.718281828459";
   std::string rtn_str;
   std::string other_part;
+  x = subsflt(x, ref_subs);
   if (is_decimal(x)) {
-    x = subsflt(x, ref_subs);
     rtn_str = divide2(x, exp_val);
     rtn_str = powerflt(rtn_str, x);
     other_part = multflt2(x, ref_mult);
