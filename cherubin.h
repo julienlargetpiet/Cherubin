@@ -3376,6 +3376,8 @@ std::string factorial(std::string &x) {
     return "1";
   } else if (x == "2") {
     return "2";
+  } else if (x == "0") {
+    return "1";
   };
   std::string cur_str = x;
   std::string eval_str = x;
