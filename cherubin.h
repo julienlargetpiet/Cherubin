@@ -3722,14 +3722,14 @@ bool is_greaterflt(std::string x, std::string x2) {
       };
       i += 1;
     };
-    if (dec_valf != dec_val2 & dec_valf != 0) {
+    if (dec_valf != dec_val2) {
       while (i < integ_val + dec_val2)  {
         if (x2[i] != '0') {
           return 0;
         };
         i += 1;
       };
-    } else if (dec_valf != dec_val & dec_valf != 0) {
+    } else if (dec_valf != dec_val) {
       while (i < integ_val + dec_val) {
         if (x[i] != '0') {
           return 1;
