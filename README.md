@@ -108,6 +108,9 @@
 <b><li style="margin-left:20px; color: #2c4786;">Gamma function (decimal factorial)</li></b>
 <a href="#chgamma" style="margin-left:40px;">chgamma</a>
 <br>
+<b><li style="margin-left:20px; color: #2c4786;">Beta function</li></b>
+<a href="#chbeta" style="margin-left:40px;">chbeta</a>
+<br>
 <b><li style="margin-left:20px; color: #2c4786;">Inverse functions</li></b>
 <a href="#inverse" style="margin-left:40px;">inverse</a>
 <br>
@@ -1036,6 +1039,26 @@ x </th><th> is the input, int or float as std string</th></tr>
 <br><code>776136542459656770574445893880530</code>
 <br><code>538152652348731494406662229882831</code>
 <br><code>077376"</code>
+</div>
+<br>
+<hr class="hr">
+<h1 style="color:#2c4786;">Beta function</h1>
+<h2 id="chbeta" style="test-align: left;">chbeta</h2>
+<h3>#Usage</h3>
+<div class="Div"><code>std::string chbeta(std::string &x, std::string &x2)</code></div>
+<h3>#Description</h3>
+<p>Returns the result of the beta function</p>
+<h3>#Arguments</h3>
+<table><tr><th>Name</th><th>Definition</th></tr><tr><th>
+x </th><th> is the first input</th></tr>
+<tr><th>y </th><th> is the second input</th></tr>
+</table>
+<br>
+<h3>#Example(s)</h3>
+<div class = "Div"><code>std::string x = "2";</code>
+<br><code>std::string y = "3";</code>
+<br><code>std::string out = chbeta(x, y);</code>
+<br><code>"0.08333333" </code>
 </div>
 <br>
 <hr class="hr">
