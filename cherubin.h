@@ -3594,6 +3594,21 @@ std::string factorial(std::string &x) {
 //@E 077376"
 //@X
 
+//@L1 Beta function
+
+//@T chbeta
+//@U std::string chbeta(std::string &x, std::string &x2)
+//@X
+//@D Returns the result of the beta function
+//@A x : is the first input
+//@A y : is the second input
+//@X
+//@E std::string x = "2";
+//@E std::string y = "3";
+//@E std::string out = chbeta(x, y);
+//@E "0.08333333" 
+//@X
+
 //@L1 Inverse functions
 
 //@T inverse
