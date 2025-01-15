@@ -3574,6 +3574,24 @@ std::string factorial(std::string &x) {
 //@E "1.489401"
 //@X
 
+//@L1 Gamma function (decimal factorial)
+
+//@T chgamma
+//@U std::string chgamma(std::string x)
+//@X
+//@D Returns the result of gamma(x)
+//@A x : is the input, int or float as std string
+//@X
+//@E std::string x = "11.9";
+//@E std::string out = chgamma(x);
+//@E out = rmzero(out);
+//@E "31041633.57806124915329208135736
+//@E 828050223671388095918020510420603
+//@E 776136542459656770574445893880530
+//@E 538152652348731494406662229882831
+//@E 077376"
+//@X
+
 //@L1 Inverse functions
 
 //@T inverse
@@ -3810,6 +3828,9 @@ std::string rmzero(std::string x) {
   while (x[n] == '0') {
     x.pop_back();
     n -= 1;
+  };
+  if (x[n] == '.') {
+    x.pop_back();
   };
   return x;
 };
